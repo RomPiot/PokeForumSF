@@ -6,9 +6,24 @@ easy_admin:
     datetime: "d/m/Y H:i:s"
   entities:
     # List the entity class name you want to manage
+
+    # COMMENT
     Comment:
       class: App\Entity\Comment
+      form:
+        fields:
+          - { property: "topic", label: "Topic" }
+          - { property: "content", label: "Commentaire" }
+          - { property: "author", label: "Auteur" }
+      
+      list:
+        max_results: 10
+        fields:
+          - { property: "topic", label: "Topic" } 
+          - { property: "content", label: "Commentaire" }
+          - { property: "author", label: "Auteur" }
 
+    # CATEGORY
     Category:
       class: App\Entity\Category
       form:
@@ -20,6 +35,7 @@ easy_admin:
         fields:
           - { property: "name", label: "Nom de la catégorie" }
 
+    # SUB CATEGORY
     SubCategory:
       class: App\Entity\SubCategory
       form:
@@ -33,6 +49,7 @@ easy_admin:
           - { property: "name", label: "Nom de la sous-catégorie" }
           - { property: "category", label: "Associé à la catégorie" }
 
+    # USER
     User:
       class: App\Entity\User
       form:
@@ -76,22 +93,29 @@ easy_admin:
           - { property: "isBlocked", label: "Bloqué ?" }
           - { property: "roles", label: "Role" }
 
+    # TOPIC 
     Topic:
       class: App\Entity\Topic
       form:
         fields:
-          - { property: "title", label: "Nom de la sous-catégorie" }
-          - { property: "content", label: "Associé à la catégorie" }
-          - { property: "author", label: "Associé à la catégorie" }
-          - { property: "category", label: "Associé à la catégorie" }
-          - { property: "subcategory", label: "Associé à la catégorie" }
+          - { property: "title", label: "Titre" }
+          - { property: "content", label: "Commentaire" }
+          - { property: "author", label: "Auteur" }
+          - { property: "category", label: "Catégorie" }
+          - { property: "subcategory", label: "Sous-catégorie" }
       
       list:
         max_results: 10
         fields:
-          - { property: "name", label: "Nom de la sous-catégorie" }
-          - { property: "category", label: "Associé à la catégorie" }
+          - { property: "title", label: "Titre" }
+          - { property: "content", label: "Commentaire" }
+          - { property: "author", label: "Auteur" }
+          - { property: "category", label: "Catégorie" }
+          - { property: "subcategory", label: "Sous-catégorie" }
+          - { property: "featured", label: "Mis en avant ?" }
+          - { property: "isActive", label: "Actif ?" }
 
+    # BADGE
     Badge:
       class: App\Entity\Badge
       form:

@@ -51,9 +51,9 @@ class Topic
     private $subcategory;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true, options={"default": "0"})
      */
-    private $featured;
+    private $featured = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="topic", orphanRemoval=true)
@@ -61,15 +61,20 @@ class Topic
     private $comments;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": "1"})
      */
-    private $isActive;
+    private $isActive = 1;
 
     public function __construct()
     {
 		$this->comments = new ArrayCollection();
 		$this->createdAt = new \DateTime();
     }
+
+	public function __toString()
+	{
+		return $this->getTitle();
+	}
 
     public function getId(): ?int
     {
