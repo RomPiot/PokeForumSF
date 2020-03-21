@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -56,11 +57,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $gender;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $birthday;
@@ -69,11 +65,6 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $created_at;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -90,12 +81,33 @@ class User implements UserInterface
      */
     private $topics;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": "1"})
+     */
+    private $isActive = 1;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": "0"})
+     */
+    private $isBlocked = 0;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gender;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->badges = new ArrayCollection();
         $this->topics = new ArrayCollection();
+		$this->created_at = new DateTime();
     }
+
+	public function __toString()
+	{
+		return $this->getUsername();
+	}
 
     public function getId(): ?int
     {
@@ -237,18 +249,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getGender(): ?bool
-    {
-        return $this->gender;
-    }
-
-    public function setGender(?bool $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
     public function getBirthday(): ?\DateTimeInterface
     {
         return $this->birthday;
@@ -269,18 +269,6 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
-
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
 
         return $this;
     }
@@ -350,6 +338,42 @@ class User implements UserInterface
                 $topic->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getIsBlocked(): ?bool
+    {
+        return $this->isBlocked;
+    }
+
+    public function setIsBlocked(bool $isBlocked): self
+    {
+        $this->isBlocked = $isBlocked;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

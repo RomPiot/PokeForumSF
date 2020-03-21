@@ -36,7 +36,11 @@ class Comment
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $topic;
+	private $topic;
+	
+	public function __construct() {
+		$this->created_at = new \DateTime();
+	}
 
     public function getId(): ?int
     {

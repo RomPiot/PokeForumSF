@@ -63,11 +63,12 @@ class Topic
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private $isActive;
 
     public function __construct()
     {
-        $this->comments = new ArrayCollection();
+		$this->comments = new ArrayCollection();
+		$this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -190,15 +191,16 @@ class Topic
         return $this;
     }
 
-    public function getActive(): ?bool
+    public function getIsActive(): ?bool
     {
-        return $this->active;
+        return $this->isActive;
     }
 
-    public function setActive(bool $active): self
+    public function setIsActive(bool $isActive): self
     {
-        $this->active = $active;
+        $this->isActive = $isActive;
 
         return $this;
     }
+
 }

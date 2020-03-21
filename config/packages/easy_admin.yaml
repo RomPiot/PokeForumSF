@@ -1,9 +1,106 @@
 easy_admin:
-   entities:
-       # List the entity class name you want to manage
-       - App\Entity\Comment
-       - App\Entity\Category
-       - App\Entity\SubCategory
-       - App\Entity\User
-       - App\Entity\Topic
-       - App\Entity\Badge
+  site_name: "Administration"
+  formats:
+    date: "d/m/Y"
+    time: "H:i"
+    datetime: "d/m/Y H:i:s"
+  entities:
+    # List the entity class name you want to manage
+    Comment:
+      class: App\Entity\Comment
+
+    Category:
+      class: App\Entity\Category
+      form:
+        fields:
+          - { property: "name", label: "Nom de la catégorie" }
+      
+      list:
+        max_results: 10
+        fields:
+          - { property: "name", label: "Nom de la catégorie" }
+
+    SubCategory:
+      class: App\Entity\SubCategory
+      form:
+        fields:
+          - { property: "name", label: "Nom de la sous-catégorie" }
+          - { property: "category", label: "Associé à la catégorie" }
+      
+      list:
+        max_results: 10
+        fields:
+          - { property: "name", label: "Nom de la sous-catégorie" }
+          - { property: "category", label: "Associé à la catégorie" }
+
+    User:
+      class: App\Entity\User
+      form:
+        fields:
+          - { property: "username", label: "Pseudo" }
+          - { property: "avatar", label: "Avatar" }
+          - { property: "name", label: "Prénom" }
+          - { property: "lastname", label: "Nom" }
+          - { property: "email", label: "Email" }
+          - { property: "password", label: "Mot de passe" }
+
+          - property: "roles"
+            label: "Role supplémentaire"
+            type: choice
+            type_options:
+              mapped: true
+              expanded: false
+              multiple: true
+              choices:
+                {
+                  "Administrateur": "ROLE_ADMIN",
+                  "Modérateur": "ROLE_MODO"
+                }
+
+          - property: "gender"
+            type: choice
+            type_options:
+              mapped: true
+              expanded: false
+              multiple: false
+              choices: { "Homme": "man", "Femme": "wooman", "Autre": "other" }
+
+      list:
+        max_results: 10
+        fields:
+          - { property: "username", label: "Pseudo" }
+          - { property: "name", label: "Prénom" }
+          - { property: "lastname", label: "Nom" }
+          - { property: "email", label: "Email" }
+          - { property: "isActive", label: "Actif ?" }
+          - { property: "isBlocked", label: "Bloqué ?" }
+          - { property: "roles", label: "Role" }
+
+    Topic:
+      class: App\Entity\Topic
+      form:
+        fields:
+          - { property: "title", label: "Nom de la sous-catégorie" }
+          - { property: "content", label: "Associé à la catégorie" }
+          - { property: "author", label: "Associé à la catégorie" }
+          - { property: "category", label: "Associé à la catégorie" }
+          - { property: "subcategory", label: "Associé à la catégorie" }
+      
+      list:
+        max_results: 10
+        fields:
+          - { property: "name", label: "Nom de la sous-catégorie" }
+          - { property: "category", label: "Associé à la catégorie" }
+
+    Badge:
+      class: App\Entity\Badge
+      form:
+        fields:
+          - { property: "name", label: "Nom du badge" }
+          - { property: "image", label: "Image" }
+      
+      list:
+        max_results: 10
+        fields:
+          - { property: "name", label: "Nom du badge" }
+          - { property: "image", label: "Image" }
