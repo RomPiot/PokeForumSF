@@ -64,7 +64,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -101,7 +101,7 @@ class User implements UserInterface
         $this->comments = new ArrayCollection();
         $this->badges = new ArrayCollection();
         $this->topics = new ArrayCollection();
-		$this->created_at = new DateTime();
+		$this->createdAt = new DateTime();
     }
 
 	public function __toString()
@@ -263,12 +263,12 @@ class User implements UserInterface
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
