@@ -7,6 +7,28 @@ easy_admin:
   entities:
     # List the entity class name you want to manage
 
+    # TOPIC
+    Topic:
+      class: App\Entity\Topic
+      form:
+        fields:
+          - { property: "title", label: "Titre" }
+          - { property: "content", label: "Commentaire" }
+          - { property: "author", label: "Auteur" }
+          - { property: "category", label: "Catégorie" }
+          - { property: "subcategory", label: "Sous-catégorie" }
+
+      list:
+        max_results: 20
+        fields:
+          - { property: "title", label: "Titre" }
+          - { property: "content", label: "Commentaire" }
+          - { property: "author", label: "Auteur" }
+          - { property: "category", label: "Catégorie" }
+          - { property: "subcategory", label: "Sous-catégorie" }
+          - { property: "featured", label: "Mis en avant ?" }
+          - { property: "isActive", label: "Actif ?" }
+
     # COMMENT
     Comment:
       class: App\Entity\Comment
@@ -15,11 +37,11 @@ easy_admin:
           - { property: "topic", label: "Topic" }
           - { property: "content", label: "Commentaire" }
           - { property: "author", label: "Auteur" }
-      
+
       list:
-        max_results: 10
+        max_results: 20
         fields:
-          - { property: "topic", label: "Topic" } 
+          - { property: "topic", label: "Topic" }
           - { property: "content", label: "Commentaire" }
           - { property: "author", label: "Auteur" }
 
@@ -29,9 +51,9 @@ easy_admin:
       form:
         fields:
           - { property: "name", label: "Nom de la catégorie" }
-      
+
       list:
-        max_results: 10
+        max_results: 20
         fields:
           - { property: "name", label: "Nom de la catégorie" }
 
@@ -42,9 +64,9 @@ easy_admin:
         fields:
           - { property: "name", label: "Nom de la sous-catégorie" }
           - { property: "category", label: "Associé à la catégorie" }
-      
+
       list:
-        max_results: 10
+        max_results: 20
         fields:
           - { property: "name", label: "Nom de la sous-catégorie" }
           - { property: "category", label: "Associé à la catégorie" }
@@ -69,10 +91,7 @@ easy_admin:
               expanded: false
               multiple: true
               choices:
-                {
-                  "Administrateur": "ROLE_ADMIN",
-                  "Modérateur": "ROLE_MODO"
-                }
+                { "Administrateur": "ROLE_ADMIN", "Modérateur": "ROLE_MODO" }
 
           - property: "gender"
             type: choice
@@ -83,7 +102,7 @@ easy_admin:
               choices: { "Homme": "man", "Femme": "wooman", "Autre": "other" }
 
       list:
-        max_results: 10
+        max_results: 20
         fields:
           - { property: "username", label: "Pseudo" }
           - { property: "name", label: "Prénom" }
@@ -93,27 +112,21 @@ easy_admin:
           - { property: "isBlocked", label: "Bloqué ?" }
           - { property: "roles", label: "Role" }
 
-    # TOPIC 
-    Topic:
-      class: App\Entity\Topic
+    # POKEMON
+    Pokemon:
+      class: App\Entity\Pokemon
       form:
         fields:
-          - { property: "title", label: "Titre" }
-          - { property: "content", label: "Commentaire" }
-          - { property: "author", label: "Auteur" }
-          - { property: "category", label: "Catégorie" }
-          - { property: "subcategory", label: "Sous-catégorie" }
-      
+          - { property: "idPokemon", label: "Numéro d'identification" }
+          - { property: "name", label: "Nom du pokemon" }
+          - { property: "difficulty", label: "Difficulté" }
+
       list:
-        max_results: 10
+        max_results: 20
         fields:
-          - { property: "title", label: "Titre" }
-          - { property: "content", label: "Commentaire" }
-          - { property: "author", label: "Auteur" }
-          - { property: "category", label: "Catégorie" }
-          - { property: "subcategory", label: "Sous-catégorie" }
-          - { property: "featured", label: "Mis en avant ?" }
-          - { property: "isActive", label: "Actif ?" }
+          - { property: "idPokemon", label: "Numéro d'identification" }
+          - { property: "name", label: "Nom du pokemon" }
+          - { property: "difficulty", label: "Difficulté" }
 
     # BADGE
     Badge:
@@ -122,9 +135,9 @@ easy_admin:
         fields:
           - { property: "name", label: "Nom du badge" }
           - { property: "image", label: "Image" }
-      
+
       list:
-        max_results: 10
+        max_results: 20
         fields:
           - { property: "name", label: "Nom du badge" }
           - { property: "image", label: "Image" }
