@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,21 @@ class Pokemon
      * @ORM\Column(type="integer", options={"default": "1"})
      */
     private $difficulty = 1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Pokedex", mappedBy="pokemon", orphanRemoval=true)
+     */
+    private $pokedex;
+
+    public function __construct()
+    {
+        $this->pokedex = new ArrayCollection();
+    }
+
+	public function __toString()
+	{
+		return $this->getName();
+	}
 
     public function getId(): ?int
     {
@@ -68,6 +85,37 @@ class Pokemon
     public function setIdPokemon(int $idPokemon): self
     {
         $this->idPokemon = $idPokemon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pokedex[]
+     */
+    public function getPokedex(): Collection
+    {
+        return $this->pokedex;
+    }
+
+    public function addPokedex(Pokedex $pokedex): self
+    {
+        if (!$this->pokedex->contains($pokedex)) {
+            $this->pokedex[] = $pokedex;
+            $pokedex->setPokemon($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokedex(Pokedex $pokedex): self
+    {
+        if ($this->pokedex->contains($pokedex)) {
+            $this->pokedex->removeElement($pokedex);
+            // set the owning side to null (unless already changed)
+            if ($pokedex->getPokemon() === $this) {
+                $pokedex->setPokemon(null);
+            }
+        }
 
         return $this;
     }

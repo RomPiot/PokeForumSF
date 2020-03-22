@@ -96,18 +96,24 @@ class User implements UserInterface
      */
     private $gender;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Pokedex", mappedBy="user", orphanRemoval=true)
+     */
+    private $pokedex;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->badges = new ArrayCollection();
         $this->topics = new ArrayCollection();
 		$this->createdAt = new DateTime();
+  $this->pokedex = new ArrayCollection();
     }
 
 	public function __toString()
-	{
-		return $this->getUsername();
-	}
+               	{
+               		return $this->getUsername();
+               	}
 
     public function getId(): ?int
     {
@@ -374,6 +380,37 @@ class User implements UserInterface
     public function setGender(?string $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pokedex[]
+     */
+    public function getPokedex(): Collection
+    {
+        return $this->pokedex;
+    }
+
+    public function addPokedex(Pokedex $pokedex): self
+    {
+        if (!$this->pokedex->contains($pokedex)) {
+            $this->pokedex[] = $pokedex;
+            $pokedex->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokedex(Pokedex $pokedex): self
+    {
+        if ($this->pokedex->contains($pokedex)) {
+            $this->pokedex->removeElement($pokedex);
+            // set the owning side to null (unless already changed)
+            if ($pokedex->getUser() === $this) {
+                $pokedex->setUser(null);
+            }
+        }
 
         return $this;
     }

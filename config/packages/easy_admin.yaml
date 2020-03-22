@@ -94,6 +94,7 @@ easy_admin:
                 { "Administrateur": "ROLE_ADMIN", "Modérateur": "ROLE_MODO" }
 
           - property: "gender"
+            label: "Genre"
             type: choice
             type_options:
               mapped: true
@@ -127,6 +128,22 @@ easy_admin:
           - { property: "idPokemon", label: "Numéro d'identification" }
           - { property: "name", label: "Nom du pokemon" }
           - { property: "difficulty", label: "Difficulté" }
+
+    # POKEDEX
+    Pokedex:
+      class: App\Entity\Pokedex
+      form:
+        fields:
+          - { property: "user", label: "Utilisateur" }
+          - { property: "pokemon", label: "Pokémon" }
+          - { property: "quantity", label: "Qantité" }
+
+      list:
+        max_results: 20
+        fields:
+          - { property: "user", label: "Utilisateur" }
+          - { property: "pokemon", label: "Pokémon" }
+          - { property: "quantity", label: "Qantité" }
 
     # BADGE
     Badge:
