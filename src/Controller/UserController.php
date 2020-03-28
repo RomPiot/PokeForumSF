@@ -20,11 +20,11 @@ class UserController extends AbstractController
 	}
 	
 	/**
-     * @Route("/profil/{id}", name="user_profile_edit")
+     * @Route("/profil/editer/{id}", name="user_profile_edit")
      */
     public function edit(User $user, UserRepository $userRepository)
     {		
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'user' => $user,
         ]);
     }

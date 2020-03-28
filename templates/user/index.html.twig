@@ -7,37 +7,18 @@
 
 
 	<div class="container emp-profile">
-		<form method="post">
-			<div class="row">
-				<div class="col-md-4">
-					<div
-						class="profile-img">
-						{# <img src=" {{ asset('user.avatar') }}" alt=""/> #}
-						{% if user.gender == 'man' %}
-							<img src="https://randomuser.me/api/portraits/men/{{ random(1, 99) }}.jpg" alt=""/>
-						{% else %}
-							<img src="https://randomuser.me/api/portraits/women/{{ random(1, 99) }}.jpg" alt=""/>
-						{% endif %}
-					</div>
-				</div>
-				<div class="col-md-8">
-					<div class="profile-head">
-						<h5>{{ user }}</h5>
-						<p class="proile-description">{{ user.description }}</p>
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pokedex</a>
-							</li>
-						</ul>
-						<a href="{{ path('user_profile_edit', {id: app.user.id}) }}" class="profile-edit-btn"/>Editer mon profil</a>
-				</div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-4">
+				<div
+					class="profile-img">
+					{# <img src=" {{ asset('user.avatar') }}" alt=""/> #}
+					{% if user.gender == 'man' %}
+						<img src="https://randomuser.me/api/portraits/men/{{ random(1, 99) }}.jpg" alt=""/>
+					{% else %}
+						<img src="https://randomuser.me/api/portraits/women/{{ random(1, 99) }}.jpg" alt=""/>
+					{% endif %}
+				</div>
+
 				<div class="profile-work d-flex flex-column align-items-center justify-content-start">
 					<p class="">Le Grade Ici</p>
 					<p class="">{{ user.pokedex|length}}
@@ -45,83 +26,93 @@
 				</div>
 			</div>
 			<div class="col-md-8">
-				<div class="tab-content profile-tab" id="myTabContent">
-					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						<div class="row">
-							<div class="col-md-6">
-								<label>Prénom</label>
-							</div>
-							<div class="col-md-6">
-								<p>
-									{{ user.name }}
-								</p>
-							</div>
+				<div class="profile-head">
+					<h5>{{ user }}</h5>
+					<p class="proile-description">{{ user.description }}</p>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pokedex</a>
+						</li>
+					</ul>
+					<a href="{{ path('user_profile_edit', {id: app.user.id}) }}" class="profile-edit-btn"/>Editer mon profil</a>
+			</div>
+			<div class="tab-content profile-tab" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Prénom</label>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<label>Nom</label>
-							</div>
-							<div class="col-md-6">
-								<p>
-									{{ user.lastname }}
-								</p>
-							</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.name }}
+							</p>
 						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<label>Email</label>
-							</div>
-							<div class="col-md-6">
-								<p>
-									{{ user.email }}
-								</p>
-							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Nom</label>
 						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<label>Date de naissance</label>
-							</div>
-							<div class="col-md-6">
-								<p>
-									{{ user.birthday|date("m/d/Y") }}
-								</p>
-							</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.lastname }}
+							</p>
 						</div>
 					</div>
 
-					{# Pokedex tab #}
-					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Email</label>
+						</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.email }}
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<label>Date de naissance</label>
+						</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.birthday|date("m/d/Y") }}
+							</p>
+						</div>
+					</div>
+				</div>
+
+				{# Pokedex tab #}
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="row">
+						<div class="col-md-4">
+							<label>N°</label>
+						</div>
+						<div class="col-md-6">
+							<label>Nom</label>
+						</div>
+						<div class="col-md-2">
+							<label>Quantité</label>
+						</div>
+					</div>
+					{% for pokemons in user.pokedex %}
 						<div class="row">
 							<div class="col-md-4">
-								<label>N°</label>
+								<p>{{pokemons.pokemon.idPokemon}}</p>
 							</div>
 							<div class="col-md-6">
-								<label>Nom</label>
+								<p>{{pokemons.pokemon.name}}</p>
 							</div>
 							<div class="col-md-2">
-								<label>Quantité</label>
+								<p>{{pokemons.quantity}}</p>
 							</div>
 						</div>
-						{% for pokemons in user.pokedex %}
-							<div class="row">
-								<div class="col-md-4">
-									<p>{{pokemons.pokemon.idPokemon}}</p>
-								</div>
-								<div class="col-md-6">
-									<p>{{pokemons.pokemon.name}}</p>
-								</div>
-								<div class="col-md-2">
-									<p>{{pokemons.quantity}}</p>
-								</div>
-							</div>
-						{% endfor %}
-
-
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
-	</form>
-</div>{% endblock %}
+	</div>
+{% endblock %}
