@@ -173,7 +173,10 @@ class User implements UserInterface
 
 	public function setPassword(string $password): self
 	{
-		$this->password = $password;
+		if (!empty($password)) {
+			
+			$this->password = $password;
+		}
 
 		return $this;
 	}

@@ -74,14 +74,16 @@ easy_admin:
     # USER
     User:
       class: App\Entity\User
+      controller: App\Controller\Admin\UserAdminController
       form:
         fields:
           - { property: "username", label: "Pseudo" }
+          # - { property: "avatar", label: "Avatar", type: 'image', base_path: '/images/uploads/profile' }
           - { property: "avatar", label: "Avatar" }
           - { property: "name", label: "Prénom" }
           - { property: "lastname", label: "Nom" }
           - { property: "email", label: "Email" }
-          - { property: "password", label: "Mot de passe" }
+          - { property: "password", label: "Mot de passe", type: "password", type_options: { required: false, empty_data: '' }  }
 
           - property: "birthday" 
             label: "Date de naissance"
