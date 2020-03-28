@@ -82,6 +82,14 @@ easy_admin:
           - { property: "lastname", label: "Nom" }
           - { property: "email", label: "Email" }
           - { property: "password", label: "Mot de passe" }
+
+          - property: "birthday" 
+            label: "Date de naissance"
+            # type: text
+            type_options: 
+              widget: 'single_text' 
+
+
           - { property: "description", label: "Description" }
 
           - property: "gender"

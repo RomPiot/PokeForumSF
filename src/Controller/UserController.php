@@ -10,9 +10,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profil/{id}", name="user_profile")
+     * @Route("/profil/{id}", name="user_profile_show")
      */
-    public function index(User $user, UserRepository $userRepository)
+    public function show(User $user, UserRepository $userRepository)
+    {		
+        return $this->render('user/index.html.twig', [
+            'user' => $user,
+        ]);
+	}
+	
+	/**
+     * @Route("/profil/{id}", name="user_profile_edit")
+     */
+    public function edit(User $user, UserRepository $userRepository)
     {		
         return $this->render('user/index.html.twig', [
             'user' => $user,

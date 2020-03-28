@@ -1,5 +1,5 @@
 body {
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  background-color: #dce4e7;
 }
 
 .emp-profile {
@@ -46,12 +46,15 @@ body {
 }
 
 .profile-edit-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
   border: none;
   border-radius: 1.5rem;
-  width: 70%;
   padding: 2%;
   font-weight: 600;
-  color: #6c757d;
+  background-color: #6c757d;
+  color: white;
   cursor: pointer;
 }
 

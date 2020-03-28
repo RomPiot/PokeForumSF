@@ -10,18 +10,23 @@
 		<form method="post">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="profile-img">
-						<img src=" {{ asset('user.avatar') }}" alt=""/>
-						<div class="file btn btn-lg btn-primary">
+					<div
+						class="profile-img">
+						{# <img src=" {{ asset('user.avatar') }}" alt=""/> #}
+						{% if user.gender == 'man' %}
+							<img src="https://randomuser.me/api/portraits/men/{{ random(1, 99) }}.jpg" alt=""/>
+						{% else %}
+							<img src="https://randomuser.me/api/portraits/women/{{ random(1, 99) }}.jpg" alt=""/>
+						{% endif %}
+						{# <div class="file btn btn-lg btn-primary">
 							Changer mon avatar
 							<input type="file" name="file"/>
-						</div>
+						</div> #}
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-8">
 					<div class="profile-head">
 						<h5>{{ user }}</h5>
-						<h6>SON GRADE ICI</h6>
 						<p class="proile-rating">{{ user.description }}</p>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item">
@@ -31,25 +36,15 @@
 								<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pokedex</a>
 							</li>
 						</ul>
+					<a href="{{ path('user_profile_edit', {id: app.user.id}) }}" class="profile-edit-btn"/>Editer mon profil</a>
 					</div>
-				</div>
-				<div class="col-md-2">
-					<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<div class="profile-work">
-						<p>WORK LINK</p>
-						<a href="">Website Link</a><br/>
-						<a href="">Bootsnipp Profile</a><br/>
-						<a href="">Bootply Profile</a>
-						<p>SKILLS</p>
-						<a href="">Web Designer</a><br/>
-						<a href="">Web Developer</a><br/>
-						<a href="">WordPress</a><br/>
-						<a href="">WooCommerce</a><br/>
-						<a href="">PHP, .Net</a><br/>
+					<div class="profile-work d-flex flex-column align-items-center justify-content-start">
+						<p class="">Le Grade Ici</p>
+						<p class="">Pokédex :  {{ user.pokedex|length}} / 151</p>
 					</div>
 				</div>
 				<div class="col-md-8">
@@ -57,64 +52,66 @@
 						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="row">
 								<div class="col-md-6">
-									<label>User Id</label>
+									<label>Prénom</label>
 								</div>
 								<div class="col-md-6">
-									<p>Kshiti123</p>
+									<p>
+										{{ user.name }}
+									</p>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<label>Name</label>
+									<label>Nom</label>
 								</div>
 								<div class="col-md-6">
-									<p>Kshiti Ghelani</p>
+									<p>
+										{{ user.lastname }}
+									</p>
 								</div>
 							</div>
+
 							<div class="row">
 								<div class="col-md-6">
 									<label>Email</label>
 								</div>
 								<div class="col-md-6">
-									<p>kshitighelani@gmail.com</p>
+									<p>
+										{{ user.email }}
+									</p>
 								</div>
 							</div>
+
 							<div class="row">
 								<div class="col-md-6">
-									<label>Phone</label>
+									<label>Date de naissance</label>
 								</div>
 								<div class="col-md-6">
-									<p>123 456 7890</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label>Profession</label>
-								</div>
-								<div class="col-md-6">
-									<p>Web Developer and Designer</p>
+									<p>
+										{{ user.birthday|date("m/d/Y") }}
+									</p>
 								</div>
 							</div>
 						</div>
+
+						{# Pokedex tab #}
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-						{% for pokemons in user.pokedex %}
-							<div class="row">
-								<div class="col-md-4">
-									<label>{{pokemons.pokemon.idPokemon}}</label>
+							{% for pokemons in user.pokedex %}
+								<div class="row">
+									<div class="col-md-4">
+										<label>{{pokemons.pokemon.idPokemon}}</label>
+									</div>
+									<div class="col-md-4">
+										<p>{{pokemons.pokemon.name}}</p>
+									</div>
+									<div class="col-md-2">
+										<p>{{pokemons.quantity}}</p>
+									</div>
 								</div>
-								<div class="col-md-4">
-									<p>{{pokemons.pokemon.name}}</p>
-								</div>
-								<div class="col-md-2">
-									<p>{{pokemons.quantity}}</p>
-								</div>
-							</div>
-						{% endfor %}
+							{% endfor %}
 
 
-
-							
 						</div>
 					</div>
 				</div>
