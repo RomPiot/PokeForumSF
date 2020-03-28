@@ -82,6 +82,16 @@ easy_admin:
           - { property: "lastname", label: "Nom" }
           - { property: "email", label: "Email" }
           - { property: "password", label: "Mot de passe" }
+          - { property: "description", label: "Description" }
+
+          - property: "gender"
+            label: "Genre"
+            type: choice
+            type_options:
+              mapped: true
+              expanded: false
+              multiple: false
+              choices: { "Homme": "man", "Femme": "wooman", "Autre": "other" }
 
           - property: "roles"
             label: "Role supplémentaire"
@@ -92,15 +102,6 @@ easy_admin:
               multiple: true
               choices:
                 { "Administrateur": "ROLE_ADMIN", "Modérateur": "ROLE_MODO" }
-
-          - property: "gender"
-            label: "Genre"
-            type: choice
-            type_options:
-              mapped: true
-              expanded: false
-              multiple: false
-              choices: { "Homme": "man", "Femme": "wooman", "Autre": "other" }
 
       list:
         max_results: 20
