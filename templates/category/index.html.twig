@@ -1,20 +1,160 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Home{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <style>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/sebsa/PhpstormProjects/PokeForumSF/src/Controller/CategoryController.php'|file_link(0) }}">src/Controller/CategoryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/sebsa/PhpstormProjects/PokeForumSF/templates/category/index.html.twig'|file_link(0) }}">templates/category/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+        .iconCatgory {
+            width: 40px;
+            margin: 15px;
+            margin-right: 0;
+        }
+
+        .categoryContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border-radius: 40px;
+            background-color: white;
+            margin: 5px;
+            width: 210px;
+
+        }
+
+        .categoryContainer > h3 {
+                margin: 0;
+        }
+
+        #wrapperCategory{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background-color: #607D8B;
+            margin: 15px;
+            border-radius: 15px;
+            box-shadow: 4px 4px 20px 0px #84848478;
+            max-width: 660px;
+        }
+
+        #wrapperCategory >h2{
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+
+        .TopicContainer {
+            padding: 15px;
+            width: 100%;
+            border-bottom: 1px solid;
+            color: white;
+        }
+
+        .TopicContainer > h2 {
+            padding: 15px;
+            width: 100%;
+            border-bottom: 1px solid;
+
+        }
+
+        .TopicContainer > h3{
+            font-size: 15px;
+            margin: 0;
+        }
+
+        #wrapperTopic {
+            justify-content: center;
+            background-color: #50b4e4;
+            margin: 15px;
+            border-radius: 15px;
+            box-shadow: 4px 4px 20px 0px #84848478;
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            min-height: 277.5px;
+            width: 100%;
+            max-width: 545px;
+        }
+
+        #wrapperTopic >h2{
+            width: 100%;
+            text-align: center;
+            color: black;
+            border-bottom: 1px solid;
+            padding: 15px;
+            margin: 0;
+            color: white;
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            max-width: 1295px;
+        }
+
+        #pokemonLogoContainer {
+            width: 1235px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #343a40;
+            border-radius: 15px;
+            margin-top: 15px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        #pokemonLogoContainer >img{
+            width:60%;
+        }
+
+    </style>
+
+
+    <div id="pokemonLogoContainer">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+
+    </div>
+
+    <div id="wrapperCategory">
+
+            <div class="categoryContainer">
+                <h3>{{ category.name }}</h3>
+                <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+            </div>
+
+
+        <div id="wrapperTopic">
+            <h2>Sous-catégories</h2>
+            {% for subCategory in subCategorys %}
+
+                {% if loop.index < 4 %}
+
+                    <div class="TopicContainer">
+                        <h3>{{ subCategory.name }}</h3>
+                    </div>
+
+                {% endif%}
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
 {% endblock %}

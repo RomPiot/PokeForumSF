@@ -115,6 +115,10 @@
             width:60%;
         }
 
+        a{
+            color: black;
+        }
+
     </style>
 
 
@@ -127,11 +131,13 @@
     <div id="wrapperCategory">
         <h2>Catégories</h2>
         {% for category in categories %}
+            <a href="{{ path('category',{id: category.id}) }}">
+                <div class="categoryContainer">
+                    <h3>{{ category.name }}</h3>
+                    <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+                </div>
+            </a>
 
-            <div class="categoryContainer">
-                <h3>{{ category.name }}</h3>
-                <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
-            </div>
 
         {% endfor %}
 
