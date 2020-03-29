@@ -26,7 +26,7 @@
         }
 
         .categoryContainer > h3 {
-                margin: 0;
+            margin: 0;
         }
 
         #wrapperCategory{
@@ -78,6 +78,7 @@
             min-height: 277.5px;
             width: 100%;
             max-width: 545px;
+            padding-bottom: 30px;
         }
 
         #wrapperTopic >h2{
@@ -114,6 +115,10 @@
             width:60%;
         }
 
+        a{
+            color: black;
+        }
+
     </style>
 
 
@@ -122,20 +127,27 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
 
     </div>
+    {% for category in categorys %}
 
     <div id="wrapperCategory">
 
-            <div class="categoryContainer">
-                <h3>{{ category.name }}</h3>
-                <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
-            </div>
 
+
+        <a href="{{ path('category',{id: category.id}) }}">
+
+        <div class="categoryContainer">
+            <h3>{{ category.name }}</h3>
+            <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+        </div>
+        </a>
 
         <div id="wrapperTopic">
             <h2>Sous-catégories</h2>
-            {% for subCategory in subCategorys %}
 
-                {% if loop.index < 4 %}
+
+            {% for subCategory in subCategorys %}
+                {% if loop.parent.loop.index == subCategory.category.id  %}
+
 
                     <div class="TopicContainer">
                         <h3>{{ subCategory.name }}</h3>
@@ -150,30 +162,7 @@
 
 
     </div>
-
-
-    <div id="wrapperTopic">
-        <h2>Nouveaux topics</h2>
-        {% for topic in topics %}
-
-            {% if loop.index < 4 %}
-
-                <div class="TopicContainer">
-                    <h3>{{ topic.title }}</h3>
-                </div>
-
-            {% endif%}
-
-        {% endfor %}
-
-
-    </div>
-
-
-
-
-
-
+    {% endfor %}
 
 
 {% endblock %}

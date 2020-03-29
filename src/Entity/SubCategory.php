@@ -66,6 +66,7 @@ class SubCategory
         return $this->category;
     }
 
+
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
