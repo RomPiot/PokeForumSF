@@ -33,6 +33,11 @@ class Category
      */
     private $topics;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $icon;
+
     public function __construct()
     {
         $this->subCategories = new ArrayCollection();
@@ -40,9 +45,9 @@ class Category
 	}
 	
 	public function __toString()
-	{
-		return $this->getName();
-	}
+         	{
+         		return $this->getName();
+         	}
 
     public function getId(): ?int
     {
@@ -119,6 +124,18 @@ class Category
                 $topic->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(?string $icon): self
+    {
+        $this->icon = $icon;
 
         return $this;
     }

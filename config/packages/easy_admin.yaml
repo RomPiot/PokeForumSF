@@ -51,11 +51,13 @@ easy_admin:
       form:
         fields:
           - { property: "name", label: "Nom de la catégorie" }
+          - { property: "icon", label: "Icon" }
 
       list:
         max_results: 20
         fields:
           - { property: "name", label: "Nom de la catégorie" }
+          - { property: "icon", label: "Icon" }
 
     # SUB CATEGORY
     SubCategory:
