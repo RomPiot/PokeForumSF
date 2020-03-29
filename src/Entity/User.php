@@ -37,6 +37,8 @@ class User implements UserInterface
 	 * @ORM\Column(type="string")
 	 */
 	private $password;
+	
+	private $oldPassword;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
@@ -433,6 +435,26 @@ class User implements UserInterface
 	public function setDescription(?string $description): self
 	{
 		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of oldPassword
+	 */ 
+	public function getOldPassword()
+	{
+		return $this->oldPassword;
+	}
+
+	/**
+	 * Set the value of oldPassword
+	 *
+	 * @return  self
+	 */ 
+	public function setOldPassword($oldPassword)
+	{
+		$this->oldPassword = $oldPassword;
 
 		return $this;
 	}

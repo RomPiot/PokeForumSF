@@ -84,6 +84,7 @@ easy_admin:
           - { property: "lastname", label: "Nom" }
           - { property: "email", label: "Email" }
           - { property: "password", label: "Mot de passe", type: "password", type_options: { required: false, empty_data: '' }  }
+          # - { property: "oldPassword", label: "oldPassword", type: "hidden", type_options: { required: false }  }
 
           - property: "birthday" 
             label: "Date de naissance"
