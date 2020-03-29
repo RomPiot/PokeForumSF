@@ -37,7 +37,10 @@
 							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pokedex</a>
 						</li>
 					</ul>
-					<a href="{{ path('user_profile_edit', {id: app.user.id}) }}" class="profile-edit-btn"/>Editer mon profil</a>
+
+					{% if app.user.id == user.id %}
+					<a href="{{ path('user_profile_edit') }}" class="profile-edit-btn"/>Editer mon profil</a>
+					{% endif %}
 			</div>
 			<div class="tab-content profile-tab" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">

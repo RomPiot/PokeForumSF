@@ -101,7 +101,7 @@ easy_admin:
               mapped: true
               expanded: false
               multiple: false
-              choices: { "Homme": "man", "Femme": "wooman", "Autre": "other" }
+              choices: { "Homme": "man", "Femme": "woman", "Autre": "other" }
 
           - property: "roles"
             label: "Role supplémentaire"
