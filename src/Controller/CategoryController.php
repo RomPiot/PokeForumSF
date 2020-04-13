@@ -30,7 +30,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/categoryList", name="categoryList")
+     * @Route("/categoryList", name="category_list")
      */
     public function categoryList(CategoryRepository $categoryRepository,SubCategoryRepository $subCategoryRepository)
     {
