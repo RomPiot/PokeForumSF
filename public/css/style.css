@@ -95,13 +95,16 @@ body {
   height: 100%;
 }
 
+.hunt-btn, .pokeball-container {
+  margin-right: 10px;
+}
+
 .pokeball-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-right: 10px;
 }
 
 .pokeball-container .pokeball {
