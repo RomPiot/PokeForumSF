@@ -38,15 +38,20 @@ class Pokemon
      */
     private $pokedex;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->pokedex = new ArrayCollection();
     }
 
 	public function __toString()
-	{
-		return $this->getName();
-	}
+         	{
+         		return $this->getName();
+         	}
 
     public function getId(): ?int
     {
@@ -116,6 +121,18 @@ class Pokemon
                 $pokedex->setPokemon(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

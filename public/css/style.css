@@ -3,6 +3,10 @@ body {
   font-size: 14px;
 }
 
+.bold {
+  font-weight: 500;
+}
+
 .emp-profile {
   padding: 3%;
   margin: 3% 0;
@@ -50,7 +54,7 @@ body {
   cursor: pointer;
 }
 
-.proile-description {
+.profile-description {
   color: #818182;
   margin-top: 5%;
 }

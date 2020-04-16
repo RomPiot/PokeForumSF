@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
 use App\Repository\BadgeRepository;
+use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +15,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PokemonController extends AbstractController
 {
+	/**
+	 * @Route("/pokemon/{id}", name="pokemon_show")
+	 */
+	public function show($id, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository)
+	{
+		$pokemon = $pokemonRepository->findOneByIdPokemon($id);
+		$pokemonId = $pokemon->getId();
+		
+		$pokedex = $pokedexRepository->findByPokemon($pokemonId);
+
+		return $this->render('pokemon/index.html.twig', [
+			'pokemon' => $pokemon,
+			'pokedex' => $pokedex
+		]);
+	}
+
+
 	/**
 	 * @Route("/pokemon/random", name="pokemon_random")
 	 */
