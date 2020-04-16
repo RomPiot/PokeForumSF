@@ -20,9 +20,8 @@ class BadgeRepository extends ServiceEntityRepository
 	}
 
 	// /**
-	//  * @return Badge[] Returns an array of Badge objects
+	//  * @return Badge[] Returns an array of Badge objects for a user
 	//  */
-
 	public function findByUser($userId)
 	{
 		return $this->createQueryBuilder('b')

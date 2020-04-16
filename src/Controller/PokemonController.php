@@ -19,34 +19,34 @@ class PokemonController extends AbstractController
 
 		switch ($nbBadge) {
 			case '0':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 1]);
+				$listPokemon = $pokemonRepository->findByDifficult(1);
 				break;
 			case '1':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 2]);
+				$listPokemon = $pokemonRepository->findByDifficult(2);
 				break;
 			case '2':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 3]);
+				$listPokemon = $pokemonRepository->findByDifficult(3);
 				break;
 			case '3':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 4]);
+				$listPokemon = $pokemonRepository->findByDifficult(4);
 				break;
 			case '4':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 5]);
+				$listPokemon = $pokemonRepository->findByDifficult(5);
 				break;
 			case '5':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 6]);
+				$listPokemon = $pokemonRepository->findByDifficult(6);
 				break;
 			case '6':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 7]);
+				$listPokemon = $pokemonRepository->findByDifficult(7);
 				break;
 			case '7':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 8]);
+				$listPokemon = $pokemonRepository->findByDifficult(8);
 				break;
 			case '8':
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 9]);
+				$listPokemon = $pokemonRepository->findByDifficult(9);
 				break;
 			default:
-				$listPokemon = $pokemonRepository->findBy(["difficulty" => 1]);
+				$listPokemon = $pokemonRepository->findByDifficult(1);
 				break;
 		}
 
