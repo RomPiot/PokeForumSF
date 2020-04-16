@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
@@ -144,9 +145,14 @@ class UserController extends AbstractController
 	{
 		// $tokenReceived = $request->request->get("token");
 
+		// Not working 
+		// $userId = $request->request->get("user_id");
+
+		$jsonPostRequest = \json_decode($request->getContent());
+		$userId = $jsonPostRequest->user_id;
+
 		// if ($tokenReceived = $this->token) {
 
-		$userId = $request->request->get("user_id");
 		$user = $userRepository->find($userId);
 
 		$nbPokeballUser = $user->getPokeball();

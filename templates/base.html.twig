@@ -36,7 +36,6 @@
 
 								</ul>
 								{% if is_granted('ROLE_USER') and app.user.pokeball > 0 %}
-									<a class="btn btn-primary hunt-btn" href="#">Chasser un pokemon</a>
 									<div class="pokeball-container">
 										{% for i in 1..app.user.pokeball %}
 
@@ -45,6 +44,7 @@
 											</div>
 										{% endfor %}
 									</div>
+									<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser un pokemon</a>
 									<div class="btn-group">
 										<button type="button" class="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<img src="{{ app.user.avatar }}" alt=""/>
@@ -70,10 +70,36 @@
 				</div>
 
 			{% endblock %}
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
-																																"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+
+					const huntBtn = document.querySelector('a.hunt-btn');
+					let pokemon;
+
+					huntBtn.addEventListener("click", function (event) {
+						event.preventDefault();
+						const url = this.href;
+						
+						axios.post(url, {
+							"user_id": {{ app.user.id }}
+						}).then(function(response) {
+							pokemon = JSON.parse(response.data.content);
+							console.log(pokemon);
+
+							$('.pokeball-container').children().last().remove();
+
+						})
+					});
+
+				});
+			</script>
+
+
 			{% block javascripts %}{% endblock %}
 		</body>
 	</html>

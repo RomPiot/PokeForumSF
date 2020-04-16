@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Repository\BadgeRepository;
 use App\Repository\PokemonRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -61,5 +64,16 @@ class PokemonController extends AbstractController
 		} else {
 			return new Response();
 		}
+	}
+
+	/**
+	 * @Route("/pokemon/hunt", name="pokemon_hunt")
+	 */
+	public function hunt_pokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, UserController $userController, UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager)
+	{
+		$pokemon = $this->random_pokemon($pokemonRepository, $badgeRepository);
+		$userController->removePokeball($userRepository, $request, $entityManager);
+
+		return $this->json($pokemon);
 	}
 }
