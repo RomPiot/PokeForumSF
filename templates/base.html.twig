@@ -37,8 +37,16 @@
 										<a class="nav-link" href="{{ path('home') }}">Page</a>
 									</li>
 								</ul>
-
+								{# {{ dump(app.user.pokeball) }} #}
 								{% if is_granted('ROLE_USER') %}
+								<div class="pokeball-container">
+									{% for i in 1..app.user.pokeball %}
+										
+									<div>
+										<img src="{{ asset('images/pokemons/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
+									</div>
+									{% endfor %}
+								</div>
 									<div class="btn-group">
 										<button type="button" class="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											{% if app.user.gender == 'man' %}
