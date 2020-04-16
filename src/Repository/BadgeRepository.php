@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Badge;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Badge|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,29 +14,28 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class BadgeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Badge::class);
-    }
+	public function __construct(ManagerRegistry $registry)
+	{
+		parent::__construct($registry, Badge::class);
+	}
 
-    // /**
-    //  * @return Badge[] Returns an array of Badge objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+	// /**
+	//  * @return Badge[] Returns an array of Badge objects
+	//  */
 
-    /*
+	public function findByUser($userId)
+	{
+		return $this->createQueryBuilder('b')
+			->leftJoin("b.users", "bu")
+			->andWhere('bu.id = :id')
+			->setParameter('id', $userId)
+			->orderBy('b.id', 'ASC')
+			->setMaxResults(10)
+			->getQuery()
+			->getResult();
+	}
+
+	/*
     public function findOneBySomeField($value): ?Badge
     {
         return $this->createQueryBuilder('b')
