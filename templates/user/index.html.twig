@@ -5,7 +5,6 @@
 
 {% block content %}
 
-
 	<div class="container emp-profile">
 		<div class="row">
 			<div class="col-md-4">
@@ -99,10 +98,10 @@
 					{% for pokemons in user.pokedex %}
 						<div class="row">
 							<div class="col-md-4">
-								<p>{{pokemons.pokemon.idPokemon}}</p>
+								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.idPokemon}}</a>
 							</div>
 							<div class="col-md-6">
-								<p>{{pokemons.pokemon.name}}</p>
+								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.name}}</a>
 							</div>
 							<div class="col-md-2">
 								<p>{{pokemons.quantity}}</p>
