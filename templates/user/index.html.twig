@@ -11,12 +11,7 @@
 			<div class="col-md-4">
 				<div
 					class="profile-img">
-					{# <img src=" {{ asset('user.avatar') }}" alt=""/> #}
-					{% if user.gender == 'man' %}
-						<img src="https://randomuser.me/api/portraits/men/{{ random(1, 99) }}.jpg" alt=""/>
-					{% else %}
-						<img src="https://randomuser.me/api/portraits/women/{{ random(1, 99) }}.jpg" alt=""/>
-					{% endif %}
+					<img src="{{ app.user.avatar }}" alt=""/>
 				</div>
 
 				<div class="profile-work d-flex flex-column align-items-center justify-content-start">

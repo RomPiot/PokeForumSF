@@ -39,21 +39,17 @@
 								</ul>
 								{# {{ dump(app.user.pokeball) }} #}
 								{% if is_granted('ROLE_USER') %}
-								<div class="pokeball-container">
-									{% for i in 1..app.user.pokeball %}
-										
-									<div>
-										<img src="{{ asset('images/pokemons/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
+									<div class="pokeball-container">
+										{% for i in 1..app.user.pokeball %}
+
+											<div>
+												<img src="{{ asset('images/pokemons/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
+											</div>
+										{% endfor %}
 									</div>
-									{% endfor %}
-								</div>
 									<div class="btn-group">
 										<button type="button" class="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											{% if app.user.gender == 'man' %}
-												<img src="https://randomuser.me/api/portraits/men/{{ random(1, 99) }}.jpg" alt=""/>
-											{% else %}
-												<img src="https://randomuser.me/api/portraits/women/{{ random(1, 99) }}.jpg" alt=""/>
-											{% endif %}
+											<img src="{{ app.user.avatar }}" alt=""/>
 										</button>
 										<div class="dropdown-menu dropdown-menu-right">
 											<a href=" {{ path('user_profile_show', {id: app.user.id}) }}" class="dropdown-item">Mon Profil</a>
@@ -74,10 +70,10 @@
 				<div class="container">
 					{% block content %}{% endblock %}
 				</div>
-			
+
 			{% endblock %}
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
-																"></script>
+																				"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 			{% block javascripts %}{% endblock %}

@@ -29,11 +29,11 @@ class UserController extends AbstractController
 		$oldPassword = $user->getPassword();
 
 		$form = $this->createFormBuilder($user)
-			->add('avatar')
 			->add('username')
 			->add('description')
 			->add('name')
 			->add('lastname')
+			->add('avatar')
 			->add('email', EmailType::class)
 			->add('password', PasswordType::class, [
 				"required" => false,
@@ -65,9 +65,6 @@ class UserController extends AbstractController
 		if ($form->isSubmitted() && $form->isValid()) {
 			$passwordEncoded = $encoder->encodePassword($user, $newPassword);
 			$samePassword = $this->checkOldPassword($newPassword);
-
-			// \dump($oldPassword);
-			// \dd($passwordEncoded);
 			
 			if ($samePassword == true) {
 				$user->setPassword($oldPassword);
