@@ -69,6 +69,14 @@
 					{% block content %}{% endblock %}
 				</div>
 
+				<div class="pokemon-main-container display-none">
+					<div class="pokemon-container">
+						<div class="pokemon" data-id="">
+							<img src="{{ asset('images/pokemons/1.png') }}" class="pokemon-image">
+						</div>
+					</div>
+				</div>
+
 			{% endblock %}
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -79,7 +87,11 @@
 				document.addEventListener("DOMContentLoaded", function () {
 
 					const huntBtn = document.querySelector('a.hunt-btn');
-					let pokemon;
+					const pokemonMainContainer = document.querySelector('div.pokemon-main-container');
+					const pokemon = document.querySelector('div.pokemon');
+					const pokemonImage = document.querySelector('img.pokemon-image');
+					
+					let pokemonData;
 
 					huntBtn.addEventListener("click", function (event) {
 						event.preventDefault();
@@ -88,13 +100,51 @@
 						axios.post(url, {
 							"user_id": {{ app.user.id }}
 						}).then(function(response) {
-							pokemon = JSON.parse(response.data.content);
-							console.log(pokemon);
-
+							// Remove a pokeball
 							$('.pokeball-container').children().last().remove();
+							
+							pokemonData = JSON.parse(response.data.content);
+							console.log(pokemonData);
+
+							let idPokemon = pokemonData.idPokemon;
+
+							// change image pokemon
+							pokemonImage.setAttribute("src","/images/pokemons/"+pokemonData.idPokemon+".png")
+
+							pokemon.setAttribute("data-id", pokemonData.idPokemon)
+
+							// Display game
+							$(".pokemon-main-container").fadeIn("0.5");
+								movePokemon('.pokemon', pokemonData.difficulty);
+
+
+
 
 						})
 					});
+
+					function makeNewPosition(){
+						// Get viewport dimensions (remove the dimension of the div)
+						var h = $(window).height() - 50;
+						var w = $(window).width() - 50;
+						
+						var nh = Math.floor(Math.random() * h);
+						var nw = Math.floor(Math.random() * w);
+						
+						return [nh,nw];    
+						
+					}
+
+					function movePokemon(myclass, difficulty){
+						var newq = makeNewPosition();
+						duration = 1000 / (difficulty*0.5);
+						console.log(duration);
+						$(myclass).animate({ top: newq[0], left: newq[1] }, duration,   function(){
+						movePokemon(myclass, difficulty);        
+						});
+						
+					};
+					
 
 				});
 			</script>

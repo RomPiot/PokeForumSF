@@ -95,7 +95,8 @@ body {
   height: 100%;
 }
 
-.hunt-btn, .pokeball-container {
+.hunt-btn,
+.pokeball-container {
   margin-right: 10px;
 }
 
@@ -110,5 +111,46 @@ body {
 .pokeball-container .pokeball {
   height: 30px;
   width: 30px;
+}
+
+.pokemon-main-container {
+  z-index: 999;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-main-container .pokemon-main-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.pokemon-main-container .pokemon {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pokemon-main-container .pokemon-image {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+  width: 100px;
+  height: auto;
+}
+
+.display-none {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
