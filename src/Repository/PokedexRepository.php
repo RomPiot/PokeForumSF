@@ -14,29 +14,28 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class PokedexRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Pokedex::class);
-    }
+	public function __construct(ManagerRegistry $registry)
+	{
+		parent::__construct($registry, Pokedex::class);
+	}
 
-    // /**
-    //  * @return Pokedex[] Returns an array of Pokedex objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+	/**
+	 * @return Pokedex Returns a Pokedex object
+	 */
+	public function findUserPokemonRow($user, $pokemon): ?Pokedex
+	{
+		return $this->createQueryBuilder('p')
+			->andWhere('p.user = :user')
+			->andWhere('p.pokemon = :pokemon')
+			->setParameter('user', $user)
+			->setParameter('pokemon', $pokemon)
+			->orderBy('p.id', 'ASC')
+			->getQuery()
+			->getOneOrNullResult();
+	}
 
-    /*
+
+	/*
     public function findOneBySomeField($value): ?Pokedex
     {
         return $this->createQueryBuilder('p')

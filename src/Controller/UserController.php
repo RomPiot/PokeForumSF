@@ -82,7 +82,6 @@ class UserController extends AbstractController
 				$user->setPassword($passwordEncoded);
 			}
 
-
 			$entityManager->persist($user);
 			$entityManager->flush();
 
@@ -126,7 +125,7 @@ class UserController extends AbstractController
 		// if ($tokenReceived = $this->token) {
 
 		$updatePokeball = $entityManager->createQuery('update App\Entity\User u set u.pokeball = u.pokeball + 1 where u.pokeball < 6');
-
+			
 		$updatePokeball->execute();
 
 		return new Response('Allright !');

@@ -71,9 +71,9 @@
 
 				<div class="pokemon-main-container display-none">
 					<div class="pokemon-container">
-						<div class="pokemon" data-id="">
+						<a class="pokemon" data-id="" href="{{ path('pokemon_catch') }}">
 							<img src="{{ asset('images/pokemons/1.png') }}" class="pokemon-image">
-						</div>
+						</a>
 					</div>
 				</div>
 
@@ -85,17 +85,21 @@
 
 			<script>
 				document.addEventListener("DOMContentLoaded", function () {
+					let onHunt = false;
+
 
 					const huntBtn = document.querySelector('a.hunt-btn');
 					const pokemonMainContainer = document.querySelector('div.pokemon-main-container');
-					const pokemon = document.querySelector('div.pokemon');
+					const pokemon = document.querySelector('a.pokemon');
 					const pokemonImage = document.querySelector('img.pokemon-image');
 					
 					let pokemonData;
 
 					huntBtn.addEventListener("click", function (event) {
 						event.preventDefault();
+
 						const url = this.href;
+						onHunt = true;
 						
 						axios.post(url, {
 							"user_id": {{ app.user.id }}
@@ -116,11 +120,33 @@
 							// Display game
 							$(".pokemon-main-container").fadeIn("0.5");
 								movePokemon('.pokemon', pokemonData.difficulty);
-
-
-
-
 						})
+					});
+
+					// When pokemon is catched
+					document.addEventListener("click", function (event) {
+						
+						if (onHunt == true) {
+							if (event.target.classList.contains("pokemon")) {
+								event.preventDefault();
+
+								const url = this.href;
+							
+								console.log(this.getAttribute("data-id"));
+								
+								axios.post(url, {
+									"user_id": {{ app.user.id }},
+									"pokemon_id": this.getAttribute("data-id")
+								}).then(function(response) {
+										console.log(response);
+								})
+
+								$(".pokemon-main-container").fadeOut("0.5");
+							}
+
+							onHunt = false;
+						}
+						
 					});
 
 					function makeNewPosition(){
@@ -132,13 +158,12 @@
 						var nw = Math.floor(Math.random() * w);
 						
 						return [nh,nw];    
-						
 					}
 
 					function movePokemon(myclass, difficulty){
 						var newq = makeNewPosition();
-						duration = 1000 / (difficulty*0.5);
-						console.log(duration);
+						duration = 10000 / (difficulty*0.5);
+						
 						$(myclass).animate({ top: newq[0], left: newq[1] }, duration,   function(){
 						movePokemon(myclass, difficulty);        
 						});
