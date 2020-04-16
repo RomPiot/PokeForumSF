@@ -113,9 +113,9 @@ class User implements UserInterface
 	private $description;
 
 	/**
-	 * @ORM\Column(type="integer", nullable=true, options={"default": "3"})
+	 * @ORM\Column(type="integer", nullable=true, options={"default": "6"})
 	 */
-	private $pokeball = 3;
+	private $pokeball = 6;
 
 	public function __construct()
 	{
