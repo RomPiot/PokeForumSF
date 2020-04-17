@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class PokedexController extends AbstractController
 {
@@ -22,22 +23,25 @@ class PokedexController extends AbstractController
 		// $postRequest = $request->request->get("user_id");
 
 		$jsonPostRequest = \json_decode($request->getContent());
+
 		$userId = $jsonPostRequest->user_id;
 		$pokemonId = $jsonPostRequest->pokemon_id;
 
 		$user = $userRepository->find($userId);
-		$pokemon = $pokemonRepository->find($pokemonId);
+		$pokemon = $pokemonRepository->findOneByPokeId($pokemonId);
 
 		// check if user/pokemon line exist in db
 		$pokedexRow = $pokedexRepository->findUserPokemonRow($userId, $pokemonId);
+
 
 		if ($pokedexRow) {
 			$currentQuantity = $pokedexRow->getQuantity();
 			$pokedexRow->setQuantity($currentQuantity + 1);
 		} else {
 			$pokedexRow = new Pokedex;
-			$pokedexRow->setPokemon($pokemon)
+			$pokedexRow
 				->setUser($user)
+				->setPokemon($pokemon)
 				->setQuantity(1);
 		}
 

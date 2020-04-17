@@ -6,6 +6,7 @@
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
+		<link rel="icon" href="{{ asset('images/favicon.ico') }}"  type="image/icon type">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href=" {{ asset('css/style.min.css') }}"> {% block stylesheets %}{% endblock %}
 		</head>
@@ -124,27 +125,30 @@
 					});
 
 					// When pokemon is catched
-					document.addEventListener("click", function (event) {
-						
-						if (onHunt == true) {
-							if (event.target.classList.contains("pokemon")) {
+					pokemonMainContainer.addEventListener("click", function (event) {
+						console.log("ok");
+						// if (onHunt == true) {
+							if (event.target.classList.contains("pokemon-image")) {
 								event.preventDefault();
+								console.log("ok3");
 
-								const url = this.href;
+								const url = pokemon.getAttribute("href");
 							
-								console.log(this.getAttribute("data-id"));
+								console.log(pokemon.getAttribute("data-id"));
 								
 								axios.post(url, {
 									"user_id": {{ app.user.id }},
-									"pokemon_id": this.getAttribute("data-id")
+									"pokemon_id": pokemon.getAttribute("data-id")
 								}).then(function(response) {
 										console.log(response);
 								})
 
 								$(".pokemon-main-container").fadeOut("0.5");
-							}
+							// }
 
-							onHunt = false;
+							// if (!event.target.classList.contains("hunt-btn")) {
+								// onHunt = false;
+							// }
 						}
 						
 					});

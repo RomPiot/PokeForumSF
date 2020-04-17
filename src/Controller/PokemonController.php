@@ -16,23 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class PokemonController extends AbstractController
 {
 	/**
-	 * @Route("/pokemon/{id}", name="pokemon_show")
-	 */
-	public function show($id, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository)
-	{
-		$pokemon = $pokemonRepository->findOneByIdPokemon($id);
-		$pokemonId = $pokemon->getId();
-		
-		$pokedex = $pokedexRepository->findByPokemon($pokemonId);
-
-		return $this->render('pokemon/index.html.twig', [
-			'pokemon' => $pokemon,
-			'pokedex' => $pokedex
-		]);
-	}
-
-
-	/**
 	 * @Route("/pokemon/random", name="pokemon_random")
 	 */
 	public function random_pokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository)
@@ -94,5 +77,17 @@ class PokemonController extends AbstractController
 		// $userController->removePokeball($userRepository, $request, $entityManager);
 
 		return $this->json($pokemon);
+	}
+
+	/**
+	 * @Route("/pokemon/{id}", name="pokemon_show")
+	 */
+	public function show($id, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository)
+	{
+		$pokemon = $pokemonRepository->findOneByIdPokemon($id);
+
+		return $this->render('pokemon/index.html.twig', [
+			'pokemon' => $pokemon
+		]);
 	}
 }

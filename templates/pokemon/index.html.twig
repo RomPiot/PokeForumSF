@@ -18,7 +18,7 @@
 				<div class="profile-work d-flex flex-column align-items-center justify-content-start">
 					<p class="">
 						Attrapé par
-						{{ pokedex|length}}
+						{{ pokemon.pokedex|length}}
 						dresseurs</p>
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 							</div>
 						</div>
 
-						{% for pokedexRow in pokedex %}
+						{% for pokedexRow in pokemon.pokedex %}
 							<div class="row">
 								<div class="col-md-6">
 									<a href="{{ path('user_profile_show', {id: pokedexRow.user.id}) }}" class="bold">{{pokedexRow.user.username}}</a>
