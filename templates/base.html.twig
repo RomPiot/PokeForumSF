@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href=" {{ asset('css/style.min.css') }}"> {% block stylesheets %}{% endblock %}
 		</head>
-		<body data-userid="{{ app.user.id }}">
+		<body data-user-id="{{ app.user.id }}" data-user-pokeball="{{ app.user.pokeball }}">
 			{% block body %}
 
 				{% block nav %}
@@ -82,7 +82,7 @@
 				</div>
 
 				<div id="cursor-pokeball" class="display-none">
-					<div class="pokeball-loader"></div>
+					<img src="{{ asset('images/pokemon_items/pokeball.png') }}" class="pokeball-loader">
 				</div>
 
 			{% endblock %}

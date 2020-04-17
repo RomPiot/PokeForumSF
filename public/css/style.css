@@ -150,7 +150,7 @@ body {
 .pokemon-main-container .pokemon-image {
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
-  width: 100px;
+  width: 90px;
   height: auto;
   cursor: none;
 }
@@ -171,36 +171,12 @@ body {
   z-index: 9999;
   width: 60px;
   height: 60px;
-  background-color: #fff;
-  border-radius: 50%;
   position: relative;
   overflow: hidden;
-  border: 3px solid;
   -webkit-animation: frames 0.8s linear 0s infinite;
           animation: frames 0.8s linear 0s infinite;
-}
-
-.pokeball-loader:before {
-  content: "";
-  position: absolute;
-  background-color: #fff;
-  width: 15px;
-  height: 15px;
-  border: 4px solid;
-  border-radius: 50%;
-  bottom: 18px;
-  right: 20px;
-  z-index: 1;
-}
-
-.pokeball-loader:after {
-  content: "";
-  position: absolute;
-  width: 60px;
-  height: 30px;
-  background-color: red;
-  border-bottom: 4px solid;
-  top: -4px;
+  -webkit-transition: width ease 0.8s, height ease 0.8s;
+  transition: width ease 0.8s, height ease 0.8s;
 }
 
 /* AnimationFrames */
