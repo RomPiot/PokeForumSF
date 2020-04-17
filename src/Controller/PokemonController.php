@@ -74,7 +74,7 @@ class PokemonController extends AbstractController
 	public function hunt_pokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, UserController $userController, UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager)
 	{
 		$pokemon = $this->random_pokemon($pokemonRepository, $badgeRepository);
-		// $userController->removePokeball($userRepository, $request, $entityManager);
+		$userController->removePokeball($userRepository, $request, $entityManager);
 
 		return $this->json($pokemon);
 	}

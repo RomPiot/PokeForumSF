@@ -79,11 +79,18 @@
 							<img src="{{ asset('images/pokemons/1.png') }}" class="pokemon-image">
 						</a>
 					</div>
-				</div>
 
-				<div id="cursor-pokeball" class="display-none">
+				<div id="cursor-pokeball" class="display-none center-on-page">
 					<img src="{{ asset('images/pokemon_items/pokeball.png') }}" class="pokeball-loader">
 				</div>
+
+				<div class="center-on-page pokeball-catching display-none">
+					<div class="pokeball-catch">
+						<div class="pokeball-button"></div>
+					</div>
+				</div>
+				</div>
+
 
 			{% endblock %}
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

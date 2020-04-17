@@ -126,7 +126,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .pokemon-main-container .pokemon-main-container {
@@ -136,6 +136,7 @@ body {
 }
 
 .pokemon-main-container .pokemon {
+  z-index: 999;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -148,6 +149,7 @@ body {
 }
 
 .pokemon-main-container .pokemon-image {
+  z-index: 999;
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
   width: 90px;
@@ -156,10 +158,10 @@ body {
 }
 
 .display-none {
-  display: none;
+  display: none !important;
 }
 
-#cursor-pokeball {
+.center-on-page {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -198,6 +200,175 @@ body {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+.pokeball-animation {
+  -webkit-animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
+          animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
+}
+
+.pokeball-animation .pokeball-button {
+  -webkit-animation: blink .5s alternate 7;
+          animation: blink .5s alternate 7;
+}
+
+.pokeball-catching {
+  opacity: 0;
+  -webkit-transition: ease 1000;
+  transition: ease 1000;
+}
+
+.pokeball-catch {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  top: -300px;
+  background: #fff;
+  border: 10px solid #000;
+  border-radius: 50%;
+  overflow: hidden;
+  -webkit-box-shadow: inset -10px 10px 0 10px #ccc;
+          box-shadow: inset -10px 10px 0 10px #ccc;
+}
+
+.pokeball-catch::before, .pokeball-catch::after {
+  content: "";
+  position: absolute;
+}
+
+.pokeball-catch::before {
+  background: red;
+  width: 100%;
+  height: 50%;
+}
+
+.pokeball-catch::after {
+  top: calc(50% - 10px);
+  width: 100%;
+  height: 20px;
+  background: #000;
+}
+
+.pokeball-catch .pokeball-button {
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  width: 60px;
+  height: 60px;
+  background: #7f8c8d;
+  border: 10px solid #fff;
+  border-radius: 50%;
+  z-index: 10;
+  -webkit-box-shadow: 0 0 0 10px black;
+          box-shadow: 0 0 0 10px black;
+}
+
+.pokeball-catch .pokeball-success {
+  background-color: #34e3ff;
+}
+
+/* Animation */
+@-webkit-keyframes blink {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #e74c3c;
+  }
+}
+@keyframes blink {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #e74c3c;
+  }
+}
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translate(0, 0) rotate(0);
+            transform: translate(0, 0) rotate(0);
+  }
+  20% {
+    -webkit-transform: translate(-10px, 0) rotate(-20deg);
+            transform: translate(-10px, 0) rotate(-20deg);
+  }
+  30% {
+    -webkit-transform: translate(10px, 0) rotate(20deg);
+            transform: translate(10px, 0) rotate(20deg);
+  }
+  50% {
+    -webkit-transform: translate(-10px, 0) rotate(-10deg);
+            transform: translate(-10px, 0) rotate(-10deg);
+  }
+  60% {
+    -webkit-transform: translate(10px, 0) rotate(10deg);
+            transform: translate(10px, 0) rotate(10deg);
+  }
+  100% {
+    -webkit-transform: translate(0, 0) rotate(0);
+            transform: translate(0, 0) rotate(0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translate(0, 0) rotate(0);
+            transform: translate(0, 0) rotate(0);
+  }
+  20% {
+    -webkit-transform: translate(-10px, 0) rotate(-20deg);
+            transform: translate(-10px, 0) rotate(-20deg);
+  }
+  30% {
+    -webkit-transform: translate(10px, 0) rotate(20deg);
+            transform: translate(10px, 0) rotate(20deg);
+  }
+  50% {
+    -webkit-transform: translate(-10px, 0) rotate(-10deg);
+            transform: translate(-10px, 0) rotate(-10deg);
+  }
+  60% {
+    -webkit-transform: translate(10px, 0) rotate(10deg);
+            transform: translate(10px, 0) rotate(10deg);
+  }
+  100% {
+    -webkit-transform: translate(0, 0) rotate(0);
+            transform: translate(0, 0) rotate(0);
+  }
+}
+
+@-webkit-keyframes fall {
+  0% {
+    top: -300px;
+  }
+  60% {
+    top: 0;
+  }
+  80% {
+    top: -60px;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes fall {
+  0% {
+    top: -300px;
+  }
+  60% {
+    top: 0;
+  }
+  80% {
+    top: -60px;
+  }
+  100% {
+    top: 0;
   }
 }
 /*# sourceMappingURL=style.css.map */

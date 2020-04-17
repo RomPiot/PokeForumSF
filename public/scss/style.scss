@@ -119,13 +119,14 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.3);
 	.pokemon-main-container {
 		position: relative;
 		width: 100%;
 		height: 100%;
 	}
 	.pokemon {
+		z-index: 999;
 		width: fit-content;
 		height: fit-content;
 		position: absolute;
@@ -133,6 +134,7 @@ body {
 		left: 0;
 	}
 	.pokemon-image {
+		z-index: 999;
 		transform: scaleX(-1);
 		width: 90px;
 		height: auto;
@@ -141,10 +143,10 @@ body {
 }
 
 .display-none {
-	display: none;
+	display: none !important;
 }
 
-#cursor-pokeball {
+.center-on-page {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -169,3 +171,85 @@ body {
 		transform: rotate(360deg);
 	}
 }
+
+// ----------- //
+
+.pokeball-animation {
+	animation: fall 0.6s ease-in-out forwards,
+	shake 1.25s cubic-bezier(.36,.07,.19,.97) 3;
+	.pokeball-button {
+		animation: blink .5s alternate 7;
+	}
+}
+
+.pokeball-catching {
+	opacity: 0;
+	transition: ease 1000;
+}
+
+.pokeball-catch {
+	transition: 0.5s;
+	position: relative;
+	width: 200px;
+	height: 200px;
+	top: -300px;
+	background: #fff;
+	border: 10px solid #000;
+	border-radius: 50%;
+	overflow: hidden;
+	box-shadow: inset -10px 10px 0 10px #ccc;
+	
+  &::before,
+  &::after {
+	content:"";
+	position: absolute;
+  }
+  &::before {
+	background: red;
+	width: 100%;
+	height: 50%;
+  }
+  &::after {
+	top: calc(50% - 10px);
+	width: 100%;
+	height: 20px;
+	background: #000;
+  }
+  .pokeball-button {
+	position: absolute;
+	top: calc(50% - 30px);
+	left: calc(50% - 30px);
+	width: 60px;
+	height: 60px;
+	background: #7f8c8d;
+	border: 10px solid #fff;
+	border-radius: 50%;
+	z-index: 10;
+	box-shadow: 0 0 0 10px black;
+  }
+
+  .pokeball-success {
+	background-color: rgb(52, 227, 255);
+  }
+}
+
+
+  /* Animation */
+  @keyframes blink {
+	from { background: #eee;}
+	to { background: #e74c3c; }
+  }
+  @keyframes shake {
+	0% { transform: translate(0, 0) rotate(0); }
+	20% { transform: translate(-10px, 0) rotate(-20deg); }
+	30% { transform: translate(10px, 0) rotate(20deg); }
+	50% { transform: translate(-10px, 0) rotate(-10deg); }
+	60% { transform: translate(10px, 0) rotate(10deg); }
+	100% { transform: translate(0, 0) rotate(0); }
+  }
+  @keyframes fall {
+	0% { top: -300px }
+	60% { top: 0 }
+	80% { top: -60px }
+	100% { top: 0 }
+  }
