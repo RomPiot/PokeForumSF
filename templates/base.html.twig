@@ -36,16 +36,19 @@
 									</li>
 
 								</ul>
-								{% if is_granted('ROLE_USER') and app.user.pokeball > 0 %}
-									<div class="pokeball-container">
-										{% for i in 1..app.user.pokeball %}
+								{% if is_granted('ROLE_USER')  %}
+									{% if app.user.pokeball > 0 %}
+										<div class="pokeball-container">
+											{% for i in 1..app.user.pokeball %}
 
-											<div>
-												<img src="{{ asset('images/pokemon_items/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
-											</div>
-										{% endfor %}
-									</div>
-									<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser un pokemon</a>
+												<div>
+													<img src="{{ asset('images/pokemon_items/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
+												</div>
+											{% endfor %}
+										</div>
+										<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser un pokemon</a>
+									{% endif %}
+
 									<div class="btn-group">
 										<button type="button" class="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<img src="{{ app.user.avatar }}" alt=""/>
@@ -78,6 +81,10 @@
 					</div>
 				</div>
 
+				<div id="cursor-pokeball" class="display-none">
+					<div class="pokeball-loader"></div>
+				</div>
+
 			{% endblock %}
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -87,7 +94,9 @@
 			<script>
 				document.addEventListener("DOMContentLoaded", function () {
 					let onHunt = false;
-
+					
+					const body = document.querySelector('body');
+					const cursorPokeball = document.querySelector('#cursor-pokeball');
 
 					const huntBtn = document.querySelector('a.hunt-btn');
 					const pokemonMainContainer = document.querySelector('div.pokemon-main-container');
@@ -96,8 +105,20 @@
 					
 					let pokemonData;
 
+					document.addEventListener("mousemove", function (event) {
+						let x = event.clientX;
+						let y = event.clientY;
+						cursorPokeball.style.left = x + "px";
+						cursorPokeball.style.top = y + "px";
+					});
+
+					// Click on button 'Chasser un pokemon'
 					huntBtn.addEventListener("click", function (event) {
 						event.preventDefault();
+
+						body.style.cursor = "none";
+						cursorPokeball.classList.remove('display-none');
+
 
 						const url = this.href;
 						onHunt = true;
@@ -124,13 +145,12 @@
 						})
 					});
 
-					// When pokemon is catched
-					pokemonMainContainer.addEventListener("click", function (event) {
-						console.log("ok");
-						// if (onHunt == true) {
+					// On click in game
+					document.addEventListener("click", function (event) {
+						if (onHunt == true) {
+							// If click on pokemon
 							if (event.target.classList.contains("pokemon-image")) {
 								event.preventDefault();
-								console.log("ok3");
 
 								const url = pokemon.getAttribute("href");
 							
@@ -142,16 +162,18 @@
 								}).then(function(response) {
 										console.log(response);
 								})
-
+							} 
+							
+							if (!event.target.classList.contains("hunt-btn")) {
+								onHunt = false;
 								$(".pokemon-main-container").fadeOut("0.5");
-							// }
-
-							// if (!event.target.classList.contains("hunt-btn")) {
-								// onHunt = false;
-							// }
+								body.style.cursor = "inherit";
+								cursorPokeball.classList.add('display-none');
+							}
 						}
 						
 					});
+					
 
 					function makeNewPosition(){
 						// Get viewport dimensions (remove the dimension of the div)
