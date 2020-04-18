@@ -33,6 +33,11 @@ class Badge
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="integer", options={"default": "1"})
+     */
+    private $level = 1;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -91,6 +96,18 @@ class Badge
             $this->users->removeElement($user);
             $user->removeBadge($this);
         }
+
+        return $this;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): self
+    {
+        $this->level = $level;
 
         return $this;
     }

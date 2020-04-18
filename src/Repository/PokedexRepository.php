@@ -34,6 +34,20 @@ class PokedexRepository extends ServiceEntityRepository
 			->getOneOrNullResult();
 	}
 
+	/**
+	 * Return all différent Pokemons of a user by difficulty lvl
+	 *
+	 */
+	// public function findByUserAndDifficulty($user, $difficulty) {
+	// 	->andWhere('p.user = :user')
+	// 	->andWhere('p.pokemon = :pokemon')
+	// 	->setParameter('user', $user)
+	// 	->setParameter('pokemon', $pokemon)
+	// 	->orderBy('p.id', 'ASC')
+	// 	->getQuery()
+	// 	->getOneOrNullResult();
+	// }
+
 
 	/*
     public function findOneBySomeField($value): ?Pokedex

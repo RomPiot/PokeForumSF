@@ -22,7 +22,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PokemonController extends AbstractController
 {
-
 	private $pokemonRepository;
 	private $badgeRepository;
 	private $serializer;
