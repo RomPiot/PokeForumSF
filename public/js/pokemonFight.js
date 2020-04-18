@@ -57,18 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			$(".pokeball-loader").css({ "width": "60px", "height": "60px" });
 			
 			axios.post(url, {
-			}).then(function(response) {
+			}).then(function (response) {
 				pokemonData = JSON.parse(response.data.content);
+				console.log(pokemonData);
 
 				// change image pokemon
 				pokemonImage.setAttribute("src", "/images/pokemons/" + pokemonData.idPokemon + ".png");
 				pokemon.setAttribute("data-id", pokemonData.idPokemon);
 
-				
-
 				setTimeout(() => {
 					// Display game
-					// movePokemon('.pokemon', pokemonData.difficulty);
+					movePokemon('.pokemon', pokemonData.difficulty);
 					
 					let pokemonHeight = pokemonImage.offsetHeight;
 					let pokemonWidth = pokemonImage.offsetWidth;
@@ -79,7 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
 					} else {
 						pokemonImage.style.width = "90px";
 						pokemonImage.style.height = "auto";
-					}				
+					}			
+					
+					pokemon.classList.remove("no-active");
+
 				}, 20);
 			})
 		});
@@ -125,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		setTimeout(() => {
 			pokeballCatching.classList.add("no-active");
+			pokemon.classList.add("no-active");
 		}, 7000);
 
 		setTimeout(() => {
@@ -148,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	function movePokemon(myclass, difficulty){
 		var newq = makeNewPosition();
-		duration = 1600 - (difficulty*100);
+		duration = 1400 - (difficulty*100);
 		
 		$(myclass).animate({ top: newq[0], left: newq[1] }, duration, function(){
 		movePokemon(myclass, difficulty);        
