@@ -15,11 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	const pokeballCatching = document.querySelector(".pokeball-catching");
 	const pokeballCatch = document.querySelector(".pokeball-catch");
-	const pokeballCatchBtn = document.querySelector(".pokeball-button");
-
 
 	let pokemonData;
 
+	// Make pokeball cursor
 	document.addEventListener("mousemove", function (event) {
 		let x = event.clientX;
 		let y = event.clientY;
@@ -28,42 +27,48 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	if (huntBtn) {
-		
-		// Click on button 'Chasser un pokemon'
+		// Click on button 'Chasser'
 		huntBtn.addEventListener("click", function (event) {
 			event.preventDefault();
 			body.style.cursor = "none";
-			cursorPokeball.classList.remove('display-none');
-			pokemonMainContainer.classList.remove('display-none');
+			cursorPokeball.classList.remove('no-active');
+			pokemonMainContainer.classList.remove('no-active');
+			pokeballCatch.classList.remove("pokeball-animation-success");
+			pokeballCatch.classList.remove("pokeball-animation-fail");
+			
+			// Remove a pokeball
+			userPokeball -= 1;
+			$('.pokeball-container').children().first().addClass('no-active');
+
+			setTimeout(() => {
+				$('.pokeball-container').children().first().remove();
+			}, 5000);
+
+			if (userPokeball == 0) {
+				huntBtn.classList.add("no-active");
+				setTimeout(() => {
+					huntBtn.remove();
+				}, 1000);
+			}
+
 			const url = this.href;
 			onHunt = true;
 			
 			$(".pokeball-loader").css({ "width": "60px", "height": "60px" });
 			
 			axios.post(url, {
-				"user_id": userId
 			}).then(function(response) {
-				// Remove a pokeball
-				$('.pokeball-container').children().last().remove();
-				userPokeball -= 1;
-				
 				pokemonData = JSON.parse(response.data.content);
-				// console.log(pokemonData);
-
-				let idPokemon = pokemonData.idPokemon;
 
 				// change image pokemon
 				pokemonImage.setAttribute("src", "/images/pokemons/" + pokemonData.idPokemon + ".png");
 				pokemon.setAttribute("data-id", pokemonData.idPokemon);
 
-				if (userPokeball == 0) {
-					huntBtn.remove();
-				}
+				
 
 				setTimeout(() => {
 					// Display game
-					$(".pokemon-main-container").fadeIn("0.5");
-					movePokemon('.pokemon', pokemonData.difficulty);
+					// movePokemon('.pokemon', pokemonData.difficulty);
 					
 					let pokemonHeight = pokemonImage.offsetHeight;
 					let pokemonWidth = pokemonImage.offsetWidth;
@@ -82,12 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// On click in game
 	document.addEventListener("click", function (event) {
-		if (onHunt == true) {
+		if ((onHunt == true) && (!event.target.classList.contains("hunt-btn"))) {
 			successCatch = false;
 
-			if (!event.target.classList.contains("hunt-btn")) {
-				cursorPokeball.style.zIndex = 1000;
-			}
 			// If click on pokemon
 			if (event.target.classList.contains("pokemon-image")) {
 				event.preventDefault();
@@ -95,51 +97,42 @@ document.addEventListener("DOMContentLoaded", function () {
 				const url = pokemon.getAttribute("href");
 				
 				axios.post(url, {
-					"user_id": userId,
 					"pokemon_id": pokemon.getAttribute("data-id")
-				}).then(function(response) {
-					if (response.data == true) {
-						successCatch = true;
-					}
 				})
+				
+				successCatch = true;
 			} 
 
-			if (!event.target.classList.contains("hunt-btn")) {
-				$('.pokemon').stop();
-
-				$(".pokeball-loader").css({ "width": "0px", "height": "0px" });
-				
-				setTimeout(() => {
-					pokeballCatching.classList.remove("display-none");
-					$(".pokeball-catching").animate({ "opacity": 1 }, 400);
-					pokeballCatch.classList.add("pokeball-animation");
-					
-					if (successCatch == true) {	
-						setTimeout(() => {
-							pokeballCatchBtn.classList.add("pokeball-success");
-						}, 1500);
-					}
-					
-					setTimeout(() => {
-						$(".pokemon-main-container").animate({ "opacity": "0" }, 700);
-					}, 5000);
-
-					setTimeout(() => {
-						onHunt = false;
-						cursorPokeball.style.zIndex = 998;
-						pokemonMainContainer.classList.add("display-none");
-						pokeballCatchBtn.classList.remove("pokeball-success");
-						pokemonMainContainer.style.opacity = 1;
-						cursorPokeball.style.opacity = 1;
-						body.style.cursor = "inherit";
-						pokeballCatching.classList.add("display-none");
-						cursorPokeball.classList.add('display-none');
-					}, 6000);
-				}, 1000);
-			}
+			isCatch(successCatch);
 		}
-		
 	});
+
+	function isCatch(isCatch = false) {
+		$('.pokemon').stop();
+		$(".pokeball-loader").css({ "width": "0px", "height": "0px" });
+		onHunt = false;
+
+		setTimeout(() => {
+			pokeballCatching.classList.remove("no-active");
+			
+			if (isCatch) {	
+				pokeballCatch.classList.add("pokeball-animation-success");
+			} else {
+				pokeballCatch.classList.add("pokeball-animation-fail");
+			}
+			
+		}, 1000);
+
+		setTimeout(() => {
+			pokeballCatching.classList.add("no-active");
+		}, 7000);
+
+		setTimeout(() => {
+			cursorPokeball.classList.add("no-active");
+			pokemonMainContainer.classList.add("no-active");
+			body.style.cursor = "inherit";
+		}, 7500);
+	}
 	
 
 	function makeNewPosition(){

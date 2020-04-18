@@ -46,7 +46,7 @@
 												</div>
 											{% endfor %}
 										</div>
-										<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser un pokemon</a>
+										<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser</a>
 									{% endif %}
 
 									<div class="btn-group">
@@ -73,18 +73,18 @@
 					{% block content %}{% endblock %}
 				</div>
 
-				<div class="pokemon-main-container display-none">
+				<div class="pokemon-main-container no-active">
 					<div class="pokemon-container">
 						<a class="pokemon" data-id="" href="{{ path('pokedex_add') }}">
 							<img src="{{ asset('images/pokemons/1.png') }}" class="pokemon-image">
 						</a>
 					</div>
 
-				<div id="cursor-pokeball" class="display-none center-on-page">
+				<div id="cursor-pokeball" class="no-active center-on-page">
 					<img src="{{ asset('images/pokemon_items/pokeball.png') }}" class="pokeball-loader">
 				</div>
 
-				<div class="center-on-page pokeball-catching display-none">
+				<div class="center-on-page pokeball-catching no-active">
 					<div class="pokeball-catch">
 						<div class="pokeball-button"></div>
 					</div>

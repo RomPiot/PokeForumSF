@@ -17,22 +17,21 @@ class PokedexController extends AbstractController
 	/**
 	 * @Route("/pokedex/add", name="pokedex_add")
 	 */
-	public function addPokedex(Request $request, EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository, UserRepository $userRepository, PokedexRepository $pokedexRepository)
+	public function addPokedex(Request $request, EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository)
 	{
 		// not working with this bellow method to get post query
 		// $postRequest = $request->request->get("user_id");
 
 		$jsonPostRequest = \json_decode($request->getContent());
 
-		$userId = $jsonPostRequest->user_id;
 		$pokemonId = $jsonPostRequest->pokemon_id;
-
-		$user = $userRepository->find($userId);
 		$pokemon = $pokemonRepository->findOneByPokeId($pokemonId);
+
+		$user = $this->getUser();
+		$userId = $user->getId();
 
 		// check if user/pokemon line exist in db
 		$pokedexRow = $pokedexRepository->findUserPokemonRow($userId, $pokemonId);
-
 
 		if ($pokedexRow) {
 			$currentQuantity = $pokedexRow->getQuantity();

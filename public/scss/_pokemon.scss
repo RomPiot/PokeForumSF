@@ -1,14 +1,18 @@
-.hunt-btn,
-.pokeball-container {
-	margin-right: 10px;
+.hunt-btn {
+	transition: opacity ease 1s;
+	margin-right: 15px;
+
 }
 
 .pokeball-container {
+	margin-right: 10px;
 	display: flex;
 	flex-wrap: wrap;
 	.pokeball {
 		height: 30px;
 		width: 30px;
+		opacity: 1;
+		transition: opacity ease 5s;
 	}
 }
 
@@ -43,6 +47,11 @@
 	}
 }
 
+#cursor-pokeball {
+	pointer-events: none;
+	z-index: 9999;
+}
+
 .pokeball-loader {
 	z-index: 9999;
 	width: 60px;
@@ -53,16 +62,28 @@
 	transition: width ease 0.8s, height ease 0.8s;
 }
 
-.pokeball-animation {
+.pokeball-animation-fall {
 	animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
+}
+
+.pokeball-animation-fail {
+	@extend .pokeball-animation-fall;
+
 	.pokeball-button {
-		animation: blink 0.5s alternate 7;
+		animation: blink 0.5s alternate 7, fail-caught 1s ease 4s forwards;
+	}
+}
+.pokeball-animation-success {
+	@extend .pokeball-animation-fall;
+
+	.pokeball-button {
+		animation: blink 0.5s alternate 7, caught 1s ease 4s forwards;
 	}
 }
 
 .pokeball-catching {
-	opacity: 0;
-	transition: ease 1000;
+	transition: ease 0.5s;
+	opacity: 1;
 }
 
 .pokeball-catch {
@@ -99,25 +120,43 @@
 		left: calc(50% - 30px);
 		width: 60px;
 		height: 60px;
-		background: #7f8c8d;
+		background: #eee;
 		border: 10px solid #fff;
 		border-radius: 50%;
 		z-index: 10;
 		box-shadow: 0 0 0 10px black;
 	}
 
-	.pokeball-success {
-		background-color: rgb(52, 227, 255);
-	}
+	// .pokeball-success {
+	// 	background-color: #34e3ff;
+	// }
 }
 
 /* Animations */
 @keyframes blink {
 	from {
+		background: #e74c3c;
+	}
+	to {
+		background: #eee;
+	}
+}
+
+@keyframes caught {
+	from {
 		background: #eee;
 	}
 	to {
-		background: #e74c3c;
+		background: #34e3ff;
+	}
+}
+
+@keyframes fail-caught {
+	from {
+		background: #eee;
+	}
+	to {
+		background: #7f8c8d;
 	}
 }
 

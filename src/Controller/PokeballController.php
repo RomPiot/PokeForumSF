@@ -14,8 +14,6 @@ class PokeballController extends AbstractController
 {
 	/**
 	 * To add a pokeball to all users who have less than 6 
-	 * 
-	 * @Route("/pokeball/add", name="user_add_pokeball")
 	 */
 	public function addPokeball(EntityManagerInterface $entityManager)
 	{
@@ -26,37 +24,36 @@ class PokeballController extends AbstractController
 		return new Response('Pokeball added !');
 	}
 
+	/**
+	 * To add full pokeball to all users who have less than 6 
+	 * 
+	 * @Route("/pokeball/addFull", name="user_add_full_pokeball")
+	 */
+	public function addFullPokeball(EntityManagerInterface $entityManager)
+	{
+		$updatePokeball = $entityManager->createQuery('update App\Entity\User u set u.pokeball = 6 where u.pokeball < 6');
+
+		$updatePokeball->execute();
+
+		return new Response('Pokeball full !');
+	}
+
 
 	/**
 	 * To remove a pokeball to one user
-	 * 
-	 * @Route("/pokeball/remove", name="user_remove_pokeball")
 	 */
-	public function removePokeball(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager)
+	public function removePokeball()
 	{
-		// $tokenReceived = $request->request->get("token");
-
-		// Not working 
-		// $userId = $request->request->get("user_id");
-
-		// $jsonPostRequest = \json_decode($request->getContent());
-		// $userId = $jsonPostRequest->user_id;
-
-		// $user = $userRepository->find($userId);
+		$entityManager = $this->getDoctrine()->getManager();
 		$user = $this->getUser();
-
 		$nbPokeballUser = $user->getPokeball();
+
 		if ($nbPokeballUser > 0) {
-
-			$removePokeball = $nbPokeballUser - 1;
-
-			$user->setPokeball($removePokeball);
+			$user->setPokeball($nbPokeballUser - 1);
 			$entityManager->persist($user);
 			$entityManager->flush();
+		} 
 
-			return new Response('Remove a pokeball. Now : ' . $user->getPokeball());
-		} else {
-			return new Response("User haven't pokeball");
-		}
+		return new Response('Pokeball removed');
 	}
 }

@@ -1,9 +1,11 @@
-.hunt-btn,
-.pokeball-container {
-  margin-right: 10px;
+.hunt-btn {
+  -webkit-transition: opacity ease 1s;
+  transition: opacity ease 1s;
+  margin-right: 15px;
 }
 
 .pokeball-container {
+  margin-right: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14,6 +16,9 @@
 .pokeball-container .pokeball {
   height: 30px;
   width: 30px;
+  opacity: 1;
+  -webkit-transition: opacity ease 5s;
+  transition: opacity ease 5s;
 }
 
 .pokemon-main-container {
@@ -56,6 +61,11 @@
   cursor: none;
 }
 
+#cursor-pokeball {
+  pointer-events: none;
+  z-index: 9999;
+}
+
 .pokeball-loader {
   z-index: 9999;
   width: 60px;
@@ -68,20 +78,25 @@
   transition: width ease 0.8s, height ease 0.8s;
 }
 
-.pokeball-animation {
+.pokeball-animation-fall, .pokeball-animation-fail, .pokeball-animation-success {
   -webkit-animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
           animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
 }
 
-.pokeball-animation .pokeball-button {
-  -webkit-animation: blink 0.5s alternate 7;
-          animation: blink 0.5s alternate 7;
+.pokeball-animation-fail .pokeball-button {
+  -webkit-animation: blink 0.5s alternate 7, fail-caught 1s ease 4s forwards;
+          animation: blink 0.5s alternate 7, fail-caught 1s ease 4s forwards;
+}
+
+.pokeball-animation-success .pokeball-button {
+  -webkit-animation: blink 0.5s alternate 7, caught 1s ease 4s forwards;
+          animation: blink 0.5s alternate 7, caught 1s ease 4s forwards;
 }
 
 .pokeball-catching {
-  opacity: 0;
-  -webkit-transition: ease 1000;
-  transition: ease 1000;
+  -webkit-transition: ease 0.5s;
+  transition: ease 0.5s;
+  opacity: 1;
 }
 
 .pokeball-catch {
@@ -123,7 +138,7 @@
   left: calc(50% - 30px);
   width: 60px;
   height: 60px;
-  background: #7f8c8d;
+  background: #eee;
   border: 10px solid #fff;
   border-radius: 50%;
   z-index: 10;
@@ -131,25 +146,57 @@
           box-shadow: 0 0 0 10px black;
 }
 
-.pokeball-catch .pokeball-success {
-  background-color: #34e3ff;
-}
-
 /* Animations */
 @-webkit-keyframes blink {
   from {
-    background: #eee;
+    background: #e74c3c;
   }
   to {
-    background: #e74c3c;
+    background: #eee;
   }
 }
 @keyframes blink {
   from {
+    background: #e74c3c;
+  }
+  to {
+    background: #eee;
+  }
+}
+
+@-webkit-keyframes caught {
+  from {
     background: #eee;
   }
   to {
-    background: #e74c3c;
+    background: #34e3ff;
+  }
+}
+
+@keyframes caught {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #34e3ff;
+  }
+}
+
+@-webkit-keyframes fail-caught {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #7f8c8d;
+  }
+}
+
+@keyframes fail-caught {
+  from {
+    background: #eee;
+  }
+  to {
+    background: #7f8c8d;
   }
 }
 
@@ -270,6 +317,11 @@ body {
 
 .display-none {
   display: none !important;
+}
+
+.no-active {
+  pointer-events: none;
+  opacity: 0;
 }
 
 .center-on-page {

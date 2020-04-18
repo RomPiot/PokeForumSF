@@ -19,7 +19,7 @@ class PokemonController extends AbstractController
 	/**
 	 * @Route("/pokemon/random", name="pokemon_random")
 	 */
-	public function random_pokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository)
+	public function randomPokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository)
 	{
 		$user = $this->getUser();
 		$nbBadge = count($badgeRepository->findByUser($user->getId()));
@@ -72,10 +72,10 @@ class PokemonController extends AbstractController
 	/**
 	 * @Route("/pokemon/hunt", name="pokemon_hunt")
 	 */
-	public function hunt_pokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, PokeballController $pokeballController, UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager)
+	public function hunt_pokemon(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, PokeballController $pokeballController, EntityManagerInterface $entityManager)
 	{
-		$pokemon = $this->random_pokemon($pokemonRepository, $badgeRepository);
-		$pokeballController->removePokeball($userRepository, $request, $entityManager);
+		$pokemon = $this->randomPokemon($pokemonRepository, $badgeRepository);
+		$pokeballController->removePokeball();
 
 		return $this->json($pokemon);
 	}
