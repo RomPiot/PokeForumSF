@@ -45,9 +45,9 @@ class PokemonController extends AbstractController
 	/**
 	 * @Route("/pokemon/random", name="pokemon_random")
 	 */
-	public function randomPokemon($nbBadge = 8)
+	public function randomPokemon($lvlBadge = 8)
 	{
-		switch ($nbBadge) {
+		switch ($lvlBadge) {
 			case '0':
 				$listPokemon = $this->pokemonRepository->findByDifficult(1);
 				break;
@@ -97,12 +97,12 @@ class PokemonController extends AbstractController
 	public function huntPokemon(PokeballController $pokeballController)
 	{
 		$user = $this->getUser();
-		$countBadge = count($this->badgeRepository->findByUser($user->getId()));
+		$badgeMaxLevel = $this->badgeRepository->findHighterByUser($user->getId())["max_level"];
 
 		$nbPokeballUser = $user->getPokeball();
 
 		if ($nbPokeballUser > 0) {
-			$pokemon = $this->randomPokemon($countBadge);
+			$pokemon = $this->randomPokemon($badgeMaxLevel);
 			$pokeballController->removePokeball();
 		} else {
 			$pokemon = null;

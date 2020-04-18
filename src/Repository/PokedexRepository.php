@@ -33,11 +33,25 @@ class PokedexRepository extends ServiceEntityRepository
 			->getQuery()
 			->getOneOrNullResult();
 	}
+	
 
 	/**
 	 * Return all différent Pokemons of a user by difficulty lvl
 	 *
 	 */
+	public function countPokemonByDifficulty($user, $difficulty)
+	{
+		return $this->createQueryBuilder('p')
+			->select('COUNT(p)')
+			->leftJoin('p.pokemon', 'pkm')
+			->andWhere('p.user = :user')
+			->andWhere('pkm.difficulty = :diff')
+			->setParameter('user', $user)
+			->setParameter('diff', $difficulty)
+			->getQuery()
+			->getOneOrNullResult();
+	}
+
 	// public function findByUserAndDifficulty($user, $difficulty) {
 	// 	->andWhere('p.user = :user')
 	// 	->andWhere('p.pokemon = :pokemon')
