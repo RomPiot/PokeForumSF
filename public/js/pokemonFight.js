@@ -27,55 +27,58 @@ document.addEventListener("DOMContentLoaded", function () {
 		cursorPokeball.style.top = y + "px";
 	});
 
-	// Click on button 'Chasser un pokemon'
-	huntBtn.addEventListener("click", function (event) {
-		event.preventDefault();
-		body.style.cursor = "none";
-		cursorPokeball.classList.remove('display-none');
-		pokemonMainContainer.classList.remove('display-none');
-		const url = this.href;
-		onHunt = true;
+	if (huntBtn) {
 		
-		$(".pokeball-loader").css({ "width": "60px", "height": "60px" });
-		
-		axios.post(url, {
-			"user_id": userId
-		}).then(function(response) {
-			// Remove a pokeball
-			$('.pokeball-container').children().last().remove();
-			userPokeball -= 1;
+		// Click on button 'Chasser un pokemon'
+		huntBtn.addEventListener("click", function (event) {
+			event.preventDefault();
+			body.style.cursor = "none";
+			cursorPokeball.classList.remove('display-none');
+			pokemonMainContainer.classList.remove('display-none');
+			const url = this.href;
+			onHunt = true;
 			
-			pokemonData = JSON.parse(response.data.content);
-			// console.log(pokemonData);
-
-			let idPokemon = pokemonData.idPokemon;
-
-			// change image pokemon
-			pokemonImage.setAttribute("src", "/images/pokemons/" + pokemonData.idPokemon + ".png");
-			pokemon.setAttribute("data-id", pokemonData.idPokemon);
-
-			if (userPokeball == 0) {
-				huntBtn.remove();
-			}
-
-			setTimeout(() => {
-				// Display game
-				$(".pokemon-main-container").fadeIn("0.5");
-				movePokemon('.pokemon', pokemonData.difficulty);
+			$(".pokeball-loader").css({ "width": "60px", "height": "60px" });
+			
+			axios.post(url, {
+				"user_id": userId
+			}).then(function(response) {
+				// Remove a pokeball
+				$('.pokeball-container').children().last().remove();
+				userPokeball -= 1;
 				
-				let pokemonHeight = pokemonImage.offsetHeight;
-				let pokemonWidth = pokemonImage.offsetWidth;
+				pokemonData = JSON.parse(response.data.content);
+				// console.log(pokemonData);
 
-				if (pokemonHeight > pokemonWidth) {
-					pokemonImage.style.height = "90px";
-					pokemonImage.style.width = "auto";
-				} else {
-					pokemonImage.style.width = "90px";
-					pokemonImage.style.height = "auto";
-				}				
-			}, 20);
-		})
-	});
+				let idPokemon = pokemonData.idPokemon;
+
+				// change image pokemon
+				pokemonImage.setAttribute("src", "/images/pokemons/" + pokemonData.idPokemon + ".png");
+				pokemon.setAttribute("data-id", pokemonData.idPokemon);
+
+				if (userPokeball == 0) {
+					huntBtn.remove();
+				}
+
+				setTimeout(() => {
+					// Display game
+					$(".pokemon-main-container").fadeIn("0.5");
+					movePokemon('.pokemon', pokemonData.difficulty);
+					
+					let pokemonHeight = pokemonImage.offsetHeight;
+					let pokemonWidth = pokemonImage.offsetWidth;
+
+					if (pokemonHeight > pokemonWidth) {
+						pokemonImage.style.height = "90px";
+						pokemonImage.style.width = "auto";
+					} else {
+						pokemonImage.style.width = "90px";
+						pokemonImage.style.height = "auto";
+					}				
+				}, 20);
+			})
+		});
+	}
 
 	// On click in game
 	document.addEventListener("click", function (event) {
@@ -152,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	function movePokemon(myclass, difficulty){
 		var newq = makeNewPosition();
-		duration = 1400 - (difficulty*100);
+		duration = 1600 - (difficulty*100);
 		
 		$(myclass).animate({ top: newq[0], left: newq[1] }, duration, function(){
 		movePokemon(myclass, difficulty);        
