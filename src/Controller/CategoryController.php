@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{id}", name="category")
+     * @Route("/categorie/{id}", name="category")
      */
     public function index(Category $category,CategoryRepository $categoryRepository,SubCategoryRepository $subCategoryRepository,TopicRepository $topicRepository)
     {
@@ -30,7 +30,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/categoryList", name="category_list")
+     * @Route("/categories", name="category_list")
      */
     public function categoryList(CategoryRepository $categoryRepository,SubCategoryRepository $subCategoryRepository)
     {
