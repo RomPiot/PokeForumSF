@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			setTimeout(() => {
 				$('.pokeball-container').children().first().remove();
-			}, 5000);
+			}, 1000);
 
 			if (userPokeball == 0) {
 				huntBtn.classList.add("no-active");
@@ -59,13 +59,21 @@ document.addEventListener("DOMContentLoaded", function () {
 			axios.post(url, {
 			}).then(function (response) {
 				pokemonData = JSON.parse(response.data.content);
-				console.log(pokemonData);
+				// console.log(pokemonData);
 
 				// change image pokemon
 				pokemonImage.setAttribute("src", "/images/pokemons/" + pokemonData.idPokemon + ".png");
 				pokemon.setAttribute("data-id", pokemonData.idPokemon);
 
+				let escapeTime = (15 - pokemonData.difficulty) * 1000;
+
 				setTimeout(() => {
+
+					setTimeout(() => {
+						escape();
+						return false;
+					}, escapeTime);
+
 					// Display game
 					movePokemon('.pokemon', pokemonData.difficulty);
 					
@@ -81,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					}			
 					
 					pokemon.classList.remove("no-active");
+					$(".pokemon").animate({ "opacity" : 1 }, 500);
 
 				}, 20);
 			})
@@ -127,14 +136,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		setTimeout(() => {
 			pokeballCatching.classList.add("no-active");
-			pokemon.classList.add("no-active");
+			$(".pokemon").animate({ "opacity" : 0 }, 500);
 		}, 7000);
-
+		
 		setTimeout(() => {
 			cursorPokeball.classList.add("no-active");
 			pokemonMainContainer.classList.add("no-active");
 			body.style.cursor = "inherit";
+			pokemon.classList.add("no-active");
 		}, 7500);
+	}
+
+	function escape() {
+		$('.pokemon').stop();
+		// $(".pokeball-loader").css({ "width": "0px", "height": "0px" });
+		onHunt = false;
+
+		pokeballCatching.classList.remove("no-active");
+		pokeballCatching.classList.add("no-active");
+		$(".pokemon").animate({ "opacity" : 0 }, 500);
+		
+		cursorPokeball.classList.add("no-active");
+		pokemonMainContainer.classList.add("no-active");
+		body.style.cursor = "inherit";
+		pokemon.classList.add("no-active");
 	}
 	
 
@@ -151,13 +176,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	function movePokemon(myclass, difficulty){
 		var newq = makeNewPosition();
-		duration = 1400 - (difficulty*100);
+		duration = 1400 - (difficulty * 100);
 		
 		$(myclass).animate({ top: newq[0], left: newq[1] }, duration, function(){
 		movePokemon(myclass, difficulty);        
 		});
-		
 	};
-	
-
 });

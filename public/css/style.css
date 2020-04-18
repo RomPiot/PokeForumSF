@@ -97,6 +97,7 @@
   -webkit-transition: ease 0.5s;
   transition: ease 0.5s;
   opacity: 1;
+  z-index: 9999;
 }
 
 .pokeball-catch {
