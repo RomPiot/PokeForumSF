@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	let escaping;
 	
 	const body = document.querySelector('body');
-	const userId = body.getAttribute("data-user-id");
 	let userPokeball = body.getAttribute("data-user-pokeball");
 	
 	const pokemonMainContainer = document.querySelector(".pokemon-main-container")
@@ -16,6 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	const pokeballCatching = document.querySelector(".pokeball-catching");
 	const pokeballCatch = document.querySelector(".pokeball-catch");
+
+	const badge = document.querySelector(".badge-container");
+	const badgeName = badge.querySelector(".badge-name");
+	const badgeDifficulty = badge.querySelector(".badge-difficulty");
+	const badgeImage = badge.querySelector(".badge-img img");
 
 	let pokemonData;
 
@@ -101,8 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// On click in game
 	document.addEventListener("click", function (event) {
+		$('.pokemon').stop();
+
 		if (!event.target.classList.contains("hunt-btn")) {
 			successCatch = false;
+			$('.pokemon').stop();
 
 			// If click on pokemon
 			if (event.target.classList.contains("pokemon-image")) {
@@ -113,7 +120,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				axios.post(url, {
 					"pokemon_id": pokemon.getAttribute("data-id")
 				}).then(function (response) {
-					// console.log(response);
+					if (response.data.content) {	
+						const newBadge = JSON.parse(response.data.content);
+
+						setTimeout(() => {
+							addBadge(newBadge)
+						}, 5000);
+					}
+
 				});
 				
 				successCatch = true;
@@ -123,8 +137,25 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
+	function addBadge(newBadge) {
+		console.log(newBadge);
+
+		const newDifficulty = newBadge.level + 1;
+		const oldBadgeImage = badgeImage.getAttribute("data-image-path");
+		const newBadgeImage = oldBadgeImage + newBadge.image;
+
+		badgeImage.setAttribute("src", newBadgeImage);
+		badgeName.outerHTML = newBadge.name;
+		badgeDifficulty.outerHTML = newDifficulty;
+		
+		badge.classList.add("down-to-center");
+
+		setTimeout(() => {
+			badge.classList.remove("down-to-center");
+		}, 7000);
+	}
+
 	function isCatch(isCatch = false) {
-		$('.pokemon').stop();
 		$(".pokeball-loader").css({ "width": "0px", "height": "0px" });
 
 		setTimeout(() => {

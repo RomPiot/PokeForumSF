@@ -97,7 +97,12 @@ class BadgeController extends AbstractController
 			$newBadgeLvl = $maxBadge + 1;
 			$this->addBadge($newBadgeLvl);
 
-			return $newBadgeLvl;
+			$newBadge = $this->badgeRepository->find($newBadgeLvl);
+
+			$jsonBadge = $this->serializer->serialize($newBadge, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['users']]);
+
+			// For instance, return a Response with encoded Json
+			return new Response($jsonBadge, 200, ['Content-Type' => 'application/json']);
 		}
 	}
 }

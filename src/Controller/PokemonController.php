@@ -147,7 +147,7 @@ class PokemonController extends AbstractController
 		// Count the nb of pokemons captured by difficulty for a user
 		$countPokemon = $this->pokedexRepository->countPokemonByDifficulty($this->getUser()->getId(), $pokemonDifficulty)[1];
 
-		if ($countPokemon == 3) {
+		if ($countPokemon == 5) {
 			return true;
 		} else {
 			return false;

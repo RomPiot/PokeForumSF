@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pokedex;
 use App\Controller\BadgeController;
+use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +18,7 @@ class PokedexController extends AbstractController
 	/**
 	 * @Route("/pokedex/add", name="pokedex_add")
 	 */
-	public function addPokedex(Request $request, EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository, BadgeController $badgeController)
+	public function addPokedex(Request $request, EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository, BadgeController $badgeController, BadgeRepository $badgeRepository)
 	{
 		// not working with this bellow method to get post query
 		// $postRequest = $request->request->get("user_id");
@@ -52,7 +53,7 @@ class PokedexController extends AbstractController
 		$badgeAdded = $badgeController->canAddBadge($pokemon->getDifficulty());
 
 		if (!empty($badgeAdded)) {
-			return new Response("Pokemon caught, and new badge $badgeAdded added !");
+			return $this->json($badgeAdded);
 		} else {
 			return new Response("Pokemon caught !");
 		}
