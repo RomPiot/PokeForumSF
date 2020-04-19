@@ -43,9 +43,17 @@ class PokemonController extends AbstractController
 	}
 
 	/**
+	 */
+
+	/**
+	 * Generate a random pokemon by a level of diffuculty
+	 *
+	 * @param integer $lvlBadge
+	 * @return Response
+	 * 
 	 * @Route("/pokemon/random", name="pokemon_random")
 	 */
-	public function randomPokemon($lvlBadge = 8)
+	public function randomPokemon($lvlBadge = 8): Response
 	{
 		switch ($lvlBadge) {
 			case '0':

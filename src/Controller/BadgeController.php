@@ -71,10 +71,12 @@ class BadgeController extends AbstractController
 		$difficulty = $badgeMaxLevel + 1;
 
 		// Count the nb of pokemons by difficulty of badge for a user
-		$count = $this->pokedexRepository->countPokemonByDifficulty($user->getId(), $difficulty);
-
+		$count = $this->pokedexRepository->countPokemonByDifficulty($user->getId(), $difficulty)[1];
+		// \dd($count);
 		if ($count >= 5) {
 			$this->addBadge($badgeMaxLevel + 1);
+		} else {
+			return new Response();
 		}
 	}
 

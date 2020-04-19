@@ -37,7 +37,6 @@ class PokedexRepository extends ServiceEntityRepository
 
 	/**
 	 * Return all différent Pokemons of a user by difficulty lvl
-	 *
 	 */
 	public function countPokemonByDifficulty($user, $difficulty)
 	{
