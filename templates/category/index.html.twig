@@ -2,21 +2,22 @@
 
 {% block title %}Home{% endblock %}
 {% block content %}
-<link rel="stylesheet" href=" {{ asset('css/styleCategory.css') }}">
+    <link rel="stylesheet" href=" {{ asset('css/styleCategory.css') }}">
 
 
     <div id="pokemonLogoContainer">
 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png"
+             alt="">
 
     </div>
 
     <div id="wrapperCategory">
 
-            <div class="categoryContainer">
-                <h3>{{ category.name }}</h3>
-                <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
-            </div>
+        <div class="categoryContainer">
+            <h3>{{ category.name }}</h3>
+            <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+        </div>
 
 
         <div id="wrapperTopic">
@@ -29,7 +30,7 @@
                         <h3>{{ subCategory.name }}</h3>
                     </div>
 
-                {% endif%}
+                {% endif %}
 
             {% endfor %}
 
@@ -45,12 +46,14 @@
         {% for topic in topics %}
 
             {% if loop.index < 4 %}
+                <a href="{{ path('topic_show',{id: topic.id}) }}">
 
-                <div class="TopicContainer">
-                    <h3>{{ topic.title }}</h3>
-                </div>
+                    <div class="TopicContainer">
+                        <h3>{{ topic.title }}</h3>
+                    </div>
+                </a>
 
-            {% endif%}
+            {% endif %}
 
         {% endfor %}
 
