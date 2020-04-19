@@ -85,25 +85,31 @@
 				{# Pokedex tab #}
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<label>N°</label>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<label>Nom</label>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3 text-center">
+							<label>Difficulté</label>
+						</div>
+						<div class="col-md-3 text-center">
 							<label>Quantité</label>
 						</div>
 					</div>
 					{% for pokemons in user.pokedex %}
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.idPokemon}}</a>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-3">
 								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.name}}</a>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3 text-center">
+								<p>{{pokemons.pokemon.difficulty}}</p>
+							</div>
+							<div class="col-md-3 text-center">
 								<p>{{pokemons.quantity}}</p>
 							</div>
 						</div>

@@ -33,7 +33,7 @@ class PokeballController extends AbstractController
 
 		$updatePokeball->execute();
 
-		return new Response('Pokeball full !');
+		return $this->redirectToRoute("home");
 	}
 
 
