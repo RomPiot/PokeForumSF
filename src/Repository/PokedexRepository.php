@@ -18,35 +18,19 @@ class PokedexRepository extends ServiceEntityRepository
 	{
 		parent::__construct($registry, Pokedex::class);
 	}
-
-	/**
-	 * @return Pokedex Returns a Pokedex object
-	 */
-	public function findUserPokemonRow($user, $pokemon): ?Pokedex
-	{
-		return $this->createQueryBuilder('p')
-			->andWhere('p.user = :user')
-			->andWhere('p.pokemon = :pokemon')
-			->setParameter('user', $user)
-			->setParameter('pokemon', $pokemon)
-			->orderBy('p.id', 'ASC')
-			->getQuery()
-			->getOneOrNullResult();
-	}
-	
-
 	/**
 	 * Return all différent Pokemons of a user by difficulty lvl
 	 */
 	public function countPokemonByDifficulty($user, $difficulty)
 	{
 		return $this->createQueryBuilder('p')
-			->select('COUNT(DISTINCT p)')
+			->select('COUNT(DISTINCT p.pokemon)')
 			->leftJoin('p.pokemon', 'pkm')
 			->andWhere('p.user = :user')
 			->andWhere('pkm.difficulty = :diff')
 			->setParameter('user', $user)
 			->setParameter('diff', $difficulty)
+			->setMaxResults(1)
 			->getQuery()
 			->getOneOrNullResult();
 	}

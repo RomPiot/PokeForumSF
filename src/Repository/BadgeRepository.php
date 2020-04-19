@@ -45,7 +45,7 @@ class BadgeRepository extends ServiceEntityRepository
 			->andWhere('bu.id = :id')
 			->setParameter('id', $userId)
 			->orderBy('b.id', 'ASC')
-			->setMaxResults(10)
+			->setMaxResults(1)
 			->getQuery()
             ->getOneOrNullResult();
 
