@@ -23,7 +23,7 @@ class TopicController extends AbstractController
     {
         $topicSelected = $topicRepository->find($topic);
 
-        return $this->render('topic/index.html.twig', [
+        return $this->render('topic/show.html.twig', [
             'topic' => $topicSelected,
         ]);
     }
