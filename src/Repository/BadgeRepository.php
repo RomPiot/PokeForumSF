@@ -19,9 +19,9 @@ class BadgeRepository extends ServiceEntityRepository
 		parent::__construct($registry, Badge::class);
 	}
 
-	// /**
-	//  * @return Badge[] Returns an array of Badge objects for a user
-	//  */
+	/**
+	 * @return Badge[] Returns an array of Badge objects for a user
+	 */
 	public function findByUser($userId)
 	{
 		return $this->createQueryBuilder('b')
@@ -32,6 +32,23 @@ class BadgeRepository extends ServiceEntityRepository
 			->setMaxResults(10)
 			->getQuery()
 			->getResult();
+	}
+
+	/**
+	 * @return Badge Returns an the highter Badge object for a user
+	 */
+	public function findHighterByUser($userId)
+	{
+		return $this->createQueryBuilder('b')
+			->select('MAX(b.level) AS max_level')
+			->leftJoin("b.users", "bu")
+			->andWhere('bu.id = :id')
+			->setParameter('id', $userId)
+			->orderBy('b.id', 'ASC')
+			->setMaxResults(1)
+			->getQuery()
+            ->getOneOrNullResult();
+
 	}
 
 	/*

@@ -47,6 +47,7 @@ class PokemonRepository extends ServiceEntityRepository
 		return $this->createQueryBuilder('p')
 			->andWhere('p.idPokemon = :val')
 			->setParameter('val', $pokeId)
+			->setMaxResults(1)
 			->getQuery()
 			->getOneOrNullResult();
 	}

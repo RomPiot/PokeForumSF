@@ -22,14 +22,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PokemonController extends AbstractController
 {
-
 	private $pokemonRepository;
+	private $pokedexRepository;
 	private $badgeRepository;
 	private $serializer;
 
-	public function __construct(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, SerializerInterface $serializer)
+	public function __construct(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, SerializerInterface $serializer, PokedexRepository $pokedexRepository)
 	{
 		$this->pokemonRepository = 	$pokemonRepository;
+		$this->pokedexRepository = 	$pokedexRepository;
 		$this->badgeRepository = $badgeRepository;
 
 		$encoder = new JsonEncoder();
@@ -44,11 +45,19 @@ class PokemonController extends AbstractController
 	}
 
 	/**
+	 */
+
+	/**
+	 * Generate a random pokemon by a level of diffuculty
+	 *
+	 * @param integer $lvlBadge
+	 * @return Response
+	 * 
 	 * @Route("/pokemon/random", name="pokemon_random")
 	 */
-	public function randomPokemon($nbBadge = 8)
+	public function randomPokemon($lvlBadge = 8): Response
 	{
-		switch ($nbBadge) {
+		switch ($lvlBadge) {
 			case '0':
 				$listPokemon = $this->pokemonRepository->findByDifficult(1);
 				break;
@@ -98,12 +107,13 @@ class PokemonController extends AbstractController
 	public function huntPokemon(PokeballController $pokeballController)
 	{
 		$user = $this->getUser();
-		$countBadge = count($this->badgeRepository->findByUser($user->getId()));
+		$badgeMaxLevel = $this->badgeRepository->findHighterByUser($user->getId())["max_level"];
+		$badgeMaxLevel = \is_null($badgeMaxLevel) ? 0 : $badgeMaxLevel;
 
 		$nbPokeballUser = $user->getPokeball();
 
 		if ($nbPokeballUser > 0) {
-			$pokemon = $this->randomPokemon($countBadge);
+			$pokemon = $this->randomPokemon($badgeMaxLevel);
 			$pokeballController->removePokeball();
 		} else {
 			$pokemon = null;
@@ -123,5 +133,24 @@ class PokemonController extends AbstractController
 		return $this->render('pokemon/index.html.twig', [
 			'pokemon' => $pokemon
 		]);
+	}
+
+
+	/**
+	 * Check if user have 5 different pokemon of badge lvl
+	 *
+	 * @param integer $pokemonDifficulty
+	 * @return boolean
+	 */
+	public function countPokemonByDifficulty(int $pokemonDifficulty): bool
+	{
+		// Count the nb of pokemons captured by difficulty for a user
+		$countPokemon = $this->pokedexRepository->countPokemonByDifficulty($this->getUser()->getId(), $pokemonDifficulty)[1];
+
+		if ($countPokemon == 3) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

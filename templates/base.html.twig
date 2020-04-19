@@ -48,6 +48,10 @@
 											{% endfor %}
 										</div>
 										<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser</a>
+										<a class="btn btn-success buy-pokeball-btn display-none" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>										
+
+									{% else %}
+										<a class="btn btn-success buy-pokeball-btn" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>										
 									{% endif %}
 
 									<div class="btn-group">

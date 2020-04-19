@@ -1,4 +1,4 @@
-.hunt-btn {
+.hunt-btn, .buy-pokeball-btn {
   -webkit-transition: opacity ease 1s;
   transition: opacity ease 1s;
   margin-right: 15px;
