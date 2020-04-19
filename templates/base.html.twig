@@ -10,7 +10,12 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href=" {{ asset('css/style.min.css') }}"> {% block stylesheets %}{% endblock %}
 		</head>
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 		<body data-user-id="{{ app.user.id }}" data-user-pokeball="{{ app.user.pokeball }}">
+		{% else %}
+		<body data-user-id="" data-user-pokeball="">
+		{% endif %}
+
 			{% block body %}
 
 				{% block nav %}
