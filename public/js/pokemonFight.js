@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			axios.post(url, {
 			}).then(function (response) {
 				pokemonData = JSON.parse(response.data.content);
-				// console.log(pokemonData);
+				console.log(pokemonData);
 
 				// change image pokemon
 				pokemonImage.setAttribute("src", "/images/pokemons/" + pokemonData.idPokemon + ".png");
@@ -109,7 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				
 				axios.post(url, {
 					"pokemon_id": pokemon.getAttribute("data-id")
-				})
+				}).then(function (response) {
+					console.log(response);
+				});
 				
 				successCatch = true;
 			} 

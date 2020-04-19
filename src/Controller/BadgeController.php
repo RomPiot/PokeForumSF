@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\BadgeRepository;
@@ -19,17 +20,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BadgeController extends AbstractController
 {
-	private $userRepository;
-	private $pokemonRepository;
-	private $pokedexRepository;
+	private $pokemonController;
 	private $badgeRepository;
 	private $serializer;
 	private $entityManager;
 
-	public function __construct(UserRepository $userRepository, PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, PokedexRepository $pokedexRepository, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+	public function __construct(UserRepository $userRepository, BadgeRepository $badgeRepository, PokedexRepository $pokedexRepository, EntityManagerInterface $entityManager, PokemonController $pokemonController)
 	{
 		$this->userRepository = 	$userRepository;
-		$this->pokemonRepository = 	$pokemonRepository;
+		$this->pokemonController = 	$pokemonController;
 		$this->badgeRepository = $badgeRepository;
 		$this->pokedexRepository = $pokedexRepository;
 		$this->entityManager = $entityManager;
@@ -60,24 +59,16 @@ class BadgeController extends AbstractController
 
 
 	/**
-	 * @Route("/badge/max", name="badge_max_user")
+	 * 
 	 */
-	public function checkMaxBadge()
+	public function checkMaxBadge(User $user)
 	{
-		$user = $this->getUser();
-
 		// get the highter level badge for a user
 		$badgeMaxLevel = $this->badgeRepository->findHighterByUser($user->getId())["max_level"];
-		$difficulty = $badgeMaxLevel + 1;
 
-		// Count the nb of pokemons by difficulty of badge for a user
-		$count = $this->pokedexRepository->countPokemonByDifficulty($user->getId(), $difficulty)[1];
-		// \dd($count);
-		if ($count >= 5) {
-			$this->addBadge($badgeMaxLevel + 1);
-		} else {
-			return new Response();
-		}
+		$badgeMaxLevel = \is_null($badgeMaxLevel) ? 0 : $badgeMaxLevel;
+
+		return $badgeMaxLevel;
 	}
 
 
@@ -88,9 +79,25 @@ class BadgeController extends AbstractController
 		$user = $this->getUser();
 		$user->addBadge($newBadge);
 
-		\dd($user);
+		$this->entityManager->persist($user);
+		$this->entityManager->flush();
+	}
 
-		// $this->entityManager->persist($user);
-		// $this->entityManager->flush();
+	public function canAddBadge(int $pokemonDifficulty)
+	{
+		$maxBadge = $this->checkMaxBadge($this->getUser());
+
+		if ($pokemonDifficulty == ($maxBadge + 1)) {
+			$canAddBadge = $this->pokemonController->countPokemonByDifficulty($pokemonDifficulty);
+		} else {
+			$canAddBadge = false;
+		}
+
+		if ($canAddBadge == true) {
+			$newBadgeLvl = $maxBadge + 1;
+			$this->addBadge($newBadgeLvl);
+
+			return $newBadgeLvl;
+		}
 	}
 }

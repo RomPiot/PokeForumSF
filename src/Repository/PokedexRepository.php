@@ -41,7 +41,7 @@ class PokedexRepository extends ServiceEntityRepository
 	public function countPokemonByDifficulty($user, $difficulty)
 	{
 		return $this->createQueryBuilder('p')
-			->select('COUNT(p)')
+			->select('COUNT(DISTINCT p)')
 			->leftJoin('p.pokemon', 'pkm')
 			->andWhere('p.user = :user')
 			->andWhere('pkm.difficulty = :diff')
@@ -50,17 +50,6 @@ class PokedexRepository extends ServiceEntityRepository
 			->getQuery()
 			->getOneOrNullResult();
 	}
-
-	// public function findByUserAndDifficulty($user, $difficulty) {
-	// 	->andWhere('p.user = :user')
-	// 	->andWhere('p.pokemon = :pokemon')
-	// 	->setParameter('user', $user)
-	// 	->setParameter('pokemon', $pokemon)
-	// 	->orderBy('p.id', 'ASC')
-	// 	->getQuery()
-	// 	->getOneOrNullResult();
-	// }
-
 
 	/*
     public function findOneBySomeField($value): ?Pokedex
