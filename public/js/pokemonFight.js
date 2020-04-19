@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	const pokeballCatch = document.querySelector(".pokeball-catch");
 
 	const badge = document.querySelector(".badge-container");
-	const badgeName = badge.querySelector(".badge-name");
 	const badgeDifficulty = badge.querySelector(".badge-difficulty");
 	const badgeImage = badge.querySelector(".badge-img img");
 
@@ -125,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 						setTimeout(() => {
 							addBadge(newBadge)
-						}, 5000);
+						}, 4500);
 					}
 
 				});
@@ -138,14 +137,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	function addBadge(newBadge) {
-		console.log(newBadge);
-
 		const newDifficulty = newBadge.level + 1;
 		const oldBadgeImage = badgeImage.getAttribute("data-image-path");
 		const newBadgeImage = oldBadgeImage + newBadge.image;
 
 		badgeImage.setAttribute("src", newBadgeImage);
-		badgeName.outerHTML = newBadge.name;
+		// badgeName.outerHTML = newBadge.name;
+		$(".badge-name").text(newBadge.name);
 		badgeDifficulty.outerHTML = newDifficulty;
 		
 		badge.classList.add("down-to-center");
