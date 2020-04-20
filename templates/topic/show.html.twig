@@ -5,17 +5,22 @@
 {% block content %}
 
     <div class="container">
-        <h1>{{  topic.title }}  </h1>
+        <h1>{{ topic.title }}  </h1>
+        <p>{{ topic.content }}</p>
     </div>
 
     {% for comment in comments %}
 
+        {% for user in users %}
+            {% if comment.author.id == user.id %}
+
+                <img src="{{ user.avatar }}" alt="">
+                <p>{{ user.username }}</p>
+            {% endif %}
+        {% endfor %}
         {{ comment.content }}
 
-
         <br>
-
-
     {% endfor %}
 
 

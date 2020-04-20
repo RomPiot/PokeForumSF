@@ -30,6 +30,8 @@ class TopicController extends AbstractController
         $userConnected = $this->getUser();
         $user = $userRepository->find($userConnected);
 
+        $allUsers = $userRepository->findAll();
+
         $topicSelected = $topicRepository->find($topic);
         $comments = $commentRepository->findBy(array('topic'=>$topic));
 
@@ -63,6 +65,7 @@ class TopicController extends AbstractController
             'comments'=>$comments,
             'topic' => $topicSelected,
             'commentForm' => $form->createView(),
+            'users'=>$allUsers
 
         ]);
     }
