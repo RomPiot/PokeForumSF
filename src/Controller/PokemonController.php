@@ -2,23 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Badge;
-use App\Entity\Pokemon;
-use App\Repository\UserRepository;
 use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
 use App\Controller\PokeballController;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PokemonController extends AbstractController
 {
@@ -27,7 +22,7 @@ class PokemonController extends AbstractController
 	private $badgeRepository;
 	private $serializer;
 
-	public function __construct(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, SerializerInterface $serializer, PokedexRepository $pokedexRepository)
+	public function __construct(PokemonRepository $pokemonRepository, BadgeRepository $badgeRepository, PokedexRepository $pokedexRepository)
 	{
 		$this->pokemonRepository = 	$pokemonRepository;
 		$this->pokedexRepository = 	$pokedexRepository;
@@ -35,7 +30,7 @@ class PokemonController extends AbstractController
 
 		$encoder = new JsonEncoder();
 		$defaultContext = [
-			AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+			AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object) {
 				return $object->getName();
 			},
 		];
@@ -43,9 +38,6 @@ class PokemonController extends AbstractController
 
 		$this->serializer = new Serializer([$normalizer], [$encoder]);
 	}
-
-	/**
-	 */
 
 	/**
 	 * Generate a random pokemon by a level of diffuculty
@@ -94,7 +86,7 @@ class PokemonController extends AbstractController
 		$pokemon = $listPokemon[$randomIndex];
 
 
-		// Serialize your object in Json
+		// Serialize object in Json
 		$jsonPokemon = $this->serializer->serialize($pokemon, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['pokedex']]);
 
 		// For instance, return a Response with encoded Json
@@ -102,9 +94,14 @@ class PokemonController extends AbstractController
 	}
 
 	/**
+	 * Hunt a new random pokemon according to badge leel
+	 *
+	 * @param PokeballController $pokeballController
+	 * @return JsonResponse
+	 * 
 	 * @Route("/pokemon/hunt", name="pokemon_hunt")
 	 */
-	public function huntPokemon(PokeballController $pokeballController)
+	public function huntPokemon(PokeballController $pokeballController): JsonResponse
 	{
 		$user = $this->getUser();
 		$badgeMaxLevel = $this->badgeRepository->findHighterByUser($user->getId())["max_level"];
@@ -122,11 +119,15 @@ class PokemonController extends AbstractController
 		return $this->json($pokemon);
 	}
 
-
 	/**
+	 * Display pokemon's detail
+	 *
+	 * @param [type] $id
+	 * @return Response
+	 * 
 	 * @Route("/pokemon/{id}", name="pokemon_show")
 	 */
-	public function show($id)
+	public function show($id): Response
 	{
 		$pokemon = $this->pokemonRepository->findOneByIdPokemon($id);
 
@@ -147,7 +148,7 @@ class PokemonController extends AbstractController
 		// Count the nb of pokemons captured by difficulty for a user
 		$countPokemon = $this->pokedexRepository->countPokemonByDifficulty($this->getUser()->getId(), $pokemonDifficulty)[1];
 
-		if ($countPokemon == 3) {
+		if ($countPokemon == 5) {
 			return true;
 		} else {
 			return false;
