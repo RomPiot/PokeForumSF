@@ -53,7 +53,7 @@ class TopicController extends AbstractController
             $entityManager->persist($newComment);
             $entityManager->flush();
 
-            return $this->redirectToRoute("topic_show",['id'=>1]);
+            return $this->redirect($request->getUri());
         }
 
 
