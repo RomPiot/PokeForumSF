@@ -4,8 +4,15 @@
 
 {% block content %}
 
+    <div id="pokemonLogoContainer">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+
+    </div>
+<div id="titreAndContent">
     <h1>{{ topic.title }}  </h1>
     <p>{{ topic.content }}</p>
+</div>
 
         {% for comment in comments %}
             <div class="comment">
@@ -29,7 +36,7 @@
                     </div>
 
             </div>
-y
+
         {% endfor %}
 
 
@@ -68,6 +75,29 @@ y
         }
         .usernameAndDate{
             display: flex;
+        }
+
+        #pokemonLogoContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #343a40;
+            border-radius: 15px;
+            margin-top: 15px;
+
+        }
+
+        #pokemonLogoContainer >img{
+            width:60%;
+        }
+
+        #titreAndContent{
+            background-color: #3363af;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            color: white;
+            width: 100%;
         }
     </style>
 
