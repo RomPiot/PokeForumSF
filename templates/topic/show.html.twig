@@ -4,26 +4,72 @@
 
 {% block content %}
 
-    <div class="container">
-        <h1>{{ topic.title }}  </h1>
-        <p>{{ topic.content }}</p>
-    </div>
+    <h1>{{ topic.title }}  </h1>
+    <p>{{ topic.content }}</p>
 
-    {% for comment in comments %}
+        {% for comment in comments %}
+            <div class="comment">
 
-        {% for user in users %}
-            {% if comment.author.id == user.id %}
+            {% for user in users %}
+                {% if comment.author.id == user.id %}
 
-                <img src="{{ user.avatar }}" alt="">
-                <p>{{ user.username }}</p>
-            {% endif %}
+                    <img class="avatar" src="{{ user.avatar }}" alt="">
+                    <div class="leftSideComment">
+                        <div class="usernameAndDate">
+                            <p class="username"> <strong> {{ user.username | capitalize  }} </strong> &nbsp; </p>
+                            <p class="date"> {{  comment.createdat |date("F jS \\a\\t g:ia", "Europe/Paris")}}  </p>
+
+                        </div>
+
+
+                {% endif %}
+            {% endfor %}
+                        <p class="commentContent"> {{ comment.content }} </p>
+
+                    </div>
+
+            </div>
+
         {% endfor %}
-        {{ comment.content }}
 
-        <br>
-    {% endfor %}
 
 
     {{ form(commentForm) }}
 
+
+    <style>
+
+        .avatar {
+            border-radius: 100%;
+            width: 80px;
+            margin: 5px;
+        }
+        .comment{
+            display: flex;
+            padding-bottom: 15px;
+            padding-top: 15px;
+            border-bottom: 1px solid #cbd3da;
+            border-top: 1px solid #cbd3da;
+        }
+
+        .username{
+            height: 20px;
+        }
+
+        .leftSideComment{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+        .commentContent{
+            padding: 15px;
+            padding-top: 0;
+
+        }
+        .usernameAndDate{
+            display: flex;
+        }
+    </style>
+
 {% endblock %}
+
