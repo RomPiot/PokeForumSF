@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManager;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,22 +14,23 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-	private $token;
-
-	public function __construct()
-	{
-		$this->token = "4fre84vrev8rec6r8zec!:fef4";
-	}
-
 	/**
+	 * The user's page edition
+	 *
+	 * @param UserRepository $userRepository
+	 * @param Request $request
+	 * @param EntityManagerInterface $entityManager
+	 * @param UserPasswordEncoderInterface $encoder
+	 * @return Response
+	 * 
 	 * @Route("/profil/editer", name="user_profile_edit")
 	 */
-	public function edit(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
+	public function edit(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder): Response
 	{
 		$userConnected = $this->getUser();
 		$user = $userRepository->find($userConnected);
@@ -94,17 +93,27 @@ class UserController extends AbstractController
 	}
 
 	/**
+	 * Display user's details
+	 *
+	 * @param User $user
+	 * @return Response
+	 * 
 	 * @Route("/profil/{id}", name="user_profile_show")
 	 */
-	public function show(User $user, UserRepository $userRepository)
+	public function show(User $user): Response
 	{
 		return $this->render('user/index.html.twig', [
 			'user' => $user,
 		]);
 	}
 
-	/* Check if password is default */
-	public function checkOldPassword($newPassword)
+	/**
+	 * Check if password is default
+	 *
+	 * @param string $newPassword
+	 * @return boolean
+	 */
+	public function checkOldPassword(string $newPassword): bool
 	{
 		if ($newPassword == "default") {
 			return true;

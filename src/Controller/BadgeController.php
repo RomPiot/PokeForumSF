@@ -2,18 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Pokemon;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
-use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,9 +42,14 @@ class BadgeController extends AbstractController
 	}
 
 	/**
+	 * Return all user's badges
+	 * 
+	 * @param User $user
+	 * @return Response
+	 * 
 	 * @Route("/badges/{id}", name="badges_user")
 	 */
-	public function allBadges(User $user)
+	public function allBadges(User $user): Response
 	{
 		$allBadge = $this->badgeRepository->findByUser($user);
 
@@ -59,11 +61,13 @@ class BadgeController extends AbstractController
 
 
 	/**
-	 * 
+	 * Return the highter user's badge level
+	 *
+	 * @param User $user
+	 * @return integer
 	 */
-	public function checkMaxBadge(User $user)
+	public function checkMaxBadge(User $user): int
 	{
-		// get the highter level badge for a user
 		$badgeMaxLevel = $this->badgeRepository->findHighterByUser($user->getId())["max_level"];
 
 		$badgeMaxLevel = \is_null($badgeMaxLevel) ? 0 : $badgeMaxLevel;
@@ -71,8 +75,13 @@ class BadgeController extends AbstractController
 		return $badgeMaxLevel;
 	}
 
-
-	public function addBadge(int $level)
+	/**
+	 * Add user's badge in db
+	 *
+	 * @param integer $level
+	 * @return void
+	 */
+	public function addBadge(int $level): void
 	{
 		$newBadge = $this->badgeRepository->findOneByLevel($level);
 
@@ -83,7 +92,13 @@ class BadgeController extends AbstractController
 		$this->entityManager->flush();
 	}
 
-	public function canAddBadge(int $pokemonDifficulty)
+	/**
+	 * Check if user won a new badge 
+	 *
+	 * @param integer $pokemonDifficulty
+	 * @return Response|null
+	 */
+	public function canAddBadge(int $pokemonDifficulty): ?Response
 	{
 		$maxBadge = $this->checkMaxBadge($this->getUser());
 
@@ -103,6 +118,8 @@ class BadgeController extends AbstractController
 
 			// For instance, return a Response with encoded Json
 			return new Response($jsonBadge, 200, ['Content-Type' => 'application/json']);
+		} else {
+			return new Response('', 200, ['Content-Type' => 'application/json']);
 		}
 	}
 }

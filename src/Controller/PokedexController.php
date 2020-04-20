@@ -4,21 +4,30 @@ namespace App\Controller;
 
 use App\Entity\Pokedex;
 use App\Controller\BadgeController;
-use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class PokedexController extends AbstractController
 {
 	/**
+	 * Add pokemon in user's pokedex
+	 *
+	 * @param Request $request
+	 * @param EntityManagerInterface $entityManager
+	 * @param PokemonRepository $pokemonRepository
+	 * @param PokedexRepository $pokedexRepository
+	 * @param BadgeController $badgeController
+	 * @return JsonResponse|null
+	 * 
 	 * @Route("/pokedex/add", name="pokedex_add")
 	 */
-	public function addPokedex(Request $request, EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository, BadgeController $badgeController, BadgeRepository $badgeRepository)
+	public function addPokedex(Request $request, EntityManagerInterface $entityManager, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository, BadgeController $badgeController): ?JsonResponse
 	{
 		// not working with this bellow method to get post query
 		// $postRequest = $request->request->get("user_id");
@@ -33,7 +42,7 @@ class PokedexController extends AbstractController
 
 		// check if user/pokemon line exist in db
 		$pokedexRow = $pokedexRepository->findOneBy(["user" => $user, "pokemon" => $pokemon]);
-		
+
 		// if user have this pokemon, increases the amount
 		if (!\is_null($pokedexRow)) {
 			$currentQuantity = $pokedexRow->getQuantity();
@@ -41,11 +50,12 @@ class PokedexController extends AbstractController
 		} else {
 			$pokedexRow = new Pokedex;
 			$pokedexRow
-			->setUser($user)
-			->setPokemon($pokemon)
-			->setQuantity(1);
+				->setUser($user)
+				->setPokemon($pokemon)
+				->setQuantity(1);
 		}
 
+		// add pokemon in user's pokedex db
 		$entityManager->persist($pokedexRow);
 		$entityManager->flush();
 
@@ -55,7 +65,7 @@ class PokedexController extends AbstractController
 		if (!empty($badgeAdded)) {
 			return $this->json($badgeAdded);
 		} else {
-			return new Response("Pokemon caught !");
+			return new Response();
 		}
 	}
 }
