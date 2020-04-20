@@ -11,6 +11,14 @@
     {% for comment in comments %}
 
         {{ comment.content }}
+
+
         <br>
+
+
     {% endfor %}
+
+
+    {{ form(commentForm) }}
+
 {% endblock %}
