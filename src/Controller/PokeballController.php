@@ -26,7 +26,7 @@ class PokeballController extends AbstractController
 	}
 
 	/**
-	 * Add full pokeball to all users who have less than 6 
+	 * Add full pokeball to a user who have less than 6 
 	 * 
 	 * @param EntityManagerInterface $entityManager
 	 * @return RedirectResponse
@@ -35,7 +35,10 @@ class PokeballController extends AbstractController
 	 */
 	public function addFullPokeball(EntityManagerInterface $entityManager): RedirectResponse
 	{
-		$updatePokeball = $entityManager->createQuery('update App\Entity\User u set u.pokeball = 6 where u.pokeball < 6');
+		$user = $this->getUser();
+
+		$updatePokeball = $entityManager->createQuery('update App\Entity\User u set u.pokeball = 6 where u.pokeball < 6 and u.id = :userId')
+			->setParameters(["userId" => $user->getId()]);
 
 		$updatePokeball->execute();
 
