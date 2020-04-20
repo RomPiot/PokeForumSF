@@ -7,4 +7,10 @@
     <div class="container">
         <h1>{{  topic.title }}  </h1>
     </div>
+
+    {% for comment in comments %}
+
+        {{ comment.content }}
+        <br>
+    {% endfor %}
 {% endblock %}

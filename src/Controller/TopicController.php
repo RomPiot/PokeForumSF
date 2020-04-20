@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Topic;
 use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use App\Repository\TopicRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,11 +20,13 @@ class TopicController extends AbstractController
     /**
      * @Route("/topic/{id}", name="topic_show")
      */
-    public function show(Topic $topic, TopicRepository $topicRepository)
+    public function show(Topic $topic, TopicRepository $topicRepository, CommentRepository $commentRepository)
     {
         $topicSelected = $topicRepository->find($topic);
+        $comments = $commentRepository->findBy(array('topic'=>$topic));
 
         return $this->render('topic/show.html.twig', [
+            'comments'=>$comments,
             'topic' => $topicSelected,
         ]);
     }
