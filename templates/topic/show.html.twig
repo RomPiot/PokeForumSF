@@ -1,105 +1,109 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TopicController!{% endblock %}
+{% block title %}Hello TopicController!
+{% endblock %}
 
 {% block content %}
 
-    <div id="pokemonLogoContainer">
+	<div id="pokemonLogoContainer">
 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
 
-    </div>
-<div id="titreAndContent">
-    <h1>{{ topic.title }}  </h1>
-    <p>{{ topic.content }}</p>
-</div>
+	</div>
+	<div id="titreAndContent">
+		<h1>{{ topic.title }}
+		</h1>
+		<p>{{ topic.content }}</p>
+	</div>
 
-        {% for comment in comments %}
-            <div class="comment">
+	{% for comment in comments %}
+		<div class="comment">
 
-            {% for user in users %}
-                {% if comment.author.id == user.id %}
+			{% for user in users %}
+				{% if comment.author.id == user.id %}
 
-                    <img class="avatar" src="{{ user.avatar }}" alt="">
-                    <div class="leftSideComment">
-                        <div class="usernameAndDate">
-                            <p class="username"> <strong> {{ user.username | capitalize  }} </strong> &nbsp; </p>
-                            <p class="date"> {{  comment.createdat |date("F jS \\a\\t g:ia", "Europe/Paris")}}  </p>
+					<img class="avatar" src="{{ user.avatar }}" alt="">
+					<div class="leftSideComment">
+						<div class="usernameAndDate">
+							<p class="username">
+								<strong>
+									{{ user.username | capitalize  }}
+								</strong>
+								&nbsp;
+							</p>
+							<p class="date">
+								{{  comment.createdat |date("F jS \\a\\t g:ia", "Europe/Paris")}}
+							</p>
+						</div>
+					{% endif %}
+				{% endfor %}
+				<p class="commentContent">
+					{{ comment.content }}
+				</p>
 
-                        </div>
+			</div>
+		</div>
+	{% endfor %}
+
+	{% if topic.isActive == true %}
+		{{ form(commentForm) }}
+	{% endif %}
 
 
-                {% endif %}
-            {% endfor %}
-                        <p class="commentContent"> {{ comment.content }} </p>
+		<style>
 
-                    </div>
+			.avatar {
+				border-radius: 100%;
+				width: 80px;
+				margin: 5px;
+			}
+			.comment {
+				display: flex;
+				padding-bottom: 15px;
+				padding-top: 15px;
+				border-bottom: 1px solid #cbd3da;
+				border-top: 1px solid #cbd3da;
+			}
 
-            </div>
+			.username {
+				height: 20px;
+			}
 
-        {% endfor %}
+			.leftSideComment {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+			}
+			.commentContent {
+				padding: 0 15px 15px;
 
+			}
+			.usernameAndDate {
+				display: flex;
+			}
 
+			#pokemonLogoContainer {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: #343a40;
+				border-radius: 15px;
+				margin-top: 15px;
 
-    {{ form(commentForm) }}
+			}
 
+			#pokemonLogoContainer > img {
+				width: 60%;
+			}
 
-    <style>
+			#titreAndContent {
+				background-color: #3363af;
+				border-radius: 15px;
+				padding: 15px;
+				margin-top: 15px;
+				color: white;
+				width: 100%;
+			}
+		</style>
 
-        .avatar {
-            border-radius: 100%;
-            width: 80px;
-            margin: 5px;
-        }
-        .comment{
-            display: flex;
-            padding-bottom: 15px;
-            padding-top: 15px;
-            border-bottom: 1px solid #cbd3da;
-            border-top: 1px solid #cbd3da;
-        }
-
-        .username{
-            height: 20px;
-        }
-
-        .leftSideComment{
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-        }
-        .commentContent{
-            padding: 15px;
-            padding-top: 0;
-
-        }
-        .usernameAndDate{
-            display: flex;
-        }
-
-        #pokemonLogoContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #343a40;
-            border-radius: 15px;
-            margin-top: 15px;
-
-        }
-
-        #pokemonLogoContainer >img{
-            width:60%;
-        }
-
-        #titreAndContent{
-            background-color: #3363af;
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 15px;
-            color: white;
-            width: 100%;
-        }
-    </style>
-
-{% endblock %}
-
+	{% endblock %}

@@ -21,87 +21,105 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class TopicController extends AbstractController
 {
-    /**
-     * @Route("/topic/{id}", name="topic_show")
-     */
-    public function show(Topic $topic, TopicRepository $topicRepository, CommentRepository $commentRepository, EntityManagerInterface $entityManager, Request $request, UserRepository $userRepository)
-    {
+	/**
+	 * Display a topic
+	 *
+	 * @param Topic $topic
+	 * @param TopicRepository $topicRepository
+	 * @param CommentRepository $commentRepository
+	 * @param EntityManagerInterface $entityManager
+	 * @param Request $request
+	 * @param UserRepository $userRepository
+	 * @return Response
+	 * 
+	 * @Route("/topic/{id}", name="topic_show")
+	 */
+	public function show(Topic $topic, TopicRepository $topicRepository, CommentRepository $commentRepository, EntityManagerInterface $entityManager, Request $request, UserRepository $userRepository): Response
+	{
+		$userConnected = $this->getUser();
+		$user = $userRepository->find($userConnected);
 
-        $userConnected = $this->getUser();
-        $user = $userRepository->find($userConnected);
+		$allUsers = $userRepository->findAll();
 
-        $allUsers = $userRepository->findAll();
+		$topicSelected = $topicRepository->find($topic);
+		$comments = $commentRepository->findBy(array('topic' => $topic));
 
-        $topicSelected = $topicRepository->find($topic);
-        $comments = $commentRepository->findBy(array('topic' => $topic));
+		if ($topic->getIsActive()) {
+			$newComment = new Comment();
 
-        $newComment = new Comment();
+			$form = $this->createFormBuilder($newComment)
+				->add('content', TextType::class, [
+					'label' => 'Commentaire'
+				])
+				->add('save', SubmitType::class, [
+					'label' => "Ajouter"
+				])
+				->getForm();
 
-        $form = $this->createFormBuilder($newComment)
-            ->add('content', TextType::class, [
-                'label' => 'Commentaire'
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => "Ajouter"
-            ])
-            ->getForm();
+			$form->handleRequest($request);
 
-        $form->handleRequest($request);
+			if ($form->isSubmitted() && $form->isValid()) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
+				$newComment->setAuthor($user);
+				$newComment->setTopic($topicSelected);
+				$entityManager->persist($newComment);
+				$entityManager->flush();
 
-            $newComment->setAuthor($user);
-            $newComment->setTopic($topicSelected);
-            $entityManager->persist($newComment);
-            $entityManager->flush();
+				return $this->redirect($request->getUri());
+			}
 
-            return $this->redirect($request->getUri());
-        }
+			return $this->render('topic/show.html.twig', [
+				'comments' => $comments,
+				'topic' => $topicSelected,
+				'commentForm' => $form->createView(),
+				'users' => $allUsers
+			]);
+		}
 
-
-        return $this->render('topic/show.html.twig', [
-            'comments' => $comments,
-            'topic' => $topicSelected,
-            'commentForm' => $form->createView(),
-            'users' => $allUsers
-
-        ]);
-    }
-
-    /**
-     * @Route("/newTopic", name="new_topic")
-     */
-    public function new(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager)
-    {
-        $userConnected = $this->getUser();
-        $user = $userRepository->find($userConnected);
-        $topic = new Topic();
-
-        $form = $this->createForm(NewTopicFormType::class,$topic);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $topic->setAuthor($user);
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute("home");
-        }
-
-        return $this->render('topic/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+		return $this->render('topic/show.html.twig', [
+			'comments' => $comments,
+			'topic' => $topicSelected,
+			'users' => $allUsers
+		]);
+	}
 
 
+	/**
+	 * Add a new Topic
+	 *
+	 * @param UserRepository $userRepository
+	 * @param Request $request
+	 * @param EntityManagerInterface $entityManager
+	 * @return Response
+	 * 
+	 * @Route("/newTopic", name="new_topic")
+	 */
+	public function new(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
+	{
+		$userConnected = $this->getUser();
+		$user = $userRepository->find($userConnected);
+		$topic = new Topic();
 
+		$form = $this->createForm(NewTopicFormType::class, $topic);
+		$form->handleRequest($request);
 
+		if ($form->isSubmitted() && $form->isValid()) {
 
+			$topic->setAuthor($user);
+			$entityManager->persist($user);
+			$entityManager->flush();
 
-    }
+			return $this->redirectToRoute("home");
+		}
+
+		return $this->render('topic/new.html.twig', [
+			'form' => $form->createView(),
+		]);
+	}
 }
