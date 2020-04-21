@@ -9,7 +9,14 @@
 		<link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/icon type">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href=" {{ asset('css/style.min.css') }}"> {% block stylesheets %}{% endblock %}
-		</head>
+		<script
+				src="https://code.jquery.com/jquery-3.5.0.min.js"
+				integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+				crossorigin="anonymous"></script>
+
+
+
+	</head>
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<body data-user-id="{{ app.user.id }}" data-user-pokeball="{{ app.user.pokeball }}">
 			{% else %}
@@ -113,7 +120,7 @@
 
 
 				{% endblock %}
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></>
 				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 				<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 				<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

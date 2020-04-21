@@ -5,6 +5,32 @@
 {% block content %}
     <h1>New</h1>
 
-    {{ form( topicForm )}}
+    {{ form_start(form) }}
+    {{ form_row(form.Category) }}
+    {{ form_row(form.SubCategory) }}
+    {{ form_end(form) }}
+
+
+
+<script>
+        var $category = $('#new_topic_form_Category');
+        $category.change(function() {
+            var $form = $(this).closest('form');
+            var data = {};
+            data[$category.attr('name')] = $category.val() ;
+            console.log(data);
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    console.log($(html).find('#new_topic_form_SubCategory'));
+                    $('#new_topic_form_SubCategory').replaceWith(
+                        $(html).find('#new_topic_form_SubCategory')
+                    );
+                }
+            });
+        });
+    </script>
 
 {% endblock %}
