@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
-use App\Repository\SubCategoryRepository;
 use App\Repository\TopicRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,21 +16,21 @@ class CategoryController extends AbstractController
 	 *
 	 * @param Category $category
 	 * @param CategoryRepository $categoryRepository
-	 * @param SubCategoryRepository $subCategoryRepository
 	 * @param TopicRepository $topicRepository
 	 * @return Response
 	 * 
 	 * @Route("/categorie/{id}", name="category")
 	 */
-	public function index(Category $category, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository, TopicRepository $topicRepository): Response
+	public function index(Category $category, CategoryRepository $categoryRepository, TopicRepository $topicRepository): Response
 	{
-		$categoryReturn = $categoryRepository->find($category);
-		$subCategorys = $subCategoryRepository->findBy(array('id' => $category));
+		$category = $categoryRepository->find($category);
+		// $subCategories = $subCategoryRepository->findBy(array('id' => $category));
+		$subCategories = $category->getCategories();
 		$topics = $topicRepository->findBy(array(), array('createdAt' => 'DESC'));
 
 		return $this->render('category/index.html.twig', [
-			'category' => $categoryReturn,
-			'subCategorys' => $subCategorys,
+			'category' => $category,
+			'subCategories' => $subCategories,
 			'topics' => $topics
 		]);
 	}
@@ -40,20 +39,18 @@ class CategoryController extends AbstractController
 	 * Display all categories
 	 *
 	 * @param CategoryRepository $categoryRepository
-	 * @param SubCategoryRepository $subCategoryRepository
 	 * @return Response
 	 * 
 	 * @Route("/categories", name="category_list")
 	 */
-	public function categoryList(CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository): Response
+	public function categoryList(CategoryRepository $categoryRepository): Response
 	{
-
-		$categorysReturn = $categoryRepository->findAll();
-		$subCategorys = $subCategoryRepository->findAll();
+		$categories = $categoryRepository->findMainCategories();
+		$subCategories = $categoryRepository->findsubCategories();
 
 		return $this->render('category/list.html.twig', [
-			'categorys' => $categorysReturn,
-			'subCategorys' => $subCategorys
+			'categories' => $categories,
+			'subCategories' => $subCategories
 		]);
 	}
 }

@@ -26,7 +26,7 @@ class NewTopicFormType extends AbstractType
         ;
 
         $formModifier = function (FormInterface $form, Category $category = null) {
-            $subCategory = null === $category ? [] : $category->getSubCategories();
+            $subCategory = null === $category ? [] : $category->getsubCategories();
 
             $form->add('SubCategory', EntityType::class, [
                 'class' => 'App\Entity\SubCategory',

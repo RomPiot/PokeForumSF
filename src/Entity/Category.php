@@ -11,132 +11,149 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @ORM\Id()
+	 * @ORM\GeneratedValue()
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SubCategory", mappedBy="category", orphanRemoval=true)
-     */
-    private $subCategories;
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="category")
+	 */
+	private $topics;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="category")
-     */
-    private $topics;
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $icon;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $icon;
+	/**
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="categories")
+	 */
+	private $parentCategory;
 
-    public function __construct()
-    {
-        $this->subCategories = new ArrayCollection();
-        $this->topics = new ArrayCollection();
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory")
+	 */
+	private $categories;
+
+	public function __construct()
+	{
+		$this->topics = new ArrayCollection();
+		$this->categories = new ArrayCollection();
 	}
-	
+
 	public function __toString()
-         	{
-         		return $this->getName();
-         	}
+	{
+		return $this->getName();
+	}
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+	public function setName(string $name): self
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * @return Collection|SubCategory[]
-     */
-    public function getSubCategories(): Collection
-    {
-        return $this->subCategories;
-    }
+	/**
+	 * @return Collection|Topic[]
+	 */
+	public function getTopics(): Collection
+	{
+		return $this->topics;
+	}
 
-    public function addSubCategory(SubCategory $subCategory): self
-    {
-        if (!$this->subCategories->contains($subCategory)) {
-            $this->subCategories[] = $subCategory;
-            $subCategory->setCategory($this);
-        }
+	public function addTopic(Topic $topic): self
+	{
+		if (!$this->topics->contains($topic)) {
+			$this->topics[] = $topic;
+			$topic->setCategory($this);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeSubCategory(SubCategory $subCategory): self
-    {
-        if ($this->subCategories->contains($subCategory)) {
-            $this->subCategories->removeElement($subCategory);
-            // set the owning side to null (unless already changed)
-            if ($subCategory->getCategory() === $this) {
-                $subCategory->setCategory(null);
-            }
-        }
+	public function removeTopic(Topic $topic): self
+	{
+		if ($this->topics->contains($topic)) {
+			$this->topics->removeElement($topic);
+			// set the owning side to null (unless already changed)
+			if ($topic->getCategory() === $this) {
+				$topic->setCategory(null);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * @return Collection|Topic[]
-     */
-    public function getTopics(): Collection
-    {
-        return $this->topics;
-    }
+	public function getIcon(): ?string
+	{
+		return $this->icon;
+	}
 
-    public function addTopic(Topic $topic): self
-    {
-        if (!$this->topics->contains($topic)) {
-            $this->topics[] = $topic;
-            $topic->setCategory($this);
-        }
+	public function setIcon(?string $icon): self
+	{
+		$this->icon = $icon;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeTopic(Topic $topic): self
-    {
-        if ($this->topics->contains($topic)) {
-            $this->topics->removeElement($topic);
-            // set the owning side to null (unless already changed)
-            if ($topic->getCategory() === $this) {
-                $topic->setCategory(null);
-            }
-        }
+	public function getParentCategory(): ?self
+	{
+		return $this->parentCategory;
+	}
 
-        return $this;
-    }
+	public function setParentCategory(?self $parentCategory): self
+	{
+		$this->parentCategory = $parentCategory;
 
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
+		return $this;
+	}
 
-    public function setIcon(?string $icon): self
-    {
-        $this->icon = $icon;
+	/**
+	 * @return Collection|self[]
+	 */
+	public function getCategories(): Collection
+	{
+		return $this->categories;
+	}
 
-        return $this;
-    }
+	public function addCategory(self $category): self
+	{
+		if (!$this->categories->contains($category)) {
+			$this->categories[] = $category;
+			$category->setParentCategory($this);
+		}
+
+		return $this;
+	}
+
+	public function removeCategory(self $category): self
+	{
+		if ($this->categories->contains($category)) {
+			$this->categories->removeElement($category);
+			// set the owning side to null (unless already changed)
+			if ($category->getParentCategory() === $this) {
+				$category->setParentCategory(null);
+			}
+		}
+
+		return $this;
+	}
 }

@@ -13,12 +13,10 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
 
     </div>
-    {% for category in categorys %}
+    {% for category in categories %}
 
     <div id="wrapperCategory">
-
-
-
+	
         <a href="{{ path('category',{id: category.id}) }}">
 
         <div class="categoryContainer">
@@ -27,20 +25,15 @@
         </div>
         </a>
 
-        <div id="wrapperSubCategorie">
+        <div id="wrapperSubCategory">
             <h2>Sous-catégories</h2>
 
-
-            {% for subCategory in subCategorys %}
-                {% if loop.parent.loop.index == subCategory.category.id  %}
-
-
-                    <div class="SubCategorieContainer">
-                        <h3>{{ subCategory.name }}</h3>
+            {% for subCategory in subCategories %}
+				{% if category == subCategory.parentCategory %}
+					<div class="SubCategorieContainer">
+                        <h3><a href="{{ path('category', {id: subCategory.id}) }}">{{ subCategory.name }}</a></h3>
                     </div>
-
-                {% endif%}
-
+				{% endif %}
             {% endfor %}
 
 

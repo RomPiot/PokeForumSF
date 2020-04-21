@@ -46,11 +46,6 @@ class Topic
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SubCategory", inversedBy="topics")
-     */
-    private $subcategory;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true, options={"default": "0"})
      */
     private $featured = 0;
@@ -137,18 +132,6 @@ class Topic
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    public function getSubcategory(): ?SubCategory
-    {
-        return $this->subcategory;
-    }
-
-    public function setSubcategory(?SubCategory $subcategory): self
-    {
-        $this->subcategory = $subcategory;
 
         return $this;
     }
