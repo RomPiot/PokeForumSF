@@ -22,7 +22,7 @@ class HomeController extends AbstractController
 	public function index(CategoryRepository $categoryRepository, TopicRepository $topicRepository): Response
 	{
 		$topics = $topicRepository->findBy(array(), array('createdAt' => 'DESC'));
-		$categories = $categoryRepository->findAll();
+		$categories = $categoryRepository->findMainCategories();
 
 		return $this->render('home/index.html.twig', [
 			'categories' => $categories,
