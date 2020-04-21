@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Form;
-
 
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,7 +13,6 @@ use Symfony\Component\Form\FormInterface;
 
 class NewTopicFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -26,7 +23,7 @@ class NewTopicFormType extends AbstractType
         ;
 
         $formModifier = function (FormInterface $form, Category $category = null) {
-            $subCategory = null === $category ? [] : $category->getsubCategories();
+            $subCategory = null === $category ? [] : $category->getSubCategories();
 
             $form->add('SubCategory', EntityType::class, [
                 'class' => 'App\Entity\SubCategory',

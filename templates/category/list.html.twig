@@ -16,7 +16,7 @@
     {% for category in categories %}
 
     <div id="wrapperCategory">
-	
+
         <a href="{{ path('category',{id: category.id}) }}">
 
         <div class="categoryContainer">
@@ -35,10 +35,7 @@
                     </div>
 				{% endif %}
             {% endfor %}
-
-
         </div>
-
 
     </div>
     {% endfor %}
