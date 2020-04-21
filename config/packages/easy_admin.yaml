@@ -30,6 +30,7 @@ easy_admin:
     # COMMENT
     Comment:
       class: App\Entity\Comment
+      label: 'Commentaire'
       form:
         fields:
           - { property: "topic", label: "Topic" }
@@ -46,6 +47,7 @@ easy_admin:
     # CATEGORY
     Category:
       class: App\Entity\Category
+      label: 'Categorie'
       form:
         fields:
           - { property: "name", label: "Nom de la catégorie" }
@@ -63,6 +65,7 @@ easy_admin:
     # USER
     User:
       class: App\Entity\User
+      label: 'Utilisateur'
       controller: App\Controller\Admin\UserAdminController
       form:
         fields:
