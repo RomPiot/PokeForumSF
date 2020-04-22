@@ -2,28 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Topic;
 use App\Form\NewTopicFormType;
-use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\TopicRepository;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Proxies\__CG__\App\Entity\SubCategory;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class TopicController extends AbstractController
 {

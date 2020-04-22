@@ -21,18 +21,35 @@ class CategoryController extends AbstractController
 	 * 
 	 * @Route("/categorie/{id}", name="category")
 	 */
-	public function index(Category $category, CategoryRepository $categoryRepository, TopicRepository $topicRepository): Response
+	public function cagegory(Category $category, CategoryRepository $categoryRepository, TopicRepository $topicRepository): Response
 	{
 		$category = $categoryRepository->find($category);
-		// $subCategories = $subCategoryRepository->findBy(array('id' => $category));
-		$subCategories = $category->getCategories();
-		$topics = $topicRepository->findBy(array(), array('createdAt' => 'DESC'));
-
-		return $this->render('category/index.html.twig', [
-			'category' => $category,
-			'subCategories' => $subCategories,
-			'topics' => $topics
-		]);
+		
+		// If is a main category
+		if ($category->getParentCategory() == null) {
+			// get all subcategories
+			$subCategories = $category->getCategories();
+			
+			// TODO 
+			// get all topics in subcategories related to main category
+			$topics = "";
+			
+			return $this->render('category/index.html.twig', [
+				'category' => $category,
+				'subCategories' => $subCategories,
+				'topics' => $topics,
+				'mainCategory' => true
+				]);
+			} else {
+			// get all topics in subcategories related to a main category
+			$topics = $topicRepository->findBy(["category" => $category], array('createdAt' => 'DESC'));
+			
+			return $this->render('category/index.html.twig', [
+				'category' => $category,
+				'topics' => $topics,
+				'mainCategory' => false
+				]);
+			}
 	}
 
 	/**
