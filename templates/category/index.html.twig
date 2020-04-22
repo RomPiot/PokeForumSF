@@ -28,7 +28,7 @@
 					{% if loop.index < 4 %}
 
 						<div class="TopicContainer">
-							<h3>{{ subCategory.name }}</h3>
+							<h3><a href="{{ path('category',{id: subCategory.id}) }}">{{ subCategory.name }}</a></h3>
 						</div>
 
 					{% endif %}

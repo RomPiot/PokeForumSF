@@ -56,6 +56,9 @@
 	font-size: 15px;
 	margin: 0;
 }
+.TopicContainer h3 a {
+	color: white;
+}
 
 #wrapperTopic {
 	justify-content: center;
