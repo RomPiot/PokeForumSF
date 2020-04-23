@@ -117,6 +117,11 @@ class User implements UserInterface
 	 */
 	private $pokeball = 6;
 
+	/**
+	 * @ORM\Column(type="integer", options={"default": "0"})
+	 */
+	private $points = 0;
+
 	public function __construct()
 	{
 		$this->comments = new ArrayCollection();
@@ -484,5 +489,43 @@ class User implements UserInterface
 		$this->pokeball = $pokeball;
 
 		return $this;
+	}
+
+	public function getPoints(): ?int
+	{
+		return $this->points;
+	}
+
+	public function setPoints(?int $points): self
+	{
+		$this->points = $points;
+
+		return $this;
+	}
+
+	public function getRank(): string
+	{
+		$point = $this->getPoints();
+
+		switch ($point) {
+			case $point < 10:
+				return "Apprenti dresseur";
+				break;
+			case $point >= 20 && $point < 50:
+				return "Dresseur confirmé";
+				break;
+			case $point >= 50 && $point < 100:
+				return "Champion d'arène";
+				break;
+			case $point >= 100 && $point < 150:
+				return "Champion de Ligue";
+				break;
+			case $point >= 150:
+				return "Maître Pokémon";
+				break;
+			default:
+				return "Apprenti dresseur";
+				break;
+		}
 	}
 }
