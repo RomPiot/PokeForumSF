@@ -19,6 +19,42 @@ use Symfony\Component\Routing\Annotation\Route;
 class TopicController extends AbstractController
 {
 	/**
+	 * Add a new Topic
+	 *
+	 * @param UserRepository $userRepository
+	 * @param Request $request
+	 * @param EntityManagerInterface $entityManager
+	 * @return Response
+	 * 
+	 * @Route("/topic/nouveau", name="new_topic")
+	 */
+	public function new(Request $request, EntityManagerInterface $entityManager): Response
+	{
+		$user = $this->getUser();
+		$topic = new Topic();
+
+		$form = $this->createForm(NewTopicFormType::class, $topic);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+
+			$topic->setAuthor($user);
+			$entityManager->persist($topic);
+
+			$user->setPoints($user->getPoints() + 1);
+			$entityManager->persist($user);
+
+			$entityManager->flush();
+
+			return $this->redirectToRoute("home");
+		}
+
+		return $this->render('topic/new.html.twig', [
+			'form' => $form->createView(),
+		]);
+	}
+
+	/**
 	 * Display a topic
 	 *
 	 * @param Topic $topic
@@ -33,8 +69,7 @@ class TopicController extends AbstractController
 	 */
 	public function show(Topic $topic, TopicRepository $topicRepository, CommentRepository $commentRepository, EntityManagerInterface $entityManager, Request $request, UserRepository $userRepository): Response
 	{
-		$userConnected = $this->getUser();
-		$user = $userRepository->find($userConnected);
+		$user = $this->getUser();
 
 		$allUsers = $userRepository->findAll();
 
@@ -56,10 +91,13 @@ class TopicController extends AbstractController
 			$form->handleRequest($request);
 
 			if ($form->isSubmitted() && $form->isValid()) {
-
 				$newComment->setAuthor($user);
 				$newComment->setTopic($topicSelected);
 				$entityManager->persist($newComment);
+
+				$user->setPoints($user->getPoints() + 1);
+				$entityManager->persist($user);
+
 				$entityManager->flush();
 
 				return $this->redirect($request->getUri());
@@ -77,40 +115,6 @@ class TopicController extends AbstractController
 			'comments' => $comments,
 			'topic' => $topicSelected,
 			'users' => $allUsers
-		]);
-	}
-
-
-	/**
-	 * Add a new Topic
-	 *
-	 * @param UserRepository $userRepository
-	 * @param Request $request
-	 * @param EntityManagerInterface $entityManager
-	 * @return Response
-	 * 
-	 * @Route("/newTopic", name="new_topic")
-	 */
-	public function new(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager): Response
-	{
-		$userConnected = $this->getUser();
-		$user = $userRepository->find($userConnected);
-		$topic = new Topic();
-
-		$form = $this->createForm(NewTopicFormType::class, $topic);
-		$form->handleRequest($request);
-
-		if ($form->isSubmitted() && $form->isValid()) {
-
-			$topic->setAuthor($user);
-			$entityManager->persist($user);
-			$entityManager->flush();
-
-			return $this->redirectToRoute("home");
-		}
-
-		return $this->render('topic/new.html.twig', [
-			'form' => $form->createView(),
 		]);
 	}
 }

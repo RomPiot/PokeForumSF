@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
 			
 			// TODO 
 			// get all topics in subcategories related to main category
-			$topics = "";
+			$topics = $topicRepository->findBy(["category" => $category], array('createdAt' => 'DESC'));
 			
 			return $this->render('category/index.html.twig', [
 				'category' => $category,
@@ -41,8 +41,9 @@ class CategoryController extends AbstractController
 				'mainCategory' => true
 				]);
 			} else {
+
 			// get all topics in subcategories related to a main category
-			$topics = $topicRepository->findBy(["category" => $category], array('createdAt' => 'DESC'));
+			$topics = $topicRepository->findBy(["subCategory" => $category], array('createdAt' => 'DESC'));
 			
 			return $this->render('category/index.html.twig', [
 				'category' => $category,

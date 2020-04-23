@@ -60,6 +60,12 @@ class Topic
      */
     private $isActive = 1;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $subCategory;
+
     public function __construct()
     {
 		$this->comments = new ArrayCollection();
@@ -67,9 +73,9 @@ class Topic
     }
 
 	public function __toString()
-	{
-		return $this->getTitle();
-	}
+         	{
+         		return $this->getTitle();
+         	}
 
     public function getId(): ?int
     {
@@ -187,6 +193,18 @@ class Topic
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getSubCategory(): ?Category
+    {
+        return $this->subCategory;
+    }
+
+    public function setSubCategory(?Category $subCategory): self
+    {
+        $this->subCategory = $subCategory;
 
         return $this;
     }

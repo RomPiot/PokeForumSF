@@ -30,10 +30,9 @@ class UserController extends AbstractController
 	 * 
 	 * @Route("/profil/editer", name="user_profile_edit")
 	 */
-	public function edit(UserRepository $userRepository, Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder): Response
+	public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder): Response
 	{
-		$userConnected = $this->getUser();
-		$user = $userRepository->find($userConnected);
+		$user = $this->getUser();
 
 		$oldPassword = $user->getPassword();
 

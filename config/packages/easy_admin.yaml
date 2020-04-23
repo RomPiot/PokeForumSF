@@ -16,6 +16,7 @@ easy_admin:
           - { property: "content", label: "Commentaire" }
           - { property: "author", label: "Auteur" }
           - { property: "category", label: "Catégorie" }
+          - { property: "subCategory", label: "Sous-catégorie" }
 
       list:
         max_results: 20
@@ -24,6 +25,7 @@ easy_admin:
           - { property: "content", label: "Commentaire" }
           - { property: "author", label: "Auteur" }
           - { property: "category", label: "Catégorie" }
+          - { property: "subCategory", label: "Sous-catégorie" }
           - { property: "featured", label: "Mis en avant ?" }
           - { property: "isActive", label: "Actif ?" }
 
