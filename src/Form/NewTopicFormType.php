@@ -22,12 +22,15 @@ class NewTopicFormType extends AbstractType
             ])
         ;
 
+        // ça dois venir de la | je t'es remis la configuration d'origine pour que ça soit plus simple à comprendre
         $formModifier = function (FormInterface $form, Category $category = null) {
-            $subCategory = null === $category ? [] : $category->getCategories();
+            $subCategory = null === $category ? [] : $category->getCategory();
 
-            $form->add('Category', EntityType::class, [
+            // Dans mes test seul le 'child' 'category' fonctionne -> mais on en peut pas l'afficher qua ça fait doublon avec l'autre
+            $form->add('SubCategory', EntityType::class, [
                 'class' => 'App\Entity\Category',
                 'placeholder' => '',
+                // on les récupère à partir de la catégorie séléctionner dans le formulaire en Ajax
                 'choices' => $subCategory,
             ]);
         };
