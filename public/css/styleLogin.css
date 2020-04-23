@@ -68,6 +68,10 @@
 #formLoginContainer > form{
     width: 60%;
 }
+#formLoginContainer > form > h1{
+    padding-bottom: 25px;
+}
+
 
 .form-control {
     margin-bottom: 20px;
