@@ -30,13 +30,13 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+	 * @Assert\NotBlank(message="Le contenu ne peut-être vide")
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-	 * @Assert\NotBlank(message="Le contenu ne peut-être vide")
      */
 	private $topic;
 	

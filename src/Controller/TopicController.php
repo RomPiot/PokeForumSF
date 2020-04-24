@@ -71,16 +71,13 @@ class TopicController extends AbstractController
 	 * @param CommentRepository $commentRepository
 	 * @param EntityManagerInterface $entityManager
 	 * @param Request $request
-	 * @param UserRepository $userRepository
 	 * @return Response
 	 * 
 	 * @Route("/topic/{id}", name="topic_show")
 	 */
-	public function show(Topic $topic, TopicRepository $topicRepository, CommentRepository $commentRepository, EntityManagerInterface $entityManager, Request $request, UserRepository $userRepository): Response
+	public function show(Topic $topic, TopicRepository $topicRepository, CommentRepository $commentRepository, EntityManagerInterface $entityManager, Request $request): Response
 	{
 		$user = $this->getUser();
-
-		$allUsers = $userRepository->findAll();
 
 		$topicSelected = $topicRepository->find($topic);
 		$comments = $commentRepository->findBy(array('topic' => $topic));
@@ -116,14 +113,12 @@ class TopicController extends AbstractController
 				'comments' => $comments,
 				'topic' => $topicSelected,
 				'commentForm' => $form->createView(),
-				'users' => $allUsers
 			]);
 		}
 
 		return $this->render('topic/show.html.twig', [
 			'comments' => $comments,
 			'topic' => $topicSelected,
-			'users' => $allUsers
 		]);
 	}
 
