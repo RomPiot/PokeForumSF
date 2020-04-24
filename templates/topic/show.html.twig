@@ -31,17 +31,17 @@
 			{% for user in users %}
 				{% if comment.author.id == user.id %}
 
-					<img class="avatar" src="{{ user.avatar }}" alt="">
+					<a href="{{ path('user_profile_show', {id: user.id}) }}"><img class="avatar" src="{{ user.avatar }}" alt=""></a>
 					<div class="leftSideComment">
 						<div class="usernameAndDate">
-							<p class="username">
+							<a href="{{ path('user_profile_show', {id: user.id}) }}" class="username">
 								<strong>
 									{{ user.username | capitalize  }}
 								</strong>
-								&nbsp;
-							</p>
-							<p class="date">
-								{{  comment.createdat |date("F jS \\a\\t g:ia", "Europe/Paris")}}
+							</a>
+							,&nbsp;
+							<p class="date">le 
+								{{  comment.createdat |date("d M Y à H:i", "Europe/Paris")}}
 							</p>
 						</div>
 					{% endif %}
@@ -76,6 +76,7 @@
 
 			.username {
 				height: 20px;
+				color: black;
 			}
 
 			.leftSideComment {
