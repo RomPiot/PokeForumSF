@@ -26,12 +26,17 @@ class TopicController extends AbstractController
 	 * @param EntityManagerInterface $entityManager
 	 * @return Response
 	 * 
-	 * @Route("/topic/nouveau", name="new_topic")
+	 * @Route("/topic/edition/{id<\d+>?0}", name="topic_edit")
 	 */
-	public function new(Request $request, EntityManagerInterface $entityManager): Response
+	public function edit($id = 0, Request $request, EntityManagerInterface $entityManager, TopicRepository $topicRepository): Response
 	{
 		$user = $this->getUser();
-		$topic = new Topic();
+		
+		if ($id == 0) {
+			$topic = new Topic();
+		} else {
+			$topic = $topicRepository->find($id);
+		}
 
 		$form = $this->createForm(NewTopicFormType::class, $topic);
 		$form->handleRequest($request);
@@ -46,7 +51,7 @@ class TopicController extends AbstractController
 
 			$entityManager->flush();
 
-			return $this->redirectToRoute("home");
+			return $this->redirectToRoute("topic_show", ["id" => $topic->getId()]);
 		}
 
 		return $this->render('topic/new.html.twig', [
@@ -116,5 +121,19 @@ class TopicController extends AbstractController
 			'topic' => $topicSelected,
 			'users' => $allUsers
 		]);
+	}
+
+	
+	/**
+	 * Remove a topic
+	 * 
+	 * @Route("/topic/supprimer/{id}", name="topic_remove")
+	 */
+	public function remove(Topic $topic, EntityManagerInterface $entityManager)
+	{
+		$entityManager->remove($topic);
+		$entityManager->flush();
+		
+		return $this->redirectToRoute('home');
 	}
 }
