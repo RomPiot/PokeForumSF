@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -35,6 +36,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+	 * @Assert\NotBlank(message="Le contenu ne peut-être vide")
      */
 	private $topic;
 	

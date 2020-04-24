@@ -39,9 +39,11 @@
 									<li class="nav-item {% if app.request.get('_route') == 'category_list' %} active {% endif %} ">
 										<a class="nav-link" href="{{ path('category_list') }}">Catégories</a>
 									</li>
+									{% if is_granted('ROLE_USER')  %}
 									<li class="nav-item {% if app.request.get('_route') == 'topic_edit' %} active {% endif %} ">
-										<a class="nav-link" href="{{ path('topic_edit') }}">Nouveau Topic</a>
+										<a class="nav-link" href="{{ path('topic_edit') }}">Créer un Topic</a>
 									</li>
+									{% endif %}
 
 								</ul>
 								{% if is_granted('ROLE_USER')  %}

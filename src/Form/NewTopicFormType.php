@@ -13,6 +13,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class NewTopicFormType extends AbstractType
 {
@@ -35,6 +37,11 @@ class NewTopicFormType extends AbstractType
 				"choices" => $mainCategories,
 				'class'       => 'App\Entity\Category',
 				'placeholder' => 'Sélectionnez la catégorie',
+				'constraints' => [
+					new NotBlank([
+						'message' => 'La catégorie est obligatoire',
+					]),
+				]
 			]);
 
 		$formModifier = function (FormInterface $form, Category $category = null) {
@@ -46,6 +53,11 @@ class NewTopicFormType extends AbstractType
 					'placeholder' => 'Sélectionnez la sous-catégorie',
 					'choices' => $category->getCategories(),
 					'class'       => 'App\Entity\Category',
+					'constraints' => [
+						new NotBlank([
+							'message' => 'La sous-catégorie est obligatoire',
+						]),
+					]
 				]);
 
 			} else {
@@ -55,7 +67,12 @@ class NewTopicFormType extends AbstractType
 					'placeholder' => "Sélectionnez d'abord la catégorie",
 					'choices' => [],
 					'class'       => 'App\Entity\Category',
-					'disabled' => true
+					'constraints' => [
+						new NotBlank([
+							'message' => 'La sous-catégorie est obligatoire',
+							]),
+						],
+					'disabled' => true,
 				]);
 				
 			}
@@ -63,7 +80,7 @@ class NewTopicFormType extends AbstractType
 
 		$builder
 			->add('title', null, [
-				"label" => "Titre"
+				"label" => "Titre",
 			])
 			->add('content', null, [
 				"label" => "Contenu"

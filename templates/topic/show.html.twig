@@ -13,10 +13,14 @@
 	<div id="titreAndContent">
 		<div class="d-flex justify-content-between align-items-center">
 			<h1>{{ topic.title }}</h1>
+
+			{% if topic.author == app.user %}			
 			<div>
 				<a href="{{ path('topic_edit', {'id' : topic.id}) }}">Editer</a>
 				<a href="{{ path('topic_remove', {'id' : topic.id}) }}">Supprimer</a>
 			</div>
+			{% endif %}
+
 		</div>
 		<p>{{ topic.content }}</p>
 	</div>
@@ -50,7 +54,7 @@
 		</div>
 	{% endfor %}
 
-	{% if topic.isActive == true %}
+	{% if topic.isActive == true and commentForm is defined %}
 		{{ form(commentForm) }}
 	{% endif %}
 

@@ -32,6 +32,10 @@ class TopicController extends AbstractController
 	{
 		$user = $this->getUser();
 		
+		if (!$user) {
+			return $this->redirectToRoute('home');
+		}
+
 		if ($id == 0) {
 			$topic = new Topic();
 		} else {
@@ -81,7 +85,7 @@ class TopicController extends AbstractController
 		$topicSelected = $topicRepository->find($topic);
 		$comments = $commentRepository->findBy(array('topic' => $topic));
 
-		if ($topic->getIsActive()) {
+		if ($topic->getIsActive() && $user) {
 			$newComment = new Comment();
 
 			$form = $this->createFormBuilder($newComment)
