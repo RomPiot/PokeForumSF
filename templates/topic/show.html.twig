@@ -26,35 +26,34 @@
 	</div>
 
 	{% for comment in comments %}
-		<div class="comment">
+		<div
+			class="comment">
 
 			{# {% if comment.author == app.user %} #}
 
-				<a href="{{ path('user_profile_show', {id: comment.author.id}) }}"><img class="avatar" src="{{ comment.author.avatar }}" alt=""></a>
-				<div class="leftSideComment">
-					<div class="d-flex justify-content-between align-items-center">
-						<div class="usernameAndDate">
-							<a href="{{ path('user_profile_show', {id: comment.author.id }) }}" class="username">
-								<strong>
-									{{ comment.author.username | capitalize  }}
-								</strong>
-							</a>
-							,&nbsp;
-							<p class="date">le
-								{{  comment.createdat |date("d M Y à H:i", "Europe/Paris")}}
-							</p>
-						</div>
-
-
-						{% if comment.author == app.user %}
-							<div>
-								{# <a href="{{ path('comment_edit', {'id' : comment.id}) }}"> #}
-								<a href="">
-									Editer</a>
-								<a href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
-							</div>
-						{% endif %}
+			<a href="{{ path('user_profile_show', {id: comment.author.id}) }}"><img class="avatar" src="{{ comment.author.avatar }}" alt=""></a>
+			<div class="leftSideComment">
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="usernameAndDate">
+						<a href="{{ path('user_profile_show', {id: comment.author.id }) }}" class="username">
+							<strong>
+								{{ comment.author.username | capitalize  }}
+							</strong>
+						</a>
+						,&nbsp;
+						<p class="date">le
+							{{  comment.createdat |date("d M Y à H:i", "Europe/Paris")}}
+						</p>
 					</div>
+
+
+					{% if comment.author == app.user %}
+						<div>
+							<a class="comment-edit" href="#">Editer</a>
+							<a href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
+						</div>
+					{% endif %}
+				</div>
 
 
 				{# {% endif %} #}
@@ -65,7 +64,6 @@
 			</div>
 		</div>
 	{% endfor %}
-
 	{% if topic.isActive == true and commentForm is defined %}
 		{{ form(commentForm) }}{% endif %}
 
@@ -128,4 +126,50 @@
 			}
 		</style>
 
-	{% endblock %}
+
+<script>
+
+$(function () {
+	var lastContent = "";
+
+	$(".comment-edit").on("click", function (event) {
+		event.preventDefault();
+
+		let activeComment = $(this).parents(".leftSideComment").find(".commentContent");
+
+		lastContent = activeComment.text();
+
+		activeComment.prop("contenteditable", true);
+		activeComment.focus();
+
+	});
+
+	$(".commentContent").on("keydown", function (event) {
+		let activeCommentText = $(this).text();
+
+		if ((event.key == 'Enter') || (event.key == 'Escape')) {	
+			$(this).prop("contenteditable", false);
+		}
+
+		if (event.key == 'Escape') {
+			$(this).text(lastContent);
+		}
+
+		if (event.key == 'Enter') {
+
+			$.post(
+				"{{ path('comment_edit') }}",
+				{
+					"comment_id": activeCommentText,
+					"comment_content": activeCommentText
+				},
+				function (response) {
+					console.log(response);
+				}
+			);
+		}
+
+	});
+});
+</script>
+{% endblock %}

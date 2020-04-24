@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Topic;
+use App\Form\CommentFormType;
 use App\Form\NewTopicFormType;
 use App\Repository\CommentRepository;
 use App\Repository\TopicRepository;
@@ -31,16 +32,23 @@ class TopicController extends AbstractController
 	public function edit($id = 0, Request $request, EntityManagerInterface $entityManager, TopicRepository $topicRepository): Response
 	{
 		$user = $this->getUser();
-		
-		if (!$user) {
+
+		if ($user) {
+			// New Topic
+			if ($id == 0) {
+				$topic = new Topic();
+			
+			// Topic exist
+			} else {
+				$topic = $topicRepository->find($id);
+				if ($user != $topic->getAuthor()) {
+					return $this->redirectToRoute('home');
+				}
+			}
+		} else {
 			return $this->redirectToRoute('home');
 		}
 
-		if ($id == 0) {
-			$topic = new Topic();
-		} else {
-			$topic = $topicRepository->find($id);
-		}
 
 		$form = $this->createForm(NewTopicFormType::class, $topic);
 		$form->handleRequest($request);
@@ -85,18 +93,10 @@ class TopicController extends AbstractController
 		if ($topic->getIsActive() && $user) {
 			$newComment = new Comment();
 
-			$form = $this->createFormBuilder($newComment)
-				->add('content', TextType::class, [
-					'label' => 'Commentaire'
-				])
-				->add('save', SubmitType::class, [
-					'label' => "Ajouter"
-				])
-				->getForm();
+			$formComment = $this->createForm(CommentFormType::class, $newComment);
+			$formComment->handleRequest($request);
 
-			$form->handleRequest($request);
-
-			if ($form->isSubmitted() && $form->isValid()) {
+			if ($formComment->isSubmitted() && $formComment->isValid()) {
 				$newComment->setAuthor($user);
 				$newComment->setTopic($topicSelected);
 				$entityManager->persist($newComment);
@@ -112,7 +112,7 @@ class TopicController extends AbstractController
 			return $this->render('topic/show.html.twig', [
 				'comments' => $comments,
 				'topic' => $topicSelected,
-				'commentForm' => $form->createView(),
+				'commentForm' => $formComment->createView(),
 			]);
 		}
 
@@ -122,7 +122,7 @@ class TopicController extends AbstractController
 		]);
 	}
 
-	
+
 	/**
 	 * Remove a topic
 	 * 
@@ -132,7 +132,7 @@ class TopicController extends AbstractController
 	{
 		$entityManager->remove($topic);
 		$entityManager->flush();
-		
+
 		return $this->redirectToRoute('home');
 	}
 }
