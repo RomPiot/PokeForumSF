@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use App\Repository\CategoryRepository;
 use App\Repository\TopicRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class HomeController extends PokeController
 {
 	/**
 	 * The website's homepage page

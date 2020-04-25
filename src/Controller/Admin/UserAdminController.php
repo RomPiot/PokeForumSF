@@ -45,21 +45,5 @@ class UserAdminController extends EasyAdminController
 		} else {
 			$user->setPassword($passwordEncoded);
 		}
-
-		// $newPassword = $user->getPassword();
-		// $oldPassword = $user->getOldPassword();
-
-		// // \dump($oldPassword);
-		// // \dd($newPassword);
-
-		// $passwordEncoded = $this->encoder->encodePassword($user, $user->getPassword());
-
-		// $samePassword = $this->userController->checkOldPassword($newPassword);
-
-		// if ($samePassword == true) {
-		// 	$user->setPassword($oldPassword);
-		// } else {
-		// 	$user->setPassword($passwordEncoded);
-		// }
 	}
 }
