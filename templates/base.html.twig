@@ -1,137 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}PokeForum
 			{% endblock %}
 		</title>
 		<link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/icon type">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href=" {{ asset('css/style.min.css') }}"> {% block stylesheets %}{% endblock %}
 		<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-
-
 	</head>
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		<body data-user-id="{{ app.user.id }}" data-user-pokeball="{{ app.user.pokeball }}">
-		{% else %}
-			<body data-user-id="" data-user-pokeball="">
-			{% endif %}
 
-			{% block body %}
+	<body data-user-pokeball="{{ is_granted('IS_AUTHENTICATED_FULLY') ? app.user.pokeball : ""}}">
 
-				{% block nav %}
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<div class="container">
-							<a class="navbar-brand" href="{{ path('home') }}">PokéForumSF</a>
-							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
+	{% block nav %}
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand" href="{{ path('home') }}">PokeForum</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor02">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item {% if app.request.get('_route') == 'home' %} active {% endif %}">
+							<a class="nav-link" href="{{ path('home') }}">Accueil
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item {% if app.request.get('_route') == 'category_list' %} active {% endif %} ">
+							<a class="nav-link" href="{{ path('category_list') }}">Catégories</a>
+						</li>
+						{% if is_granted('ROLE_USER')  %}
+							<li class="nav-item {% if app.request.get('_route') == 'topic_edit' %} active {% endif %} ">
+								<a class="nav-link" href="{{ path('topic_edit') }}">Créer un Topic</a>
+							</li>
+						{% endif %}
+
+					</ul>
+					{% if is_granted('ROLE_USER')  %}
+						{% if app.user.pokeball > 0 %}
+							<div class="pokeball-container">
+								{% for i in 1..app.user.pokeball %}
+
+									<div>
+										<img src="{{ asset('images/pokemon_items/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
+									</div>
+								{% endfor %}
+							</div>
+							<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser</a>
+							<a class="btn btn-success buy-pokeball-btn display-none" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>
+
+						{% else %}
+							<a class="btn btn-success buy-pokeball-btn" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>
+						{% endif %}
+
+						<div class="btn-group">
+							<button type="button" class="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img src="{{ app.user.avatar }}" alt=""/>
 							</button>
-
-							<div class="collapse navbar-collapse" id="navbarColor02">
-								<ul class="navbar-nav mr-auto">
-									<li class="nav-item {% if app.request.get('_route') == 'home' %} active {% endif %}">
-										<a class="nav-link" href="{{ path('home') }}">Accueil
-											<span class="sr-only">(current)</span>
-										</a>
-									</li>
-									<li class="nav-item {% if app.request.get('_route') == 'category_list' %} active {% endif %} ">
-										<a class="nav-link" href="{{ path('category_list') }}">Catégories</a>
-									</li>
-									{% if is_granted('ROLE_USER')  %}
-									<li class="nav-item {% if app.request.get('_route') == 'topic_edit' %} active {% endif %} ">
-										<a class="nav-link" href="{{ path('topic_edit') }}">Créer un Topic</a>
-									</li>
-									{% endif %}
-
-								</ul>
-								{% if is_granted('ROLE_USER')  %}
-									{% if app.user.pokeball > 0 %}
-										<div class="pokeball-container">
-											{% for i in 1..app.user.pokeball %}
-
-												<div>
-													<img src="{{ asset('images/pokemon_items/pokeball.png') }}" alt="pokeball PokeForum" class="pokeball">
-												</div>
-											{% endfor %}
-										</div>
-										<a class="btn btn-primary hunt-btn" href="{{ path('pokemon_hunt') }}">Chasser</a>
-										<a class="btn btn-success buy-pokeball-btn display-none" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>
-
-									{% else %}
-										<a class="btn btn-success buy-pokeball-btn" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>
-									{% endif %}
-
-									<div class="btn-group">
-										<button type="button" class="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<img src="{{ app.user.avatar }}" alt=""/>
-										</button>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="{{ path('user_profile_show', {id: app.user.id}) }}" class="dropdown-item">Mon Profil</a>
-											<div class="dropdown-divider"></div>
-											<a href=" {{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
-										</div>
-									</div>
-								{% else %}
-									<div class="btn-group">
-										<a href="{{ path('app_register') }}" class="btn btn-info mr-2">Inscription</a>
-									</div>
-									<div class="btn-group">
-										<a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
-									</div>
-								{% endif %}
+							<div class="dropdown-menu dropdown-menu-right">
+								<a href="{{ path('user_profile_show', {id: app.user.id}) }}" class="dropdown-item">Mon Profil</a>
+								<div class="dropdown-divider"></div>
+								<a href=" {{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
 							</div>
 						</div>
-					</nav>
-				{% endblock %}
-
-				<div class="container">
-					{% block content %}{% endblock %}
-				</div>
-
-				<div class="pokemon-main-container no-active">
-					<div class="pokemon-container">
-						<a class="pokemon no-active" data-id="" href="{{ path('pokedex_add') }}">
-							<img src="{{ asset('images/pokemons/1.png') }}" class="pokemon-image">
-						</a>
-					</div>
-
-					<div id="cursor-pokeball" class="no-active center-on-page">
-						<img src="{{ asset('images/pokemon_items/pokeball.png') }}" class="pokeball-loader">
-					</div>
-
-					<div class="center-on-page pokeball-catching no-active">
-						<div class="pokeball-catch">
-							<div class="pokeball-button"></div>
+					{% else %}
+						<div class="btn-group">
+							<a href="{{ path('app_register') }}" class="btn btn-info mr-2">Inscription</a>
 						</div>
-					</div>
+						<div class="btn-group">
+							<a href="{{ path('app_login') }}" class="btn btn-primary">Connexion</a>
+						</div>
+					{% endif %}
 				</div>
+			</div>
+		</nav>
+	{% endblock %}
 
-				<div class="badge-container d-flex flex-column align-items-center">
-					<p class="badge-congrat">Nouveau badge obtenu !</p>
-					<div class="badge-img">
-						<img src="" data-image-path="{{ asset('images/pokemon_items/') }}">
-					</div>
-					<p class="badge-name-full">Badge
-						<span class="badge-name"></span>
-					</p>
-					<p>Le badge
-						<span class="badge-name"></span>
-						vous permet de capturer des pokemons d'un niveau de difficulté
-						<span class="badge-difficulty"></span>.</p>
-					<p>Bonne chasse, jeune dresseur !</p>
-				</div>
+	<div class="container"> 
+		{% block content %}{% endblock %}
+	</div>
+
+	<div class="pokemon-main-container no-active">
+		<div class="pokemon-container">
+			<a class="pokemon no-active" data-id="" href="{{ path('pokedex_add') }}">
+				<img src="{{ asset('images/pokemons/1.png') }}" class="pokemon-image">
+			</a>
+		</div>
+
+		<div id="cursor-pokeball" class="no-active center-on-page">
+			<img src="{{ asset('images/pokemon_items/pokeball.png') }}" class="pokeball-loader">
+		</div>
+
+		<div class="center-on-page pokeball-catching no-active">
+			<div class="pokeball-catch">
+				<div class="pokeball-button"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="badge-container d-flex flex-column align-items-center">
+		<p class="badge-congrat">Nouveau badge obtenu !</p>
+		<div class="badge-img">
+			<img src="" data-image-path="{{ asset('images/pokemon_items/') }}">
+		</div>
+		<p class="badge-name-full">Badge
+			<span class="badge-name"></span>
+		</p>
+		<p>Le badge
+			<span class="badge-name"></span>
+			vous permet de capturer des pokemons d'un niveau de difficulté
+			<span class="badge-difficulty"></span>.</p>
+		<p>Bonne chasse, jeune dresseur !</p>
+	</div>
 
 
-			{% endblock %}
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-			<script src="{{ asset('js/pokemonFight.min.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="{{ asset('js/pokemonFight.min.js') }}"></script>
 
-			{% block javascripts %}{% endblock %}
-		</body>
-	</html>
+	{% block javascripts %}{% endblock %}
+	</body>
 </html>

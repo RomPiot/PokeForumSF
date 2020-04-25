@@ -21,7 +21,7 @@ class CategoryController extends AbstractController
 	 * 
 	 * @Route("/categorie/{id}", name="category")
 	 */
-	public function cagegory(Category $category, CategoryRepository $categoryRepository, TopicRepository $topicRepository): Response
+	public function show(Category $category, CategoryRepository $categoryRepository, TopicRepository $topicRepository): Response
 	{
 		$category = $categoryRepository->find($category);
 		
@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
 			// get all topics in subcategories related to main category
 			$topics = $topicRepository->findBy(["category" => $category], array('createdAt' => 'DESC'));
 			
-			return $this->render('category/index.html.twig', [
+			return $this->render('category/show.html.twig', [
 				'category' => $category,
 				'subCategories' => $subCategories,
 				'topics' => $topics,
@@ -45,7 +45,7 @@ class CategoryController extends AbstractController
 			// get all topics in subcategories related to a main category
 			$topics = $topicRepository->findBy(["subCategory" => $category], array('createdAt' => 'DESC'));
 			
-			return $this->render('category/index.html.twig', [
+			return $this->render('category/show.html.twig', [
 				'category' => $category,
 				'topics' => $topics,
 				'mainCategory' => false
@@ -61,12 +61,12 @@ class CategoryController extends AbstractController
 	 * 
 	 * @Route("/categories", name="category_list")
 	 */
-	public function categoryList(CategoryRepository $categoryRepository): Response
+	public function index(CategoryRepository $categoryRepository): Response
 	{
 		$categories = $categoryRepository->findMainCategories();
 		$subCategories = $categoryRepository->findsubCategories();
 
-		return $this->render('category/list.html.twig', [
+		return $this->render('category/index.html.twig', [
 			'categories' => $categories,
 			'subCategories' => $subCategories
 		]);

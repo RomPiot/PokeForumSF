@@ -511,8 +511,11 @@ class User implements UserInterface
 			case $point < 10:
 				return "Apprenti dresseur";
 				break;
-			case $point >= 20 && $point < 50:
+			case $point >= 10 && $point < 20:
 				return "Dresseur confirmé";
+				break;
+			case $point >= 20 && $point < 50:
+				return "Futur champion";
 				break;
 			case $point >= 50 && $point < 100:
 				return "Champion d'arène";
