@@ -44,15 +44,11 @@ class CommentController extends AbstractController
 	public function edit(EntityManagerInterface $entityManager, CommentRepository $commentRepository, Request $request)
 	{
 		$user = $this->getUser();
-		
-		// TODO : find why symfony not accept this below, when it works well with postman
+
 		$jsonPostRequest = \json_decode($request->getContent());
-		
+
 		$commentId = $jsonPostRequest->comment_id;
 		$commentContent = $jsonPostRequest->comment_content;
-		// \dump($commentId);
-		// \dd($content);
-		// \dd($jsonPostRequest);
 
 		if ($user) {
 			$comment = $commentRepository->find($commentId);
@@ -62,7 +58,7 @@ class CommentController extends AbstractController
 		} else {
 			return $this->redirectToRoute('home');
 		}
-		
+
 		$comment->setContent($commentContent);
 
 		$entityManager->persist($comment);

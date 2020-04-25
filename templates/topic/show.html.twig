@@ -27,7 +27,7 @@
 
 	{% for comment in comments %}
 		<div
-			class="comment">
+			class="comment" data-id="{{ comment.id }}">
 
 			{# {% if comment.author == app.user %} #}
 
@@ -156,17 +156,16 @@ $(function () {
 		}
 
 		if (event.key == 'Enter') {
+			let commentId = $(this).parents(".comment").attr("data-id");
+			
+			
+			axios.post("{{ path('comment_edit') }}",
+			{
+				comment_id: commentId,
+				comment_content: activeCommentText	
+			});
 
-			$.post(
-				"{{ path('comment_edit') }}",
-				{
-					"comment_id": activeCommentText,
-					"comment_content": activeCommentText
-				},
-				function (response) {
-					console.log(response);
-				}
-			);
+			
 		}
 
 	});
