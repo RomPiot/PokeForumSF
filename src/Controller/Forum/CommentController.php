@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
-
+namespace App\Controller\Forum;
 
 use App\Entity\Comment;
+use App\Controller\PokeController;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends PokeController
 {
-
-
 	/**
 	 * Remove a comment
 	 * 

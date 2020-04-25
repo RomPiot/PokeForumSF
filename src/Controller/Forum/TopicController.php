@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Forum;
 
-use App\Entity\Comment;
 use App\Entity\Topic;
+use App\Entity\Comment;
 use App\Form\CommentFormType;
 use App\Form\NewTopicFormType;
-use App\Repository\CommentRepository;
-use App\Repository\TopicRepository;
+use App\Controller\PokeController;
 use App\Repository\UserRepository;
+use App\Repository\TopicRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

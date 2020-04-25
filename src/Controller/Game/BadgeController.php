@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Game;
 
 use App\Entity\User;
+use App\Controller\PokeController;
 use App\Repository\UserRepository;
 use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Controller\Game\PokemonController;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

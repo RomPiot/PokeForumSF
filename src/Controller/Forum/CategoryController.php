@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Forum;
 
 use App\Entity\Category;
-use App\Repository\CategoryRepository;
+use App\Controller\PokeController;
 use App\Repository\TopicRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

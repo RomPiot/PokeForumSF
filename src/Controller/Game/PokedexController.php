@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Game;
 
 use App\Entity\Pokedex;
-use App\Controller\BadgeController;
+use App\Controller\PokeController;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
+use App\Controller\Game\BadgeController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class PokedexController extends PokeController
 {

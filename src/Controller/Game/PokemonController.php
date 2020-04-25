@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Game;
 
+use App\Controller\PokeController;
 use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
-use App\Controller\PokeballController;
+use App\Controller\Game\PokeballController;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PokemonController extends PokeController
 {
