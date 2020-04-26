@@ -23,7 +23,7 @@
 
 }
 
-#wrapperCategory{
+#wrapperCategory {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -36,10 +36,10 @@
     max-width: 660px;
 }
 
-#wrapperCategory >h2{
+#wrapperCategory > h2 {
     width: 100%;
     text-align: center;
-	color: white;
+    color: white;
 }
 
 
@@ -48,7 +48,17 @@
     width: 100%;
     border-bottom: 1px solid;
     color: white;
+    display: flex;
+    align-items: center;
 }
+
+.TopicContainer > img {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
 
 .TopicContainer > h2 {
     padding: 15px;
@@ -57,12 +67,24 @@
 
 }
 
-.TopicContainer > h3{
+.TopicContainer > h3 {
     font-size: 15px;
     margin: 0;
 }
 
-#wrapperTopic {
+#featuredAndNewTopicContainer{
+    width: 39%;
+}
+
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) {
+    background: linear-gradient(to left, #0083B0, #00B4DB);
+}
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) > h2 {
+    background: linear-gradient(to left, #166c864d, #1a8fb5bf);
+}
+
+
+.wrapperTopic {
     justify-content: center;
     background-color: #50b4e4;
     margin: 15px;
@@ -75,19 +97,19 @@
     padding-bottom: 30px;
 }
 
-#wrapperTopic >h2{
+.wrapperTopic > h2 {
     width: 100%;
     text-align: center;
     color: black;
     border-bottom: 1px solid;
     padding: 15px;
     margin: 0;
-	color: white;
+    color: white;
     background: linear-gradient(to right, #fe3c0052, #ff7e5f);
     border-radius: 15px 15px 0 0;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -107,10 +129,10 @@
     margin-right: 15px;
 }
 
-#pokemonLogoContainer >img{
-    width:60%;
+#pokemonLogoContainer > img {
+    width: 60%;
 }
 
-a{
+a {
     color: black;
 }

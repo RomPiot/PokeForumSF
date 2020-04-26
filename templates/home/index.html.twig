@@ -30,8 +30,8 @@
     </div>
 
 
-<div style="width: 39%" >
-    <div  id="wrapperTopic">
+<div id="featuredAndNewTopicContainer" >
+    <div  class="wrapperTopic">
         <h2>
             Nouveaux topics
         </h2>
@@ -41,6 +41,7 @@
                 <a href="{{ path('topic_show',{id: topic.id}) }}">
 
                     <div class="TopicContainer">
+                        <img  src="{{ topic.category.icon }}" alt="">
                         <h3>{{ topic.title }}</h3>
                     </div>
                 </a>
@@ -50,8 +51,8 @@
         {% endfor %}
     </div>
 
-    <div style="background: linear-gradient(to left, #0083B0, #00B4DB);" id="wrapperTopic">
-        <h2 style="background: linear-gradient(to left, #166c864d, #1a8fb5bf);" >
+    <div  class="wrapperTopic">
+        <h2>
             Meilleurs topics</h2>
         {% for topic in topics %}
 
@@ -59,6 +60,8 @@
                 <a href="{{ path('topic_show',{id: topic.id}) }}">
 
                     <div class="TopicContainer">
+                        <img  src="{{ topic.category.icon }}" alt="">
+
                         <h3>{{ topic.title }}</h3>
                     </div>
                 </a>
