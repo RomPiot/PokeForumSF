@@ -42,22 +42,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return array Returns an array of array who contains User objects and others fields informations
+     */
+    public function findTopList()
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+		return $this->createQueryBuilder('u')
+			->select('partial u.{id, points, username, description}, partial b.{id, name, level}, MAX(b.level) AS max_badge, count(distinct p.pokemon) as different_pokemons')
+			->leftJoin('u.badges', 'b')
+			->leftJoin('u.pokedex', 'p')
+            ->orderBy('max_badge', 'DESC')
+			->orderBy('different_pokemons', 'DESC')
+			->groupBy('u')
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?User
