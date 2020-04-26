@@ -2,16 +2,15 @@
 
 {% block title %}Accueil - PokeForum{% endblock %}
 
-{% block content %}
+{% block stylesheets %}
     <link rel="stylesheet" href=" {{ asset('css/styleHome.css') }}">
+{% endblock %}
 
-
-
+{% block content %}
     <div id="pokemonLogoContainer">
 
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png"
              alt="">
-
     </div>
 
     <div id="wrapperCategory">

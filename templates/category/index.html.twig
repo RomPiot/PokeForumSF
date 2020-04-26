@@ -1,44 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les catégories - PokeForum{% endblock %}
+{% block title %}Toutes les catégories - PokeForum
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href=" {{ asset('css/styleCategoryList.css') }}">
+{% endblock %}
 
 {% block content %}
+	<div id="pokemonLogoContainer">
 
-    <link rel="stylesheet" href=" {{ asset('css/styleCategoryList.css') }}">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
 
+	</div>
+	{% for category in categories %}
 
+		<div id="wrapperCategory">
 
-    <div id="pokemonLogoContainer">
+			<a href="{{ path('category',{id: category.id}) }}">
 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+				<div class="categoryContainer">
+					<h3>{{ category.name }}</h3>
+					<img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+				</div>
+			</a>
 
-    </div>
-    {% for category in categories %}
+			<div id="wrapperSubCategory">
+				<h2>Sous-catégories</h2>
 
-    <div id="wrapperCategory">
+				{% for subCategory in subCategories %}
+					{% if category == subCategory.parentCategory %}
+						<div class="SubCategorieContainer">
+							<h3>
+								<a href="{{ path('category', {id: subCategory.id}) }}">{{ subCategory.name }}</a>
+							</h3>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
 
-        <a href="{{ path('category',{id: category.id}) }}">
-
-        <div class="categoryContainer">
-            <h3>{{ category.name }}</h3>
-            <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
-        </div>
-        </a>
-
-        <div id="wrapperSubCategory">
-            <h2>Sous-catégories</h2>
-
-            {% for subCategory in subCategories %}
-				{% if category == subCategory.parentCategory %}
-					<div class="SubCategorieContainer">
-                        <h3><a href="{{ path('category', {id: subCategory.id}) }}">{{ subCategory.name }}</a></h3>
-                    </div>
-				{% endif %}
-            {% endfor %}
-        </div>
-
-    </div>
-    {% endfor %}
+		</div>
+	{% endfor %}
 
 
 {% endblock %}

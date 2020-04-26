@@ -1,85 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégorie {{ category.name }} - PokeForum
+{% block title %}Catégorie
+	{{ category.name }}
+	- PokeForum
 {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href=" {{ asset('css/styleCategory.css') }}">
+{% endblock %}
+
 {% block content %}
-    <link rel="stylesheet" href=" {{ asset('css/styleCategory.css') }}">
+	<div id="pokemonLogoContainer">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+	</div>
 
+	{% if mainCategory %}
+		<div id="wrapperCategory">
 
-    <div id="pokemonLogoContainer">
-
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png"
-             alt="">
-
-    </div>
-
-    {% if mainCategory %}
-        <div id="wrapperCategory">
-
-            <div class="categoryContainer">
-                <h3>{{ category.name }}</h3>
-                {% if category.icon != "" %}
-                    <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
-                {% else %}
+			<div class="categoryContainer">
+				<h3>{{ category.name }}</h3>
+				{% if category.icon != "" %}
+					<img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+				{% else %}
 					<img class="iconCatgory" src="https://image.flaticon.com/icons/svg/287/287221.svg" alt="{{ category.name }}">
-                {% endif %}
-            </div>
+				{% endif %}
+			</div>
 
 
-            <div id="wrapperTopic">
-                <h2>Sous-catégories</h2>
-                {% for subCategory in subCategories %}
+			<div id="wrapperTopic">
+				<h2>Sous-catégories</h2>
+				{% for subCategory in subCategories %}
 
-                    {% if loop.index < 4 %}
+					{% if loop.index < 4 %}
 
-                        <div class="TopicContainer">
-                            <h3><a href="{{ path('category',{id: subCategory.id}) }}">{{ subCategory.name }}</a></h3>
-                        </div>
+						<div class="TopicContainer">
+							<h3>
+								<a href="{{ path('category',{id: subCategory.id}) }}">{{ subCategory.name }}</a>
+							</h3>
+						</div>
 
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        <div id="wrapperTopic">
-            <h2>Nouveaux topics</h2>
-            {% for topic in topics %}
-                {% if loop.index < 4 %}
-                    <a href="{{ path('topic_show',{id: topic.id}) }}">
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div id="wrapperTopic">
+			<h2>Nouveaux topics</h2>
+			{% for topic in topics %}
+				{% if loop.index < 4 %}
+					<a href="{{ path('topic_show',{id: topic.id}) }}">
 
-                        <div class="TopicContainer">
-                            <h3>{{ topic.title }}</h3>
-                        </div>
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
+						<div class="TopicContainer">
+							<h3>{{ topic.title }}</h3>
+						</div>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div>
 
-    {% else %}
-        <div id="wrapperTopic" style="max-width:100%; !important">
-            <h2>{{ category.parentCategory }}
-                /
-                {{ category }}</h2>
-            <div class="TopicContainer d-flex">
-                <p class="col-6">Titre du topic</p>
-                <p class="col-2">Créé par</p>
-                <p class="col-2">Commentaires</p>
-                <p class="col-2">Date de création</p>
-            </div>
-            {% for topic in topics %}
-                {% if loop.index < 20 %}
-                    <a href="{{ path('topic_show',{id: topic.id}) }}">
+	{% else %}
+		<div id="wrapperTopic" style="max-width:100%; !important">
+			<h2>{{ category.parentCategory }}
+				/
+				{{ category }}</h2>
+			<div class="TopicContainer d-flex">
+				<p class="col-6">Titre du topic</p>
+				<p class="col-2">Créé par</p>
+				<p class="col-2">Commentaires</p>
+				<p class="col-2">Date de création</p>
+			</div>
+			{% for topic in topics %}
+				{% if loop.index < 20 %}
+					<a href="{{ path('topic_show',{id: topic.id}) }}">
 
-                        <div class="TopicContainer d-flex">
-                            <h3 class="col-6">{{ topic.title }}</h3>
-                            <p class="col-2">{{ topic.author }}</p>
-                            <p class="col-2">{{ topic.comments|length }}</p>
-                            <p class="col-2">le {{ topic.createdAt|date('d M Y à H:i') }}</p>
-                        </div>
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
-    {% endif %}
+						<div class="TopicContainer d-flex">
+							<h3 class="col-6">{{ topic.title }}</h3>
+							<p class="col-2">{{ topic.author }}</p>
+							<p class="col-2">{{ topic.comments|length }}</p>
+							<p class="col-2">le
+								{{ topic.createdAt|date('d M Y à H:i') }}</p>
+						</div>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
 
 
 {% endblock %}

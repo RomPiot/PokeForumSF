@@ -1,52 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription - PokeForum{% endblock %}
+{% block title %}Inscription - PokeForum
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href=" {{ asset('css/styleLogin.css') }}">
+{% endblock %}
 
 {% block content %}
+	<div id="loginContainer">
+
+		<div id="imageLoginContainer">
+			<div id="blackOverlay">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+			</div>
+			<div id="imagePokemon"></div>
+		</div>
+
+		<div id="formLoginContainer">
 
 
+			{{ form_start(registrationForm) }}
+			<h1 class="h1 mb-1 font-weight-normal">Inscription</h1>
+			{{ form_row(registrationForm.username) }}
+			{{ form_row(registrationForm.plainPassword) }}
+			{{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.name) }}
+			{{ form_row(registrationForm.lastname) }}
+			{{ form_row(registrationForm.agreeTerms) }}
 
 
-
-    <link rel="stylesheet" href=" {{ asset('css/styleLogin.css') }}">
-
-
-
-    <div id="loginContainer">
-
-        <div id="imageLoginContainer">
-            <div id="blackOverlay">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png"
-                     alt="">
+			<button class="btn btn-primary">Valider</button>
+			{{ form_end(registrationForm) }}
 
 
-            </div>
-            <div id="imagePokemon"></div>
-        </div>
+		</div>
 
-        <div id="formLoginContainer">
-
-
-            {{ form_start(registrationForm) }}
-            <h1 class="h1 mb-1 font-weight-normal">Inscription</h1>
-            {{ form_row(registrationForm.username) }}
-            {{ form_row(registrationForm.plainPassword) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.name) }}
-            {{ form_row(registrationForm.lastname) }}
-            {{ form_row(registrationForm.agreeTerms) }}
-
-
-            <button class="btn btn-primary">Valider</button>
-            {{ form_end(registrationForm) }}
-
-
-        </div>
-
-    </div>
-
-
+	</div>
 
 
 {% endblock %}
-
