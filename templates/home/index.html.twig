@@ -30,9 +30,11 @@
     </div>
 
 
-
-    <div id="wrapperTopic">
-        <h2>Nouveaux topics</h2>
+<div style="width: 39%" >
+    <div  id="wrapperTopic">
+        <h2>
+            Nouveaux topics
+        </h2>
         {% for topic in topics %}
 
             {% if loop.index < 4 %}
@@ -46,9 +48,28 @@
             {% endif %}
 
         {% endfor %}
-
-
     </div>
+
+    <div style="background: linear-gradient(to left, #0083B0, #00B4DB);" id="wrapperTopic">
+        <h2 style="background: linear-gradient(to left, #166c864d, #1a8fb5bf);" >
+            Meilleurs topics</h2>
+        {% for topic in topics %}
+
+            {% if topic.featured == true %}
+                <a href="{{ path('topic_show',{id: topic.id}) }}">
+
+                    <div class="TopicContainer">
+                        <h3>{{ topic.title }}</h3>
+                    </div>
+                </a>
+
+            {% endif %}
+
+        {% endfor %}
+    </div>
+
+
+</div>
 
 
 
