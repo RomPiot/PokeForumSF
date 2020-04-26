@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ pokemon }}
+	- PokeForum
+{% endblock %}
+
+{% block content %}
+
+	<div class="container emp-profile">
+		<div class="row">
+			<div class="col-md-4">
+				<div
+					class="profile-img">
+					<img src="{{ asset("images/pokemons/" ~ pokemon.idPokemon ~ ".png") }}" alt=""/>
+				</div>
+
+				<div class="profile-work d-flex flex-column align-items-center justify-content-start">
+					<p class="">
+						Attrapé par
+						{{ pokemon.pokedex|length}}
+						dresseurs</p>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="profile-head">
+					<h5>{{ pokemon }}</h5>
+					<p class="proile-description">{{ pokemon.description }}</p>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Dresseurs l'ayant capturé</a>
+						</li>
+					</ul>
+
+				</div>
+				<div class="tab-content profile-tab" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+						<div class="row">
+							<div class="col-md-6">
+								<label>ID</label>
+							</div>
+							<div class="col-md-6">
+								<p>
+									{{ pokemon.idPokemon }}
+								</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<label>Difficulté</label>
+							</div>
+							<div class="col-md-6">
+								<p>
+									{{ pokemon.difficulty }}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					{# Pokedex tab #}
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<label>Pseudo</label>
+							</div>
+							<div class="col-md-4">
+								<label>Genre</label>
+							</div>
+							<div class="col-md-2">
+								<label>Quantité</label>
+							</div>
+						</div>
+
+						{% for pokedexRow in pokemon.pokedex %}
+							<div class="row">
+								<div class="col-md-6">
+									<a href="{{ path('user_profile_show', {id: pokedexRow.user.id}) }}" class="bold">{{pokedexRow.user.username}}</a>
+								</div>
+								<div class="col-md-4">
+									{% if pokedexRow.user.gender == "man" %}
+										<p>Homme</p>
+									{% elseif pokedexRow.user.gender == "woman" %}
+										<p>Femme</p>
+									{% endif %}
+
+								</div>
+								<div class="col-md-2 text-align-center">
+									<p>{{pokedexRow.quantity}}</p>
+
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

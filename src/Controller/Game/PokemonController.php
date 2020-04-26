@@ -40,6 +40,22 @@ class PokemonController extends PokeController
 	}
 
 	/**
+	 * Undocumented function
+	 *
+	 * @return Response
+	 * 
+	 * @Route("/pokemons", name="pokemon_list")
+	 */
+	public function index(): Response
+	{
+		$pokemons = $this->pokemonRepository->findAll();
+
+		return $this->render('pokemon/index.html.twig', [
+			"pokemons" => $pokemons,
+		]);
+	}
+
+	/**
 	 * Generate a random pokemon by a level of diffuculty
 	 *
 	 * @param integer $lvlBadge
@@ -131,7 +147,7 @@ class PokemonController extends PokeController
 	{
 		$pokemon = $this->pokemonRepository->findOneByIdPokemon($id);
 
-		return $this->render('pokemon/index.html.twig', [
+		return $this->render('pokemon/show.html.twig', [
 			'pokemon' => $pokemon
 		]);
 	}

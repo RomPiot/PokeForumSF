@@ -218,6 +218,7 @@
 	z-index: 99999;
 	border-radius: 5px;
 	padding: 30px;
+	box-shadow: 0 0 13px 2px #e8e8e8;
 
 	p:not(.badge-congrat):not(.badge-name-full) {
 		font-size: 16px;
@@ -251,4 +252,34 @@
 .down-to-center {
 	top: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.pokemon-list {
+	.form-control {
+		height: 30px;
+	}
+
+	.filter-idPokemon {
+		padding: 0;
+		text-align: center;
+	}
+
+	.pokemon-img {
+		width: 120px;
+	}
+
+	a {
+		color: black;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		.row {
+			&:hover {
+		background-color: #e2faff;
+
+			}
+		}
+	}
 }
