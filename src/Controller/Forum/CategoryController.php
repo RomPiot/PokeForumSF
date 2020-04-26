@@ -30,7 +30,6 @@ class CategoryController extends PokeController
 			// get all subcategories
 			$subCategories = $category->getCategories();
 			
-			// TODO 
 			// get all topics in subcategories related to main category
 			$topics = $topicRepository->findBy(["category" => $category], array('createdAt' => 'DESC'));
 			

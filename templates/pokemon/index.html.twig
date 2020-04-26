@@ -33,7 +33,7 @@
 					</div>
 					<div class="col-2 pokemon-name">{{ pokemon.name }}</div>
 					<div class="col-2 text-center difficulty">{{ pokemon.difficulty }}</div>
-					<div class="col-2 text-center">{{ pokemon.description }}</div>
+					<div class="col-4 text-center">{{ pokemon.description }}</div>
 				</div>
 			{% endfor %}
 		</div>
@@ -62,9 +62,7 @@
 					$(".a-pokemon .idPokemon").filter(function() {
 					$(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
 					});
-				});
-
-				
+				});				
 			});
 		</script>
 	{% endblock %}

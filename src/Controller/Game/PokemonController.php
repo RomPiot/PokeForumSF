@@ -40,7 +40,7 @@ class PokemonController extends PokeController
 	}
 
 	/**
-	 * Undocumented function
+	 * Pokemon list
 	 *
 	 * @return Response
 	 * 

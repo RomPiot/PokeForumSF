@@ -350,6 +350,15 @@ class User implements UserInterface
 	}
 
 	/**
+	 * Get the highest badge for a user
+	 */
+	public function getMaxBadge()
+	{
+		$maxBadge = \count($this->badges) - 1;
+		return $this->badges[$maxBadge];
+	}
+
+	/**
 	 * @return Collection|Topic[]
 	 */
 	public function getTopics(): Collection
@@ -507,7 +516,7 @@ class User implements UserInterface
 	{
 		$point = $this->getPoints();
 
-		switch ($point) {
+		switch (true) {
 			case $point < 10:
 				return "Apprenti dresseur";
 				break;

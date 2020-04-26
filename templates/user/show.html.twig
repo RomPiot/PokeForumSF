@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ user.username }} - PokeForum
+{% endblock %}
+
+{% block content %}
+
+	<div class="container emp-profile">
+		<div class="row">
+			<div class="col-md-4">
+				<div
+					class="profile-img">
+					<img src="{{ user.avatar }}" alt=""/>
+				</div>
+
+				<div class="profile-work d-flex flex-column align-items-center justify-content-start">
+					<p class="">{{user.rank}}</p>
+					<p class="">{{ user.pokedex|length}}
+						Pokémon attrapés sur 151</p>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="profile-head">
+					<h5>{{ user }}</h5>
+					<p class="profile-description">{{ user.description }}</p>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pokedex</a>
+						</li>
+					</ul>
+
+					{% if is_granted('ROLE_USER')  %}
+						{% if app.user.id == user.id %}
+							<a href="{{ path('user_profile_edit') }}" class="profile-edit-btn"/>Editer mon profil</a>
+						{% endif %}
+					{% endif %}
+			</div>
+			<div class="tab-content profile-tab" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="row">
+						<div class="col-md-6">
+							<label>Prénom</label>
+						</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.name }}
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Nom</label>
+						</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.lastname }}
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<label>Email</label>
+						</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.email }}
+							</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<label>Date de naissance</label>
+						</div>
+						<div class="col-md-6">
+							<p>
+								{{ user.birthday|date("m/d/Y") }}
+							</p>
+						</div>
+					</div>
+				</div>
+
+				{# Pokedex tab #}
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="row">
+						<div class="col-md-3">
+							<label>N°</label>
+						</div>
+						<div class="col-md-3">
+							<label>Nom</label>
+						</div>
+						<div class="col-md-3 text-center">
+							<label>Difficulté</label>
+						</div>
+						<div class="col-md-3 text-center">
+							<label>Quantité</label>
+						</div>
+					</div>
+					{% for pokemons in user.pokedex %}
+						<div class="row">
+							<div class="col-md-3">
+								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.idPokemon}}</a>
+							</div>
+							<div class="col-md-3">
+								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.name}}</a>
+							</div>
+							<div class="col-md-3 text-center">
+								<p>{{pokemons.pokemon.difficulty}}</p>
+							</div>
+							<div class="col-md-3 text-center">
+								<p>{{pokemons.quantity}}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
