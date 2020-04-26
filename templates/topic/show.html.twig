@@ -26,10 +26,8 @@
 	</div>
 
 	{% for comment in comments %}
-		<div
-			class="comment" data-id="{{ comment.id }}">
+		<div class="comment" data-id="{{ comment.id }}">
 
-			{# {% if comment.author == app.user %} #}
 
 			<a href="{{ path('user_profile_show', {id: comment.author.id}) }}"><img class="avatar" src="{{ comment.author.avatar }}" alt=""></a>
 			<div class="leftSideComment">
@@ -44,6 +42,10 @@
 						<p class="date">le
 							{{  comment.createdat |date("d M Y à H:i", "Europe/Paris")}}
 						</p>
+
+						{% for test in comment.author.badges%}
+						<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~  test.image ) }}" alt="">
+							{% endfor %}
 					</div>
 
 
