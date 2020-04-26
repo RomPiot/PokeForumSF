@@ -363,28 +363,28 @@
           transform: translate(-50%, -50%);
 }
 
-.pokemon-list .form-control {
+.pokemon-list .form-control, .user-list .form-control {
   height: 30px;
 }
 
-.pokemon-list .filter-idPokemon {
+.pokemon-list .filter-idPokemon, .user-list .filter-idPokemon {
   padding: 0;
   text-align: center;
 }
 
-.pokemon-list .pokemon-img {
+.pokemon-list .pokemon-img, .user-list .pokemon-img {
   width: 120px;
 }
 
-.pokemon-list a {
+.pokemon-list a, .user-list a {
   color: black;
 }
 
-.pokemon-list a:hover {
+.pokemon-list a:hover, .user-list a:hover {
   text-decoration: none;
 }
 
-.pokemon-list a .row:hover {
+.pokemon-list a .row:hover, .user-list a .row:hover {
   background-color: #e2faff;
 }
 

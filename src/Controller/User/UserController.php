@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Entity\User;
 use App\Controller\PokeController;
 use App\Form\ProfileFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,23 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends PokeController
 {
+	/**
+	 * User palmares
+	 *
+	 * @param UserRepository $userRepository
+	 * @return Response
+	 * 
+	 * @Route("/dresseurs", name="user_palmares")
+	 */
+	public function index(UserRepository $userRepository): Response
+	{
+		$users = $userRepository->findAll();
+
+		return $this->render('user/index.html.twig', [
+			"users" => $users,
+		]);
+	}
+
 	/**
 	 * The user's page edition
 	 *
@@ -61,11 +79,11 @@ class UserController extends PokeController
 	 * @param User $user
 	 * @return Response
 	 * 
-	 * @Route("/profil/{id}", name="user_profile_show")
+	 * @Route("/dresseur/{id}", name="user_profile_show")
 	 */
 	public function show(User $user): Response
 	{
-		return $this->render('user/index.html.twig', [
+		return $this->render('user/show.html.twig', [
 			'user' => $user,
 		]);
 	}

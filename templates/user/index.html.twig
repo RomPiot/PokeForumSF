@@ -1,121 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil de {{ user.username }} - PokeForum
+{% block title %}Palmarès des dresseurs - PokeForum
 {% endblock %}
 
 {% block content %}
 
-	<div class="container emp-profile">
+
+	<div class="container emp-profile user-list">
 		<div class="row">
-			<div class="col-md-4">
-				<div
-					class="profile-img">
-					<img src="{{ user.avatar }}" alt=""/>
-				</div>
-
-				<div class="profile-work d-flex flex-column align-items-center justify-content-start">
-					<p class="">{{user.rank}}</p>
-					<p class="">{{ user.pokedex|length}}
-						Pokémon attrapés sur 151</p>
-				</div>
+			<div class="col-1 text-center font-weight-bold">
+				<div class="font-weight-bold">TOP</div>
+				<input type="text" class="filter-top form-control">
 			</div>
-			<div class="col-md-8">
-				<div class="profile-head">
-					<h5>{{ user }}</h5>
-					<p class="profile-description">{{ user.description }}</p>
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Pokedex</a>
-						</li>
-					</ul>
-
-					{% if app.user.id == user.id %}
-					<a href="{{ path('user_profile_edit') }}" class="profile-edit-btn"/>Editer mon profil</a>
-					{% endif %}
+			<div class="col-2 d-flex flex-column">
+				<div class="font-weight-bold text-center">Pseudo</div>
+				<input type="text" class="filter-username form-control">
 			</div>
-			<div class="tab-content profile-tab" id="myTabContent">
-				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-					<div class="row">
-						<div class="col-md-6">
-							<label>Prénom</label>
-						</div>
-						<div class="col-md-6">
-							<p>
-								{{ user.name }}
-							</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<label>Nom</label>
-						</div>
-						<div class="col-md-6">
-							<p>
-								{{ user.lastname }}
-							</p>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6">
-							<label>Email</label>
-						</div>
-						<div class="col-md-6">
-							<p>
-								{{ user.email }}
-							</p>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-6">
-							<label>Date de naissance</label>
-						</div>
-						<div class="col-md-6">
-							<p>
-								{{ user.birthday|date("m/d/Y") }}
-							</p>
-						</div>
-					</div>
-				</div>
-
-				{# Pokedex tab #}
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="row">
-						<div class="col-md-3">
-							<label>N°</label>
-						</div>
-						<div class="col-md-3">
-							<label>Nom</label>
-						</div>
-						<div class="col-md-3 text-center">
-							<label>Difficulté</label>
-						</div>
-						<div class="col-md-3 text-center">
-							<label>Quantité</label>
-						</div>
-					</div>
-					{% for pokemons in user.pokedex %}
-						<div class="row">
-							<div class="col-md-3">
-								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.idPokemon}}</a>
-							</div>
-							<div class="col-md-3">
-								<a href="{{ path('pokemon_show', {id: pokemons.pokemon.idPokemon}) }}" class="bold">{{pokemons.pokemon.name}}</a>
-							</div>
-							<div class="col-md-3 text-center">
-								<p>{{pokemons.pokemon.difficulty}}</p>
-							</div>
-							<div class="col-md-3 text-center">
-								<p>{{pokemons.quantity}}</p>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
+			<div class="col-2 d-flex flex-column">
+				<div class="text-center font-weight-bold">Grade</div>
+				<input type="text" class="filter-grade form-control">
 			</div>
+			<div class="col-3 d-flex flex-column">
+				<div class="text-center font-weight-bold">Badge le plus élévé</div>
+				<input type="text" class="filter-maxbadge form-control">
+			</div>
+			<div class="col-4 text-center font-weight-bold">Description</div>
 		</div>
-	</div>
-{% endblock %}
+		{% for user in users %}
+			<a href="{{ path('user_profile_show', {id: user.id}) }}" class="a-user">
+				<div class="row align-items-center mt-4">
+					<div class="col-1 text-center userTop">{{ loop.index }}</div>
+					<div class="col-2 text-center username">{{ user.username }}</div>
+					<div class="col-2 text-center rank">{{ user.rank }}</div>
+					<div class="col-3 text-center maxbadge">{{ user.maxBadge }}</div>
+					<div class="col-4 text-center">{{ user.description }}</div>
+				</div>
+			{% endfor %}
+		</div>
+
+	{% endblock %}
+
+	{% block javascripts %}
+		<script>
+			$(document).ready(function(){
+				$(".filter-username").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$(".a-user .username").filter(function() {
+					$(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+
+				$(".filter-grade").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$(".a-user .rank").filter(function() {
+					$(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+
+				$(".filter-maxbadge").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$(".a-user .maxbadge").filter(function() {
+					$(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+
+				$(".filter-top").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$(".a-user .userTop").filter(function() {
+					$(this).parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
+		</script>
+	{% endblock %}

@@ -36,9 +36,9 @@
 							<li class="nav-item {% if app.request.get('_route') == 'pokemon_list' %} active {% endif %} ">
 								<a class="nav-link" href="{{ path('pokemon_list') }}">Les Pokemons</a>
 							</li>
-							{# <li class="nav-item {% if app.request.get('_route') == 'user_palmares' %} active {% endif %} ">
+							<li class="nav-item {% if app.request.get('_route') == 'user_palmares' %} active {% endif %} ">
 								<a class="nav-link" href="{{ path('user_palmares') }}">Palmarès des dresseurs</a>
-							</li> #}
+							</li>
 							{% if is_granted('ROLE_USER')  %}
 								<li class="nav-item {% if app.request.get('_route') == 'topic_edit' %} active {% endif %} ">
 									<a class="nav-link" href="{{ path('topic_edit') }}">Créer un Topic</a>

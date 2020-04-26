@@ -41,7 +41,12 @@ class Badge
     public function __construct()
     {
         $this->users = new ArrayCollection();
-    }
+	}
+	
+	public function __toString()
+	{
+		return $this->getLevel() . " - " . $this->getName();
+	}
 
     public function getId(): ?int
     {
