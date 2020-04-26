@@ -34,10 +34,15 @@ class CommentController extends PokeController
 
 	/**
 	 * Edit a comment
+	 *
+	 * @param EntityManagerInterface $entityManager
+	 * @param CommentRepository $commentRepository
+	 * @param Request $request
+	 * @return Response
 	 * 
 	 * @Route("/commentaire/edition/", name="comment_edit")
 	 */
-	public function edit(EntityManagerInterface $entityManager, CommentRepository $commentRepository, Request $request)
+	public function edit(EntityManagerInterface $entityManager, CommentRepository $commentRepository, Request $request): Response
 	{
 		$user = $this->getUser();
 

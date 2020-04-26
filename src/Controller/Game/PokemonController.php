@@ -122,12 +122,12 @@ class PokemonController extends PokeController
 	/**
 	 * Display pokemon's detail
 	 *
-	 * @param [type] $id
+	 * @param int $id
 	 * @return Response
 	 * 
 	 * @Route("/pokemon/{id}", name="pokemon_show")
 	 */
-	public function show($id): Response
+	public function show(int $id): Response
 	{
 		$pokemon = $this->pokemonRepository->findOneByIdPokemon($id);
 

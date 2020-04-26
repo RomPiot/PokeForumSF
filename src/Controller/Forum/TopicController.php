@@ -20,7 +20,7 @@ class TopicController extends PokeController
 	/**
 	 * Add a new Topic
 	 *
-	 * @param UserRepository $userRepository
+	 * @param integer $id
 	 * @param Request $request
 	 * @param EntityManagerInterface $entityManager
 	 * @return Response
@@ -120,13 +120,16 @@ class TopicController extends PokeController
 		]);
 	}
 
-
 	/**
 	 * Remove a topic
+	 *
+	 * @param Topic $topic
+	 * @param EntityManagerInterface $entityManager
+	 * @return Response
 	 * 
 	 * @Route("/topic/supprimer/{id}", name="topic_remove")
 	 */
-	public function remove(Topic $topic, EntityManagerInterface $entityManager)
+	public function remove(Topic $topic, EntityManagerInterface $entityManager): Response
 	{
 		$entityManager->remove($topic);
 		$entityManager->flush();
