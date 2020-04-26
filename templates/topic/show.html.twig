@@ -29,7 +29,17 @@
 		<div class="comment" data-id="{{ comment.id }}">
 
 
-			<a href="{{ path('user_profile_show', {id: comment.author.id}) }}"><img class="avatar" src="{{ comment.author.avatar }}" alt=""></a>
+			<a class="avatar-link" href="{{ path('user_profile_show', {id: comment.author.id}) }}">
+				<img class="avatar" src="{{ comment.author.avatar }}" alt="">
+				<div class="topic-badge-container">
+					<p>{{ comment.author.rank }}</p>
+
+					{% for test in comment.author.badges%}
+						<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~  test.image ) }}" alt="">
+					{% endfor %}
+				</div>
+
+			</a>
 			<div class="leftSideComment">
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="usernameAndDate">
@@ -43,9 +53,6 @@
 							{{  comment.createdat |date("d M Y à H:i", "Europe/Paris")}}
 						</p>
 
-						{% for test in comment.author.badges%}
-						<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~  test.image ) }}" alt="">
-							{% endfor %}
 					</div>
 
 
@@ -74,8 +81,10 @@
 
 			.avatar {
 				border-radius: 100%;
-				width: 80px;
-				margin: 5px;
+				width: 95px;
+				margin: 10px;
+				margin-left: 20px;
+				margin-bottom: 0;
 			}
 			.comment {
 				display: flex;
@@ -95,6 +104,10 @@
 				flex-wrap: wrap;
 				flex-direction: column;
 				width: 100%;
+				border-radius: 14px;
+				padding: 15px;
+				box-shadow: 3px 2px 8px #0000000f;
+				background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 			}
 			.commentContent {
 				padding: 0 15px 15px;
@@ -119,12 +132,42 @@
 			}
 
 			#titreAndContent {
-				background-color: #3363af;
+				background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 				border-radius: 15px;
 				padding: 15px;
 				margin-top: 15px;
 				color: white;
 				width: 100%;
+
+			}
+
+
+			.topic-badge-container{
+				display: flex;
+				flex-wrap: wrap;
+				width: 130px;
+				margin: 5px;
+				justify-content: center;
+			}
+
+			.topic-badge-container >img{
+				margin: 2px;
+			}
+			.topic-badge-container >p{
+				width: 100%;
+				text-align: center;
+				margin:0;
+				margin-bottom: 5px;
+				color: black;
+			}
+
+			.avatar-link{
+				background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);				border-radius: 15px;
+				margin: 10px;
+				margin-top: 0;
+				margin-bottom: 0;
+				box-shadow: 3px 2px 8px #0000000f;
+
 			}
 		</style>
 {% endblock %}
