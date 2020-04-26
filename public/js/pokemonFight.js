@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 	let successCatch = false;
-	let escaping;
+	var escaping;
 	
 	const body = document.querySelector('body');
 	let userPokeball = body.getAttribute("data-user-pokeball");
@@ -22,6 +22,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let pokemonData;
 
+	buyPokeball.addEventListener("click", function (event) {
+		event.preventDefault();
+
+		const url = this.href;
+
+		axios.post(url, {
+		}).then(function (response) { 
+			huntBtn.classList.remove("display-none");
+			huntBtn.classList.remove("no-active");
+			buyPokeball.classList.add("display-none");
+
+			userPokeball = 6;
+			$('.pokeball-container > div').removeClass('no-active');
+			$('.pokeball-container > div').removeClass('display-none');
+		});
+	});
+
 	// Make pokeball cursor
 	document.addEventListener("mousemove", function (event) {
 		let x = event.clientX;
@@ -42,16 +59,17 @@ document.addEventListener("DOMContentLoaded", function () {
 			
 			// Remove a pokeball
 			userPokeball -= 1;
-			$('.pokeball-container').children().first().addClass('no-active');
+			position = 6 - userPokeball;
+			$('.pokeball-container div:nth-child('+position+')').addClass('no-active');
 
 			setTimeout(() => {
-				$('.pokeball-container').children().first().remove();
+				$('.pokeball-container  div:nth-child('+position+')').addClass('display-none');
 			}, 1000);
 
 			if (userPokeball == 0) {
 				huntBtn.classList.add("no-active");
 				setTimeout(() => {
-					huntBtn.remove();
+					huntBtn.classList.add("display-none");
 					buyPokeball.classList.remove("display-none");
 				}, 1000);
 			}
