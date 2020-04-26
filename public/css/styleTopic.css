@@ -58,7 +58,11 @@
     margin-top: 15px;
     color: white;
     width: 100%;
+    display: flex;
 
+}
+#titreAndContent > div{
+    margin-left: 15px;
 }
 
 
@@ -87,5 +91,14 @@
     margin-top: 0;
     margin-bottom: 0;
     box-shadow: 3px 2px 8px #0000000f;
+    width: fit-content;
+    padding: 5px;
 
+
+}
+.avatar-link >p{
+    color: black;
+    text-align: center;
+    margin-top:5px;
+    margin-bottom: 5px;
 }
