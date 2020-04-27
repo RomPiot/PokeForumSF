@@ -3,7 +3,7 @@
 > Oh no, another pokemon forum... 
 
 STOP! PokeForum is not only a forum about Pokemon. <br/>
-It's also a real game, where every user is a trainer. As a trainer, you can catch Pokemons, earn arena badges, and more.
+It's also a real fun game, where every user is a trainer. As a trainer, you can catch Pokemons, earn arena badges, and more.
 
 You can follow the the project management
 [here on Trello](https://trello.com/b/mxdZndki/symfony-pokeforum).
@@ -15,6 +15,7 @@ You can follow the the project management
 - Start the server `symfony serve`
 - In your browser, go to https://127.0.0.1:8000/
 - Create an account
+- If you want to be administrator, edit the bdd.db sql file, and add ROLE_ADMIN in roles array of your user row
 - If JS and CSS for EasyAdmin don't load, type in the console `php bin/console assets:install --symlink` to resolve the problem
 
 ## Fonctionnalities
