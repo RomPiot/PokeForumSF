@@ -373,7 +373,9 @@
 }
 
 .pokemon-list .pokemon-img, .user-list .pokemon-img {
-  width: 120px;
+  width: auto;
+  max-height: 120px;
+  max-width: 120px;
 }
 
 .pokemon-list a, .user-list a {
@@ -399,6 +401,7 @@ body {
 }
 
 .navbar {
+  z-index: 9;
   position: fixed;
   top: 0;
   width: 100%;

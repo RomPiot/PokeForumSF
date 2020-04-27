@@ -265,7 +265,9 @@
 	}
 
 	.pokemon-img {
-		width: 120px;
+		width: auto;
+		max-height: 120px;
+		max-width: 120px;
 	}
 
 	a {
