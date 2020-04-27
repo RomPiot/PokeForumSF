@@ -390,6 +390,10 @@
   background-color: #e2faff;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 body {
   background-color: #dce4e7;
   font-size: 14px;

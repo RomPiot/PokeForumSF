@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let pokemonData;
 
+	huntBtn.classList.remove("disabled");
+
 	if (buyPokeball) {
 		
 		buyPokeball.addEventListener("click", function (event) {
@@ -119,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}, 20);
 			})
 
-			clearTimeout(escaping);
+			
 		});
 	}
 
@@ -154,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			} 
 
 			isCatch(successCatch);
+			clearTimeout(escaping);
 		}
 	});
 
@@ -202,16 +205,17 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function escape() {
-		$('.pokemon').stop();
 
-		pokeballCatching.classList.remove("no-active");
-		pokeballCatching.classList.add("no-active");
-		$(".pokemon").animate({ "opacity" : 0 }, 500);
-		
-		cursorPokeball.classList.add("no-active");
-		pokemonMainContainer.classList.add("no-active");
-		body.style.cursor = "inherit";
-		pokemon.classList.add("no-active");
+			$('.pokemon').stop();
+
+			pokeballCatching.classList.remove("no-active");
+			pokeballCatching.classList.add("no-active");
+			$(".pokemon").animate({ "opacity" : 0 }, 500);
+			
+			cursorPokeball.classList.add("no-active");
+			pokemonMainContainer.classList.add("no-active");
+			body.style.cursor = "inherit";
+			pokemon.classList.add("no-active");
 	}
 	
 
