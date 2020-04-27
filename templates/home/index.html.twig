@@ -36,8 +36,13 @@
 					<a href="{{ path('topic_show',{id: topic.id}) }}">
 
 						<div class="TopicContainer">
+							<div  class="sub-category-name" >{{ topic.subcategory.name }}</div>
+
+							<div class="topic-title-container">
+
 							<img src="{{ topic.category.icon }}" alt="">
 							<h3>{{ topic.title }}</h3>
+							</div>
 						</div>
 					</a>
 
@@ -51,12 +56,18 @@
 				Mis en avant</h2>
 			{% for topic in topics %}
 				{% if topic.featured == true %}
-					<a href="{{ path('topic_show',{id: topic.id}) }}">
 
+
+
+
+					<a href="{{ path('topic_show',{id: topic.id}) }}">
 						<div class="TopicContainer">
+							<div class="sub-category-name" >{{ topic.subcategory.name }}</div>
+							<div class="topic-title-container">
 							<img src="{{ topic.category.icon }}" alt="">
 
 							<h3>{{ topic.title }}</h3>
+							</div>
 						</div>
 					</a>
 				{% endif %}
