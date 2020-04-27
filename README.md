@@ -23,6 +23,16 @@ You can follow the the project management
 - If a user is banned, he is automatically logged out.
 - Users with the administrator role can edit all entities with EasyAdmin on the admin link
 
+### Security
+- Creation of the User entity with the maker user
+- User entity implements the UserInterface and its methods
+- Authentication user with username and password from User entity
+- Migration of the hash algorithm from bcrypt to auto
+- Configuration of the firewall with a guard authenticator to login and logout the user
+- Add 3 users roles (admin, modo, user) in the role hierarchy. By default, a user anthenticated have user role
+- Add access controle to limit the access depending on the user role
+- Controls in front and back to check if the user access is granted for the user connected according to his role
+
 ### Forum
 - Each user connected can add a new topic
 - Each user connected can add a new comment to a topic
@@ -33,6 +43,7 @@ You can follow the the project management
 - Each user connected can view user profiles. Unauthenticated users are redirected to the login page.
 - Each user connected can edit its own profile, but not the others
 - Each user connected has a rank according to the number of points they have. He gets an extra point each time he adds a topic or a comment.
+- Hierarchical relation of the category table with itself relating to its parent category
 
 ### Game
 - Only available for logged-in users
@@ -48,6 +59,7 @@ You can follow the the project management
 - Display of the complete list of pokemons, with their detailed general information, and with filtering options
 - Display full details of a pokemon, including the number of trainers that caught it, and their profiles.
 - Display the number of pokemons caught on each trainer's profile, as well as their pokedex details.
+- Lot of ajax uery with axios
 
 ## Missing / Improvement
 - Upload a user profile image
