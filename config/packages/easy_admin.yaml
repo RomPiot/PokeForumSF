@@ -6,7 +6,7 @@ easy_admin:
     datetime: "d/m/Y H:i:s"
   entities:
     # List the entity class name you want to manage
-
+    
     # TOPIC
     Topic:
       class: App\Entity\Topic
@@ -164,3 +164,13 @@ easy_admin:
         fields:
           - { property: "name", label: "Nom du badge" }
           - { property: "image", label: "Image" }
+  design:
+    menu:
+      - { label: 'Back to PokeForum', route: 'home', icon: 'globe' }
+      - { entity: 'Topic', icon: 'tag' }
+      - { entity: 'Comment', icon: 'tag' }
+      - { entity: 'Category', icon: 'tag' }
+      - { entity: 'User', icon: 'user'}
+      - { entity: 'Pokemon', icon: 'tag' }
+      - { entity: 'Pokedex', icon: 'tag' }
+      - { entity: 'Badge', icon: 'tag' }
