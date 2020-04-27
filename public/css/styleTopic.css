@@ -3,7 +3,7 @@
     border-radius: 100%;
     width: 95px;
     margin: 10px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     margin-bottom: 0;
 }
 .comment {
@@ -20,6 +20,7 @@
 }
 
 .leftSideComment {
+	height: fit-content;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -31,7 +32,6 @@
 }
 .commentContent {
     padding: 0 15px 15px;
-
 }
 .usernameAndDate {
     display: flex;
@@ -44,7 +44,10 @@
     background-color: #343a40;
     border-radius: 15px;
     margin-top: 15px;
+}
 
+.editAndDateComment {
+	padding: 7px 15px;
 }
 
 #pokemonLogoContainer > img {
@@ -62,9 +65,16 @@
 
 }
 #titreAndContent > div{
-    margin-left: 15px;
+	margin: 0 15px;
 }
 
+.topicContent, .commentContent {
+	white-space: break-spaces;
+}
+
+.dateTopic {
+	margin: 0 !important;
+}
 
 .topic-badge-container{
     display: flex;
@@ -86,6 +96,7 @@
 }
 
 .avatar-link{
+	text-align: center;
     background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);				border-radius: 15px;
     margin: 10px;
     margin-top: 0;
@@ -101,4 +112,18 @@
     text-align: center;
     margin-top:5px;
     margin-bottom: 5px;
+}
+
+#comment_form {
+	margin-top: 10px;
+}
+#comment_form_content {
+	height: 100px;
+}
+#comment_form label {
+	font-weight: bold;
+}
+
+#comment_form .form-group:last-of-type {
+	text-align: end;
 }

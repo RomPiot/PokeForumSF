@@ -30,7 +30,7 @@
 			<a href="{{ path('user_profile_show', {id: user.id}) }}" class="a-user">
 				<div class="row align-items-center mt-4">
 					<div class="col-1 text-center userTop">{{ loop.index }}</div>
-					<div class="col-2 text-center username">{{ user.username }}</div>
+					<div class="col-2 text-center font-weight-bold username">{{ user.username }}</div>
 					<div class="col-2 text-center rank">{{ user.rank }}</div>
 					<div class="col-3 text-center maxbadge">{{ user.maxBadge }}</div>
 					<div class="col-4 text-center">{{ user.description }}</div>

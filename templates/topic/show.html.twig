@@ -1,153 +1,150 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ topic.title }} - PokeForum
+{% block title %}
+	{{ topic.title }}
+	- PokeForum
 {% endblock %}
 
 
 {% block stylesheets %}
-    <link rel="stylesheet" href=" {{ asset('css/styleTopic.css') }}">
+	<link rel="stylesheet" href=" {{ asset('css/styleTopic.css') }}">
 {% endblock %}
 
 {% block content %}
 
-    <div id="pokemonLogoContainer">
+	<div id="pokemonLogoContainer">
 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png"
-             alt="">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
 
-    </div>
-    <div id="titreAndContent">
+	</div>
+	<div id="titreAndContent">
 
-        <a href="{{ path('user_profile_show', {id: topic.author.id}) }}">
-            <div class="avatar-link">
-                <p>Créé par {{ topic.author.username }}</p>
-                <img class="avatar" src="{{ app.user.avatar }}" alt="">
-                <div class="topic-badge-container">
-                    <p>{{ topic.author.rank }}</p>
+		<a href="{{ path('user_profile_show', {id: topic.author.id}) }}">
+			<div class="avatar-link">
+				<p class="font-weight-bold">{{ topic.author.username }}</p>
+				<img class="avatar" src="{{ topic.author.avatar }}" alt="">
+				<div class="topic-badge-container">
+					<p>{{ topic.author.rank }}</p>
 
-                    {% for creator in topic.author.badges %}
-                        <img style="width: 20px;height:20px;object-fit: contain;"
-                             src="{{ asset('images/pokemon_items/'~  creator.image ) }}" alt="">
-                    {% endfor %}
-                </div>
-            </div>
-        </a>
+					{% for badge in topic.author.badges %}
+						<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~ badge.image ) }}" alt="">
+					{% endfor %}
+				</div>
+			</div>
+		</a>
 
-        <div>
-            <div class="d-flex justify-content-between align-items-center">
-                <h1>{{ topic.title }}</h1>
+		<div class="d-flex flex-column justify-content-between">
+			<div>
+				<div class="d-flex justify-content-between align-items-center">
+					<h1>{{ topic.title }}</h1>
 
-                {% if topic.author == app.user %}
-                    <div>
-                        <a href="{{ path('topic_edit', {'id' : topic.id}) }}">Editer</a>
-                        <a href="{{ path('topic_remove', {'id' : topic.id}) }}">Supprimer</a>
-                    </div>
-                {% endif %}
+					{% if topic.author == app.user %}
+						<div>
+							<a href="{{ path('topic_edit', {'id' : topic.id}) }}">Editer</a>
+							<a href="{{ path('topic_remove', {'id' : topic.id}) }}">Supprimer</a>
+						</div>
+					{% endif %}
 
-            </div>
-            <p>{{ topic.content }}</p>
-        </div>
+				</div>
+				<p class="topicContent">{{ topic.content }}</p>
+			</div>
+			<p class="dateTopic font-italic text-right">
+				Le
+				{{ topic.createdat |date("d M Y à H:i", "Europe/Paris") }}
+			</p>
+		</div>
 
-    </div>
+	</div>
 
-    {% for comment in comments %}
-        <div class="comment" data-id="{{ comment.id }}">
-
-
-            <a class="avatar-link" href="{{ path('user_profile_show', {id: comment.author.id}) }}">
-                <img class="avatar" src="{{ comment.author.avatar }}" alt="">
-                <div class="topic-badge-container">
-                    <p>{{ comment.author.rank }}</p>
-
-                    {% for authorBadge in comment.author.badges %}
-                        <img style="width: 20px;height:20px;object-fit: contain;"
-                             src="{{ asset('images/pokemon_items/'~  authorBadge.image ) }}" alt="">
-                    {% endfor %}
-                </div>
-
-            </a>
-            <div class="leftSideComment">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="usernameAndDate">
-                        <a href="{{ path('user_profile_show', {id: comment.author.id }) }}" class="username">
-                            <strong>
-                                {{ comment.author.username | capitalize }}
-                            </strong>
-                        </a>
-                        ,&nbsp;
-                        <p class="date">le
-                            {{ comment.createdat |date("d M Y à H:i", "Europe/Paris") }}
-                        </p>
-
-                    </div>
+	{% for comment in comments %}
+		<div class="comment" data-id="{{ comment.id }}">
 
 
-                    {% if comment.author == app.user %}
-                        <div>
-                            <a class="comment-edit" href="#">Editer</a>
-                            <a href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
-                        </div>
-                    {% endif %}
-                </div>
+			<a class="avatar-link" href="{{ path('user_profile_show', {id: comment.author.id}) }}">
+				<p class="font-weight-bold">{{ comment.author.username | capitalize }}</p>
+				<p>
+					<img class="avatar" src="{{ comment.author.avatar }}" alt="">
+					<div class="topic-badge-container">
+						<p>{{ comment.author.rank }}</p>
+
+						{% for authorBadge in comment.author.badges %}
+							<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~ authorBadge.image ) }}" alt="">
+						{% endfor %}
+					</div>
+				</p>
+			</a>
+			<div class="d-flex flex-column w-100">
+				<div class="leftSideComment">
+					<div class="d-flex justify-content-end align-items-center"></div>
+
+					<div class="d-flex flex-column justify-content-between h-100">
+						<p class="commentContent">{{ comment.content }}</p>
+
+					</div>
+				</div>
+				<div class="w-100 d-flex flex-row justify-content-between editAndDateComment">
+					<div class="">
+						{% if comment.author == app.user %}
+							<a class="comment-edit" href="#">Editer</a>
+							<a href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
+						{% endif %}
+					</div>
+					<p class="dateTopic font-italic text-right">
+						Le
+						{{ comment.createdat |date("d M Y à H:i", "Europe/Paris") }}
+					</p>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	{% if topic.isActive == true and commentForm is defined %}
+		{{ form(commentForm) }}{% endif %}
 
 
-                {# {% endif %} #}
-                <p class="commentContent">
-                    {{ comment.content }}
-                </p>
+	{% endblock %}
 
-            </div>
-        </div>
-    {% endfor %}
-    {% if topic.isActive == true and commentForm is defined %}
-        {{ form(commentForm) }}{% endif %}
+	{% block javascripts %}
+		<script>
 
+			$(function () {
+var lastContent = "";
 
-{% endblock %}
+$(".comment-edit").on("click", function (event) {
+event.preventDefault();
 
-{% block javascripts %}
-    <script>
+let activeComment = $(this).parents(".leftSideComment").find(".commentContent");
 
-        $(function () {
-            var lastContent = "";
+lastContent = activeComment.text();
 
-            $(".comment-edit").on("click", function (event) {
-                event.preventDefault();
+activeComment.prop("contenteditable", true);
+activeComment.focus();
 
-                let activeComment = $(this).parents(".leftSideComment").find(".commentContent");
+});
 
-                lastContent = activeComment.text();
+$(".commentContent").on("keydown", function (event) {
+let activeCommentText = $(this).text();
 
-                activeComment.prop("contenteditable", true);
-                activeComment.focus();
+if ((event.key == 'Enter') || (event.key == 'Escape')) {
+$(this).prop("contenteditable", false);
+}
 
-            });
+if (event.key == 'Escape') {
+$(this).text(lastContent);
+}
 
-            $(".commentContent").on("keydown", function (event) {
-                let activeCommentText = $(this).text();
-
-                if ((event.key == 'Enter') || (event.key == 'Escape')) {
-                    $(this).prop("contenteditable", false);
-                }
-
-                if (event.key == 'Escape') {
-                    $(this).text(lastContent);
-                }
-
-                if (event.key == 'Enter') {
-                    let commentId = $(this).parents(".comment").attr("data-id");
+if (event.key == 'Enter') {
+let commentId = $(this).parents(".comment").attr("data-id");
 
 
-                    axios.post("{{ path('comment_edit') }}",
-                        {
-                            comment_id: commentId,
-                            comment_content: activeCommentText
-                        });
+axios.post("{{ path('comment_edit') }}", {
+comment_id: commentId,
+comment_content: activeCommentText
+});
 
 
-                }
+}
 
-            });
-        });
-    </script>
-{% endblock %}
+});
+});
+		</script>
+	{% endblock %}

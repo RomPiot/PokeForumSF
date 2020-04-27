@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil de {{ user.username }} - PokeForum
+{% block title %}Profil de
+	{{ user.username }}
+	- PokeForum
 {% endblock %}
 
 {% block content %}
@@ -8,15 +10,18 @@
 	<div class="container emp-profile">
 		<div class="row">
 			<div class="col-md-4">
-				<div
-					class="profile-img">
+				<div class="profile-img">
 					<img src="{{ user.avatar }}" alt=""/>
 				</div>
 
 				<div class="profile-work d-flex flex-column align-items-center justify-content-start">
 					<p class="">{{user.rank}}</p>
-					<p class="">{{ user.pokedex|length}}
-						Pokémon attrapés sur 151</p>
+					<div class="d-flex">
+						{% for badge in user.badges %}
+							<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~ badge.image ) }}" alt="">
+						{% endfor %}
+					</div>
+					<p class="">{{ user.pokedex|length}} Pokémon attrapés sur 151</p>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -35,8 +40,8 @@
 					{% if is_granted('ROLE_USER')  %}
 						{% if app.user.id == user.id %}
 							<a href="{{ path('user_profile_edit') }}" class="profile-edit-btn"/>Editer mon profil</a>
-						{% endif %}
 					{% endif %}
+				{% endif %}
 			</div>
 			<div class="tab-content profile-tab" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">

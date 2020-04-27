@@ -3,10 +3,17 @@
 body {
 	background-color: #dce4e7;
 	font-size: 14px;
+	padding-top: 60px;
 }
 
 .bold {
 	font-weight: 500;
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+    width: 100%;
 }
 
 .display-none {
@@ -38,6 +45,7 @@ body {
 	img {
 		width: 70%;
 		height: 100%;
+		border-radius: 20px;
 	}
 }
 

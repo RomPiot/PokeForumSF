@@ -22,22 +22,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let pokemonData;
 
-	buyPokeball.addEventListener("click", function (event) {
-		event.preventDefault();
-
-		const url = this.href;
-
-		axios.post(url, {
-		}).then(function (response) { 
-			huntBtn.classList.remove("display-none");
-			huntBtn.classList.remove("no-active");
-			buyPokeball.classList.add("display-none");
-
-			userPokeball = 6;
-			$('.pokeball-container > div').removeClass('no-active');
-			$('.pokeball-container > div').removeClass('display-none');
+	if (buyPokeball) {
+		
+		buyPokeball.addEventListener("click", function (event) {
+			event.preventDefault();
+			
+			const url = this.href;
+			
+			axios.post(url, {
+			}).then(function (response) { 
+				huntBtn.classList.remove("display-none");
+				huntBtn.classList.remove("no-active");
+				buyPokeball.classList.add("display-none");
+				
+				userPokeball = 6;
+				$('.pokeball-container > div').removeClass('no-active');
+				$('.pokeball-container > div').removeClass('display-none');
+			});
 		});
-	});
+	}
 
 	// Make pokeball cursor
 	document.addEventListener("mousemove", function (event) {
