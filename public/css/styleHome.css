@@ -52,6 +52,10 @@
     align-items: center;
 }
 
+.wrapperTopic a:last-child .TopicContainer {
+	border-bottom: 0;
+}
+
 .TopicContainer > img {
     margin-right: 10px;
     width: 40px;
@@ -91,10 +95,10 @@
     border-radius: 15px;
     box-shadow: 4px 4px 20px 0px #84848478;
     background: linear-gradient(to right, #feb47b, #ff7e5f);
-    min-height: 277.5px;
+	min-height: 100px;
+	height: fit-content;
     width: 100%;
     max-width: 545px;
-    padding-bottom: 30px;
 }
 
 .wrapperTopic > h2 {

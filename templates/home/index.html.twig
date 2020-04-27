@@ -1,81 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - PokeForum{% endblock %}
+{% block title %}Accueil - PokeForum
+{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href=" {{ asset('css/styleHome.css') }}">
+	<link rel="stylesheet" href=" {{ asset('css/styleHome.css') }}">
 {% endblock %}
 
 {% block content %}
-    <div id="pokemonLogoContainer">
+	<div id="pokemonLogoContainer">
 
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png"
-             alt="">
-    </div>
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1024px-International_Pok%C3%A9mon_logo.svg.png" alt="">
+	</div>
 
-    <div id="wrapperCategory">
-        <h2>Catégories</h2>
-        {% for category in categories %}
-            <a href="{{ path('category',{id: category.id}) }}">
-                <div class="categoryContainer">
-                    <h3>{{ category.name }}</h3>
-                    <img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
-                </div>
-            </a>
+	<div id="wrapperCategory">
+		<h2>Catégories</h2>
+		{% for category in categories %}
+			<a href="{{ path('category',{id: category.id}) }}">
+				<div class="categoryContainer">
+					<h3>{{ category.name }}</h3>
+					<img class="iconCatgory" src="{{ category.icon }}" alt="{{ category.name }}">
+				</div>
+			</a>
+		{% endfor %}
+	</div>
 
+	<div id="featuredAndNewTopicContainer">
+		<div class="wrapperTopic">
+			<h2>
+				Nouveaux topics
+			</h2>
+			{% for topic in topics %}
 
-        {% endfor %}
+				{% if loop.index <= 5 %}
+					<a href="{{ path('topic_show',{id: topic.id}) }}">
 
+						<div class="TopicContainer">
+							<img src="{{ topic.category.icon }}" alt="">
+							<h3>{{ topic.title }}</h3>
+						</div>
+					</a>
 
-    </div>
+				{% endif %}
 
+			{% endfor %}
+		</div>
 
-<div id="featuredAndNewTopicContainer" >
-    <div  class="wrapperTopic">
-        <h2>
-            Nouveaux topics
-        </h2>
-        {% for topic in topics %}
+		<div class="wrapperTopic">
+			<h2>
+				Mis en avant</h2>
+			{% for topic in topics %}
+				{% if topic.featured == true %}
+					<a href="{{ path('topic_show',{id: topic.id}) }}">
 
-            {% if loop.index < 4 %}
-                <a href="{{ path('topic_show',{id: topic.id}) }}">
+						<div class="TopicContainer">
+							<img src="{{ topic.category.icon }}" alt="">
 
-                    <div class="TopicContainer">
-                        <img  src="{{ topic.category.icon }}" alt="">
-                        <h3>{{ topic.title }}</h3>
-                    </div>
-                </a>
-
-            {% endif %}
-
-        {% endfor %}
-    </div>
-
-    <div  class="wrapperTopic">
-        <h2 >
-            Meilleurs topics</h2>
-        {% for topic in topics %}
-
-            {% if topic.featured == true %}
-                <a href="{{ path('topic_show',{id: topic.id}) }}">
-
-                    <div class="TopicContainer">
-                        <img  src="{{ topic.category.icon }}" alt="">
-
-                        <h3>{{ topic.title }}</h3>
-                    </div>
-                </a>
-
-            {% endif %}
-
-        {% endfor %}
-    </div>
+							<h3>{{ topic.title }}</h3>
+						</div>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</div>
 
 
-</div>
-
-
-
+	</div>
 
 
 {% endblock %}

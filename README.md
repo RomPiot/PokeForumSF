@@ -57,6 +57,7 @@ You can follow the the project management
 - Pokemon exchanges between trainers, or in exchange for virtual money
 - Automatic random pop of a pokemon with no action decided by the user (currently, a pokemon appears when clicking on the "chasser" button, to present the project)
 - A better method for calculating rank and adding points on the forum
+- Create a pagination on topic list
 
 ## Produced by
 
