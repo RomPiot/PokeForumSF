@@ -43,16 +43,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * @return array Returns an array of array who contains User objects and others fields informations
+     * @return User[] Returns an array of User objects
      */
     public function findTopList()
-    {
+    {		
 		return $this->createQueryBuilder('u')
-			->select('partial u.{id, points, username, description}, partial b.{id, name, level}, MAX(b.level) AS max_badge, count(distinct p.pokemon) as different_pokemons')
 			->leftJoin('u.badges', 'b')
 			->leftJoin('u.pokedex', 'p')
-            ->orderBy('max_badge', 'DESC')
-			->orderBy('different_pokemons', 'DESC')
+            ->addOrderBy('MAX(b.level)', 'DESC')
+			->addOrderBy('count(distinct p.pokemon)', 'DESC')
 			->groupBy('u')
             ->setMaxResults(100)
             ->getQuery()

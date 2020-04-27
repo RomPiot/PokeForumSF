@@ -1,7 +1,9 @@
 security:
   encoders:
     App\Entity\User:
-      algorithm: bcrypt
+      algorithm: auto
+      migrate_from:
+                - bcrypt
 
   # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
   providers:
@@ -38,6 +40,7 @@ security:
     - { path: '^/admin', roles: ROLE_ADMIN }
     - { path: ^/topic/ajouter, roles: ROLE_USER }
     - { path: ^/profil, roles: ROLE_USER }
+    - { path: ^/dresseur, roles: ROLE_USER }
 
   role_hierarchy:
     ROLE_ADMIN: [ROLE_USER, ROLE_MODO]

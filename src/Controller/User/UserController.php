@@ -24,15 +24,8 @@ class UserController extends PokeController
 	 */
 	public function index(UserRepository $userRepository): Response
 	{
-		$usersArray = $userRepository->findTopList();
+		$users = $userRepository->findTopList();
 
-		$users = [];
-
-		foreach ($usersArray as $user) {
-			\array_push($users, $user[0]);
-		}
-
-		// \dd($users);
 		return $this->render('user/index.html.twig', [
 			"users" => $users,
 		]);
