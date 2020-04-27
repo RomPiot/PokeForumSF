@@ -40,6 +40,7 @@ security:
     - { path: '^/admin', roles: ROLE_ADMIN }
     - { path: ^/topic/ajouter, roles: ROLE_USER }
     - { path: ^/profil, roles: ROLE_USER }
+    - { path: ^/dresseur, roles: ROLE_USER }
 
   role_hierarchy:
     ROLE_ADMIN: [ROLE_USER, ROLE_MODO]
