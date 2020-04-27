@@ -83,10 +83,10 @@
 					</div>
 				</div>
 				<div class="w-100 d-flex flex-row justify-content-between editAndDateComment">
-					<div class="">
+					<div class="container-delete-and-edit-button">
 						{% if comment.author == app.user %}
-							<a class="comment-edit" href="#">Editer</a>
-							<a href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
+							<a class="comment-edit button-edit" href="#">Editer</a>
+							<a class="button-delete" href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
 						{% endif %}
 					</div>
 					<p class="dateTopic font-italic text-right">
