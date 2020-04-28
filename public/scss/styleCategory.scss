@@ -1,0 +1,205 @@
+.iconCatgory {
+	width: 40px;
+	margin: 15px;
+	margin-right: 0;
+}
+
+.categoryContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	border-radius: 40px;
+	background-color: white;
+	margin: 5px;
+	width: fit-content;
+	padding: 0 24px;
+}
+
+.categoryContainer > h3 {
+	margin: 0;
+}
+
+#wrapperCategory {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	background-color: #607d8b;
+	margin: 15px;
+	border-radius: 15px;
+	box-shadow: 4px 4px 20px 0px #84848478;
+	width: 500px;
+}
+
+#wrapperCategory > h2 {
+	width: 100%;
+	text-align: center;
+	color: white;
+}
+
+.TopicContainer {
+	padding: 15px;
+	width: 100%;
+	border-bottom: 1px solid;
+	color: white;
+	display: flex;
+	align-items: self-start;
+	flex-direction: column;
+	justify-content: left;
+}
+
+#wrapperTopic a:last-child .TopicContainer {
+	border-bottom: 0;
+} 
+#wrapperCategory #wrapperTopic .TopicContainer:last-child {
+	border-bottom: 0;
+} 
+
+.TopicContainer > h2 {
+	padding: 15px;
+	width: 100%;
+	border-bottom: 1px solid;
+}
+
+.TopicContainer > h3 {
+	font-size: 15px;
+	margin: 0;
+}
+.TopicContainer h3 a {
+	color: white;
+}
+
+#wrapperTopic {
+	justify-content: center;
+	background-color: #50b4e4;
+	margin: 15px;
+	border-radius: 15px;
+	box-shadow: 4px 4px 20px 0px #84848478;
+	background: linear-gradient(to right, #feb47b, #ff7e5f);
+	min-height: 100px;
+	height: fit-content;
+	width: 100%;
+	max-width: 545px;
+}
+
+#wrapperTopic > h2 {
+	width: 100%;
+	text-align: center;
+	color: black;
+	border-bottom: 1px solid;
+	padding: 15px;
+	margin: 0;
+	color: white;
+	background: linear-gradient(to right, #fe3c0052, #ff7e5f);
+	border-radius: 15px 15px 0 0;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	max-width: 1295px;
+}
+
+#pokemonLogoContainer {
+	width: 1235px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #343a40;
+	border-radius: 15px;
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#pokemonLogoContainer > img {
+	width: 60%;
+}
+
+
+.wrapperTopic {
+	justify-content: center;
+	background-color: #50b4e4;
+	margin-top: 15px;
+	border-radius: 15px;
+	box-shadow: 4px 4px 20px 0px #84848478;
+	background: linear-gradient(to right, #feb47b, #ff7e5f);
+	min-height: 100px;
+	height: fit-content;
+	width: 100%;
+	max-width: 545px;
+}
+
+.wrapperTopic > h2 {
+	width: 100%;
+	text-align: center;
+	color: black;
+	border-bottom: 1px solid;
+	padding: 15px;
+	margin: 0;
+	color: white;
+	background: linear-gradient(to right, #fe3c0052, #ff7e5f);
+	border-radius: 15px 15px 0 0;
+}
+
+.wrapperTopic a:last-child .TopicContainer {
+	border-bottom: 0;
+}
+
+.TopicContainer > div > img {
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+}
+
+
+
+.TopicContainer > h2 {
+	padding: 15px;
+	width: 100%;
+	border-bottom: 1px solid;
+
+}
+
+.TopicContainer > div > h3 {
+	font-size: 15px;
+	margin: 0;
+}
+.sub-category-name {
+	background-color: white;
+	color: black;
+	padding: 10px;
+	padding-top: 2px;
+	border-radius: 41px;
+	padding-bottom: 2px;
+	margin: 5px;
+	margin-left: 0;
+	margin-bottom: 10px;
+}
+
+
+.topic-title-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#featuredAndNewTopicContainer {
+	width: 39%;
+}
+
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) {
+	background: linear-gradient(to left, #0083B0, #00B4DB);
+}
+
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) > h2 {
+	background: linear-gradient(to left, #166c864d, #1a8fb5bf);
+}
+
+

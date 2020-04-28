@@ -1,30 +1,23 @@
 .hunt-btn,
 .buy-pokeball-btn {
-  -webkit-transition: opacity ease 1s;
   transition: opacity ease 1s;
   margin-right: 15px;
 }
 
 .pokeball-container {
   margin-right: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
-
 .pokeball-container .pokeball {
   height: 30px;
   width: 30px;
   opacity: 1;
-  -webkit-transition: opacity ease 5s;
   transition: opacity ease 5s;
 }
 
 .pokemon-main-container {
   z-index: 999;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
   width: 100%;
   height: 100%;
@@ -33,30 +26,22 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
 }
-
 .pokemon-main-container .pokemon-main-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
-
 .pokemon-main-container .pokemon {
   z-index: 999;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   position: absolute;
   top: 0;
   left: 0;
 }
-
 .pokemon-main-container .pokemon-image {
   z-index: 999;
-  -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
+  transform: scaleX(-1);
   width: 90px;
   height: auto;
   cursor: none;
@@ -73,36 +58,29 @@
   height: 60px;
   position: relative;
   overflow: hidden;
-  -webkit-animation: frames 0.8s linear 0s infinite;
-          animation: frames 0.8s linear 0s infinite;
-  -webkit-transition: width ease 0.8s, height ease 0.8s;
+  animation: frames 0.8s linear 0s infinite;
   transition: width ease 0.8s, height ease 0.8s;
 }
 
-.pokeball-animation-fall, .pokeball-animation-fail, .pokeball-animation-success {
-  -webkit-animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
-          animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
+.pokeball-animation-fall, .pokeball-animation-success, .pokeball-animation-fail {
+  animation: fall 0.6s ease-in-out forwards, shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
 }
 
 .pokeball-animation-fail .pokeball-button {
-  -webkit-animation: blink 0.5s alternate 7, fail-caught 1s ease 4s forwards;
-          animation: blink 0.5s alternate 7, fail-caught 1s ease 4s forwards;
+  animation: blink 0.5s alternate 7, fail-caught 1s ease 4s forwards;
 }
 
 .pokeball-animation-success .pokeball-button {
-  -webkit-animation: blink 0.5s alternate 7, caught 1s ease 4s forwards;
-          animation: blink 0.5s alternate 7, caught 1s ease 4s forwards;
+  animation: blink 0.5s alternate 7, caught 1s ease 4s forwards;
 }
 
 .pokeball-catching {
-  -webkit-transition: ease 0.5s;
   transition: ease 0.5s;
   opacity: 1;
   z-index: 9999;
 }
 
 .pokeball-catch {
-  -webkit-transition: 0.5s;
   transition: 0.5s;
   position: relative;
   width: 200px;
@@ -112,28 +90,23 @@
   border: 10px solid #000;
   border-radius: 50%;
   overflow: hidden;
-  -webkit-box-shadow: inset -10px 10px 0 10px #ccc;
-          box-shadow: inset -10px 10px 0 10px #ccc;
+  box-shadow: inset -10px 10px 0 10px #ccc;
 }
-
 .pokeball-catch::before, .pokeball-catch::after {
   content: "";
   position: absolute;
 }
-
 .pokeball-catch::before {
   background: red;
   width: 100%;
   height: 50%;
 }
-
 .pokeball-catch::after {
   top: calc(50% - 10px);
   width: 100%;
   height: 20px;
   background: #000;
 }
-
 .pokeball-catch .pokeball-button {
   position: absolute;
   top: calc(50% - 30px);
@@ -144,19 +117,10 @@
   border: 10px solid #fff;
   border-radius: 50%;
   z-index: 10;
-  -webkit-box-shadow: 0 0 0 10px black;
-          box-shadow: 0 0 0 10px black;
+  box-shadow: 0 0 0 10px black;
 }
 
 /* Animations */
-@-webkit-keyframes blink {
-  from {
-    background: #e74c3c;
-  }
-  to {
-    background: #eee;
-  }
-}
 @keyframes blink {
   from {
     background: #e74c3c;
@@ -165,16 +129,6 @@
     background: #eee;
   }
 }
-
-@-webkit-keyframes caught {
-  from {
-    background: #eee;
-  }
-  to {
-    background: #34e3ff;
-  }
-}
-
 @keyframes caught {
   from {
     background: #eee;
@@ -183,16 +137,6 @@
     background: #34e3ff;
   }
 }
-
-@-webkit-keyframes fail-caught {
-  from {
-    background: #eee;
-  }
-  to {
-    background: #7f8c8d;
-  }
-}
-
 @keyframes fail-caught {
   from {
     background: #eee;
@@ -201,76 +145,26 @@
     background: #7f8c8d;
   }
 }
-
-@-webkit-keyframes shake {
-  0% {
-    -webkit-transform: translate(0, 0) rotate(0);
-            transform: translate(0, 0) rotate(0);
-  }
-  20% {
-    -webkit-transform: translate(-10px, 0) rotate(-20deg);
-            transform: translate(-10px, 0) rotate(-20deg);
-  }
-  30% {
-    -webkit-transform: translate(10px, 0) rotate(20deg);
-            transform: translate(10px, 0) rotate(20deg);
-  }
-  50% {
-    -webkit-transform: translate(-10px, 0) rotate(-10deg);
-            transform: translate(-10px, 0) rotate(-10deg);
-  }
-  60% {
-    -webkit-transform: translate(10px, 0) rotate(10deg);
-            transform: translate(10px, 0) rotate(10deg);
-  }
-  100% {
-    -webkit-transform: translate(0, 0) rotate(0);
-            transform: translate(0, 0) rotate(0);
-  }
-}
-
 @keyframes shake {
   0% {
-    -webkit-transform: translate(0, 0) rotate(0);
-            transform: translate(0, 0) rotate(0);
+    transform: translate(0, 0) rotate(0);
   }
   20% {
-    -webkit-transform: translate(-10px, 0) rotate(-20deg);
-            transform: translate(-10px, 0) rotate(-20deg);
+    transform: translate(-10px, 0) rotate(-20deg);
   }
   30% {
-    -webkit-transform: translate(10px, 0) rotate(20deg);
-            transform: translate(10px, 0) rotate(20deg);
+    transform: translate(10px, 0) rotate(20deg);
   }
   50% {
-    -webkit-transform: translate(-10px, 0) rotate(-10deg);
-            transform: translate(-10px, 0) rotate(-10deg);
+    transform: translate(-10px, 0) rotate(-10deg);
   }
   60% {
-    -webkit-transform: translate(10px, 0) rotate(10deg);
-            transform: translate(10px, 0) rotate(10deg);
+    transform: translate(10px, 0) rotate(10deg);
   }
   100% {
-    -webkit-transform: translate(0, 0) rotate(0);
-            transform: translate(0, 0) rotate(0);
+    transform: translate(0, 0) rotate(0);
   }
 }
-
-@-webkit-keyframes fall {
-  0% {
-    top: -300px;
-  }
-  60% {
-    top: 0;
-  }
-  80% {
-    top: -60px;
-  }
-  100% {
-    top: 0;
-  }
-}
-
 @keyframes fall {
   0% {
     top: -300px;
@@ -285,53 +179,31 @@
     top: 0;
   }
 }
-
-@-webkit-keyframes frames {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
 @keyframes frames {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
-
 .badge-container {
-  -webkit-transition: ease top 1s, ease opacity 0.5s;
   transition: ease top 1s, ease opacity 0.5s;
   position: fixed;
   top: -500px;
   left: 50%;
-  -webkit-transform: translate(-50%, 0);
-          transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
   width: 500px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   background-color: white;
   z-index: 99999;
   border-radius: 5px;
   padding: 30px;
-  -webkit-box-shadow: 0 0 13px 2px #e8e8e8;
-          box-shadow: 0 0 13px 2px #e8e8e8;
+  box-shadow: 0 0 13px 2px #e8e8e8;
 }
-
 .badge-container p:not(.badge-congrat):not(.badge-name-full) {
   font-size: 16px;
 }
-
 .badge-container > *:not(:last-child) {
   margin-bottom: 20px;
   text-align: center;
@@ -341,7 +213,6 @@
   width: 200px;
   height: 200px;
 }
-
 .badge-img img {
   height: 100%;
   width: auto;
@@ -359,33 +230,27 @@
 
 .down-to-center {
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .pokemon-list .form-control, .user-list .form-control {
   height: 30px;
 }
-
 .pokemon-list .filter-idPokemon, .user-list .filter-idPokemon {
   padding: 0;
   text-align: center;
 }
-
 .pokemon-list .pokemon-img, .user-list .pokemon-img {
   width: auto;
   max-height: 120px;
   max-width: 120px;
 }
-
 .pokemon-list a, .user-list a {
   color: black;
 }
-
 .pokemon-list a:hover, .user-list a:hover {
   text-decoration: none;
 }
-
 .pokemon-list a .row:hover, .user-list a .row:hover {
   background-color: #e2faff;
 }
@@ -424,8 +289,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .emp-profile {
@@ -438,7 +302,6 @@ body {
 .profile-img {
   text-align: center;
 }
-
 .profile-img img {
   width: 70%;
   height: 100%;
@@ -448,16 +311,13 @@ body {
 .profile-head h5 {
   color: #333;
 }
-
 .profile-head .nav-tabs {
   margin-bottom: 5%;
 }
-
 .profile-head .nav-tabs .nav-link {
   font-weight: 600;
   border: none;
 }
-
 .profile-head .nav-tabs .nav-link.active {
   border: none;
   border-bottom: 2px solid #0062cc;
@@ -486,13 +346,11 @@ body {
   font-weight: 600;
   margin-top: 10%;
 }
-
 .profile-work a {
   text-decoration: none;
   color: #495057;
   font-weight: 600;
 }
-
 .profile-work ul {
   list-style: none;
 }
@@ -500,7 +358,6 @@ body {
 .profile-tab label {
   font-weight: 600;
 }
-
 .profile-tab p {
   font-weight: 600;
   color: #0062cc;
@@ -515,9 +372,9 @@ body {
   border-radius: 50%;
   overflow: hidden;
 }
-
 .profile-menu img {
   width: 100%;
   height: 100%;
 }
+
 /*# sourceMappingURL=style.css.map */
