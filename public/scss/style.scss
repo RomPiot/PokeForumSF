@@ -10,11 +10,16 @@ body {
 	font-weight: 500;
 }
 
+.container {
+	max-width: 1295px;
+}
+
 .navbar {
 	z-index: 9;
 	position: fixed;
 	top: 0;
     width: 100%;
+
 }
 
 .display-none {
