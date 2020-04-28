@@ -44,6 +44,10 @@
 	width: 100%;
 	border-bottom: 1px solid;
 	color: white;
+	display: flex;
+	align-items: self-start;
+	flex-direction: column;
+	justify-content: left;
 }
 
 #wrapperTopic a:last-child .TopicContainer {
@@ -115,3 +119,87 @@
 #pokemonLogoContainer > img {
 	width: 60%;
 }
+
+
+.wrapperTopic {
+	justify-content: center;
+	background-color: #50b4e4;
+	margin-top: 15px;
+	border-radius: 15px;
+	box-shadow: 4px 4px 20px 0px #84848478;
+	background: linear-gradient(to right, #feb47b, #ff7e5f);
+	min-height: 100px;
+	height: fit-content;
+	width: 100%;
+	max-width: 545px;
+}
+
+.wrapperTopic > h2 {
+	width: 100%;
+	text-align: center;
+	color: black;
+	border-bottom: 1px solid;
+	padding: 15px;
+	margin: 0;
+	color: white;
+	background: linear-gradient(to right, #fe3c0052, #ff7e5f);
+	border-radius: 15px 15px 0 0;
+}
+
+.wrapperTopic a:last-child .TopicContainer {
+	border-bottom: 0;
+}
+
+.TopicContainer > div > img {
+	margin-right: 10px;
+	width: 40px;
+	height: 40px;
+	object-fit: contain;
+}
+
+
+
+.TopicContainer > h2 {
+	padding: 15px;
+	width: 100%;
+	border-bottom: 1px solid;
+
+}
+
+.TopicContainer > div > h3 {
+	font-size: 15px;
+	margin: 0;
+}
+.sub-category-name {
+	background-color: white;
+	color: black;
+	padding: 10px;
+	padding-top: 2px;
+	border-radius: 41px;
+	padding-bottom: 2px;
+	margin: 5px;
+	margin-left: 0;
+	margin-bottom: 10px;
+}
+
+
+.topic-title-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#featuredAndNewTopicContainer {
+	width: 39%;
+}
+
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) {
+	background: linear-gradient(to left, #0083B0, #00B4DB);
+}
+
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) > h2 {
+	background: linear-gradient(to left, #166c864d, #1a8fb5bf);
+}
+
+
