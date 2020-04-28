@@ -26,9 +26,9 @@
 					<div class="collapse navbar-collapse" id="navbarColor02">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item {% if app.request.get('_route') == 'home' %} active {% endif %}">
-								<a class="nav-link" href="{{ path('home') }}">Accueil
+								{# <a class="nav-link" href="{{ path('home') }}">Accueil
 									<span class="sr-only">(current)</span>
-								</a>
+								</a> #}
 							</li>
 							<li class="nav-item {% if app.request.get('_route') == 'category_list' %} active {% endif %} ">
 								<a class="nav-link" href="{{ path('category_list') }}">Catégories</a>
@@ -56,8 +56,8 @@
 										</div>
 									{% endfor %}
 								</div>
-								<a class="btn btn-primary hunt-btn disabled" href="{{ path('pokemon_hunt') }}">Chasser</a>
-								<a class="btn btn-success buy-pokeball-btn display-none" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>
+								<a class="btn btn-primary hunt-btn disabled" href="{{ path('pokemon_hunt') }}">Chasser des pokemons</a>
+								<a class="btn btn-success buy-pokeball-btn display-none" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeballs</a>
 
 							{% else %}
 
@@ -68,8 +68,8 @@
 										</div>
 									{% endfor %}
 								</div>
-								<a class="btn btn-primary hunt-btn display-none disabled" href="{{ path('pokemon_hunt') }}">Chasser</a>
-								<a class="btn btn-success buy-pokeball-btn" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeball</a>
+								<a class="btn btn-primary hunt-btn display-none disabled" href="{{ path('pokemon_hunt') }}">Chasser des pokemons</a>
+								<a class="btn btn-success buy-pokeball-btn" href="{{ path('user_add_full_pokeball') }}">Acheter des pokeballs</a>
 
 							{% endif %}
 
@@ -88,6 +88,7 @@
 								</div>
 							</div>
 						{% else %}
+							<a class="btn btn-success hunt-btn hunt-anonyme" href="{{ path('app_register') }}">Chasser des pokemons</a>
 							<div class="btn-group">
 								<a href="{{ path('app_register') }}" class="btn btn-info mr-2">Inscription</a>
 							</div>

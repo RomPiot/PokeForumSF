@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 	let successCatch = false;
 	var escaping;
-	
+	var hunting = false;
+
 	const body = document.querySelector('body');
-	let userPokeball = body.getAttribute("data-user-pokeball");
+	let userPokeball = parseInt(body.getAttribute("data-user-pokeball"));
 	
 	const pokemonMainContainer = document.querySelector(".pokemon-main-container")
 	const cursorPokeball = document.querySelector('#cursor-pokeball');
@@ -22,14 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	let pokemonData;
 
-	if (userPokeball != "") {
+	if (userPokeball >= 0) {
 
 		huntBtn.classList.remove("disabled");
 
 		if (buyPokeball) {
-			
 			buyPokeball.addEventListener("click", function (event) {
-				event.preventDefault();
+				buyPokeball.innerHTML = "Rechargement en cours...";
+				buyPokeball.classList.add("disabled");
+				event.preventDefault(); 
 				
 				const url = this.href;
 				
@@ -42,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					userPokeball = 6;
 					$('.pokeball-container > div').removeClass('no-active');
 					$('.pokeball-container > div').removeClass('display-none');
+				 	buyPokeball.classList.remove("disabled");
+					buyPokeball.innerHTML = "Acheter des pokeballs";
 				});
 			});
 		}
@@ -97,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					let escapeTime = (15 - pokemonData.difficulty) * 1000;
 
 					setTimeout(() => {
+						hunting = true;
 
 						// Display game
 						movePokemon('.pokemon', pokemonData.difficulty);
@@ -127,38 +132,43 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 
-		// On click in game
 		document.addEventListener("click", function (event) {
-			$('.pokemon').stop();
-
+			// On click in game
 			if (!event.target.classList.contains("hunt-btn")) {
-				successCatch = false;
-				$('.pokemon').stop();
+				if (hunting == true) {
+					hunting = false;
+					$('.pokemon').stop();
+				
+					successCatch = false;
 
-				// If click on pokemon
-				if (event.target.classList.contains("pokemon-image")) {
-					event.preventDefault();
-
-					const url = pokemon.getAttribute("href");
+					pokemon.classList.add("disabled");
 					
-					axios.post(url, {
-						"pokemon_id": pokemon.getAttribute("data-id")
-					}).then(function (response) {
-						if (response.data.content) {	
-							const newBadge = JSON.parse(response.data.content);
+					// If click on pokemon
+					if (event.target.classList.contains("pokemon-image")) {
+						event.preventDefault();
+						
+						const url = pokemon.getAttribute("href");
+						
+						axios.post(url, {
+							"pokemon_id": pokemon.getAttribute("data-id")
+						}).then(function (response) {
+							if (response.data.content) {	
+								const newBadge = JSON.parse(response.data.content);
+								
+								setTimeout(() => {
+									addBadge(newBadge)
+								}, 4500);
+							}
+							
+						});
+						
+						successCatch = true;
 
-							setTimeout(() => {
-								addBadge(newBadge)
-							}, 4500);
-						}
-
-					});
+					} 
+					isCatch(successCatch);
+					clearTimeout(escaping);
 					
-					successCatch = true;
-				} 
-
-				isCatch(successCatch);
-				clearTimeout(escaping);
+				}
 			}
 		});
 
@@ -203,21 +213,22 @@ document.addEventListener("DOMContentLoaded", function () {
 				pokemonMainContainer.classList.add("no-active");
 				body.style.cursor = "inherit";
 				pokemon.classList.add("no-active");
+				pokemon.classList.remove("disabled");
 			}, 7500);
 		}
 
 		function escape() {
 
-				$('.pokemon').stop();
+			$('.pokemon').stop();
 
-				pokeballCatching.classList.remove("no-active");
-				pokeballCatching.classList.add("no-active");
-				$(".pokemon").animate({ "opacity" : 0 }, 500);
-				
-				cursorPokeball.classList.add("no-active");
-				pokemonMainContainer.classList.add("no-active");
-				body.style.cursor = "inherit";
-				pokemon.classList.add("no-active");
+			pokeballCatching.classList.remove("no-active");
+			pokeballCatching.classList.add("no-active");
+			$(".pokemon").animate({ "opacity" : 0 }, 500);
+			
+			cursorPokeball.classList.add("no-active");
+			pokemonMainContainer.classList.add("no-active");
+			body.style.cursor = "inherit";
+			pokemon.classList.add("no-active");
 		}
 		
 
