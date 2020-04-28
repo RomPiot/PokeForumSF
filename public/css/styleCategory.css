@@ -67,10 +67,6 @@
   -webkit-box-align: self-start;
       -ms-flex-align: self-start;
           align-items: self-start;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
@@ -250,12 +246,19 @@
   width: 39%;
 }
 
-#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) {
+#featuredAndNewTopicContainer .TopicContainer {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(1) {
   background: -webkit-gradient(linear, right top, left top, from(#0083B0), to(#00B4DB));
   background: linear-gradient(to left, #0083B0, #00B4DB);
 }
 
-#featuredAndNewTopicContainer > .wrapperTopic:nth-child(2) > h2 {
+#featuredAndNewTopicContainer > .wrapperTopic:nth-child(1) > h2 {
   background: -webkit-gradient(linear, right top, left top, from(#166c864d), to(#1a8fb5bf));
   background: linear-gradient(to left, #166c864d, #1a8fb5bf);
 }
