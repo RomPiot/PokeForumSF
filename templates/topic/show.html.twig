@@ -39,9 +39,9 @@
 					<h1>{{ topic.title }}</h1>
 
 					{% if topic.author == app.user %}
-						<div>
-							<a href="{{ path('topic_edit', {'id' : topic.id}) }}">Editer</a>
-							<a href="{{ path('topic_remove', {'id' : topic.id}) }}">Supprimer</a>
+						<div class="topic-delete-and-edit-button">
+							<a class="button-edit" href="{{ path('topic_edit', {'id' : topic.id}) }}">Editer</a>
+							<a class="button-delete" href="{{ path('topic_remove', {'id' : topic.id}) }}">Supprimer</a>
 						</div>
 					{% endif %}
 

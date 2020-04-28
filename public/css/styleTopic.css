@@ -66,6 +66,7 @@
 }
 #titreAndContent > div{
 	margin: 0 15px;
+    position: relative;
 }
 
 .topicContent, .commentContent {
@@ -156,5 +157,14 @@
 .container-delete-and-edit-button{
     margin: 10px;
     margin-left: 0;
+
+}
+
+.topic-delete-and-edit-button{
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    position: absolute;
+    bottom: -5px;
 
 }
