@@ -11,6 +11,31 @@ You can follow the the project management
 <img src="https://pokeforum.h91.co/images/pokemons/150.png" alt="PokeForum" width="200"/>
 <img src="https://pokeforum.h91.co/images/pokemon_items/pokeball.png" alt="PokeForum" width="200"/>
 <img src="https://pokeforum.h91.co/images/pokemons/149.png" alt="PokeForum" width="200"/>
+
+
+## Technologies used
+- PHP 7.4
+- Composer
+- Symfony
+- JavaScript
+- jQuery
+- Axios (Ajax)
+- SCSS
+- Bootstrap
+- Sqlite
+- Git
+- VSCode / PhpStrom
+
+### Variations 
+
+| Local 			| Online 
+| :--- 				|     :---:      
+| Windows 10 		| Ubuntu 18.4       
+| Symfony Server 	| Apache2       
+| Sqlite 			| MySQL     
+| DB browser		| PhpMyAdmin     
+|					| Script Bash        
+
 ## Local installation
 
 - Download the zip project
@@ -66,26 +91,26 @@ You can follow the the project management
 - Lot of ajax uery with axios
 
 ## Deployement on the server
-- Installation of <span style="color:#D7BA7D;">PHP 7.4</span>
-- Installation of <span style="color:#D7BA7D;">Apache2</span>
-- Installation of <span style="color:#D7BA7D;">Mysql</span>
-- Installation of <span style="color:#D7BA7D;">Composer</span>
-- Installation of <span style="color:#D7BA7D;">PhpMyAdmin</span>
-- Using <span style="color:#D7BA7D;">vim</span> throughout files configuration
-- Installation of <span style="color:#D7BA7D;">mbstring</span>, and adding the extension in php.ini
+- Installation of **PHP 7.4**
+- Installation of **Apache2**
+- Installation of **Mysql**
+- Installation of **Composer**
+- Installation of **PhpMyAdmin**
+- Using **vim** throughout files configuration
+- Installation of **mbstring**, and adding the extension in php.ini
 - Apache configuration to use PHP 7.4
-- Adding an Apache <span style="color:#D7BA7D;">virtualhost</span> for redirecting the main address to our project
+- Adding an Apache **virtualhost** for redirecting the main address to our project
 - Adding a new mysql user with all rights
 - Adding of a `git init --bare` folder to be able to do a master git push prod
-- Creation of a <span style="color:#D7BA7D;">bash script</span> in the git hook '<span style="color:#D7BA7D;">post-update</span>' to automate some tasks. Thus, during a <span style="color:#D7BA7D;">push on prod</span>, all pushed files in the online git folder on the server are pulled in the website folder, and old files are replaced by the new changes. Also, deletion of all migrations and the database file concerning sqlite, and the <span style="color:#D7BA7D;">.env</span> file is automatically modified to be configured as a prod, the link to the database is replaced by the link to the online database, and the <span style="color:#D7BA7D;">cache is cleaned</span>
-- Locally, add a <span style="color:#D7BA7D;">prod remote</span> git pointing to the git folder of the website
-- On the server, after the first push on prod, deleting the old database with <span style="color:#D7BA7D;">Doctrine</span>
+- Creation of a **bash script** in the git hook '**post-update**' to automate some tasks. Thus, during a **push on prod**, all pushed files in the online git folder on the server are pulled in the website folder, and old files are replaced by the new changes. Also, deletion of all migrations and the database file concerning sqlite, and the **.env** file is automatically modified to be configured as a prod, the link to the database is replaced by the link to the online database, and the **cache is cleaned**
+- Locally, add a **prod remote** git pointing to the git folder of the website
+- On the server, after the first push on prod, deleting the old database with **Doctrine**
 - Creation of the new database with the new connection information to MySql online with Doctrine
 - Creation of a new migration with Doctrine 
 - Execute migration to import all changes in database with Doctrine
-- <span style="color:#D7BA7D;">Importation</span> of all old sqlite values to the online MySql database 
-- Creation of the complete <span style="color:#D7BA7D;">.htaccess</span> file in public folder, configured by symfony with <span style="color:#D7BA7D;">symfony/apache-pack</span>. Without this, only the home page worked
-- Conversion of all http links to https secured with <span style="color:#D7BA7D;">letsencrypt</span>. To do this, installation of <span style="color:#D7BA7D;">Certbot</span> configured with Apache and Ubuntu 18.4
+- **Importation** of all old sqlite values to the online MySql database 
+- Creation of the complete **.htaccess** file in public folder, configured by symfony with **symfony/apache-pack**. Without this, only the home page worked
+- Conversion of all http links to https secured with **letsencrypt**. To do this, installation of **Certbot** configured with Apache and Ubuntu 18.4
 
 ## Missing / Improvement
 - Upload a user profile image (possibility to add a profile image by uploading it to an image upload site, and pasting the link on in the user's profile)

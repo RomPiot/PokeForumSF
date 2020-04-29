@@ -527,12 +527,12 @@ class User implements UserInterface
 				return "Futur champion";
 				break;
 			case $point >= 50 && $point < 100:
-				return "Champion d'arène";
+				return "Champion d'Arène";
 				break;
-			case $point >= 100 && $point < 150:
+			case $point >= 100 && $point < 200:
 				return "Champion de Ligue";
 				break;
-			case $point >= 150:
+			case $point >= 200:
 				return "Maître Pokémon";
 				break;
 			default:
