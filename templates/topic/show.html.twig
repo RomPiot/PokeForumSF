@@ -73,7 +73,7 @@
 					</div>
 				</p>
 			</a>
-			<div class="d-flex flex-column w-100">
+			<div class="d-flex flex-column w-100 full-comment-content">
 				<div class="leftSideComment">
 					<div class="d-flex justify-content-end align-items-center"></div>
 
@@ -101,50 +101,90 @@
 		{{ form(commentForm) }}{% endif %}
 
 
-	{% endblock %}
+{% endblock %}
 
-	{% block javascripts %}
-		<script>
+{% block javascripts %}
+	<script>
+		// $(function () {
+			var edition = false;
+			var lastContent = "";
 
-			$(function () {
-var lastContent = "";
+			$(".button-delete").on("click", function(event) {
+				let activeComment = $(this).parents(".full-comment-content").find(".commentContent")
+				let editBtn = $(this).parents(".full-comment-content").find(".button-edit");
+				if (edition == true) {
+					event.preventDefault();
 
-$(".comment-edit").on("click", function (event) {
-event.preventDefault();
+					edition = false;
+					editBtn.text("Editer");
+					$(this).text("Supprimer");
+					activeComment.prop("contenteditable", false);
+					activeComment.text(lastContent);
 
-let activeComment = $(this).parents(".leftSideComment").find(".commentContent");
+					return false;
+				}
+			})
 
-lastContent = activeComment.text();
+			$(".comment-edit").on("click", function (event) {
+				event.preventDefault();
+				let activeComment = $(this).parents(".full-comment-content").find(".commentContent");
+				let supprBtn = $(this).parents(".full-comment-content").find(".button-delete");
+				let activeCommentText = activeComment.text();
+				let commentId = activeComment.parents(".comment").attr("data-id");
+				lastContent = activeComment.text();
 
-activeComment.prop("contenteditable", true);
-activeComment.focus();
+				if (edition == false) {
+					edition = true;
+					$(this).text("Valider");
+					supprBtn.text("Annuler la modification");
+					
+					activeComment.prop("contenteditable", true);
+					activeComment.focus();
+				} else {
+					
+					edition = false;
+					$(this).text("Editer");
+					supprBtn.text("Supprimer");
+					activeComment.prop("contenteditable", false);
+					activeComment.text(lastContent);
 
-});
+					
 
-$(".commentContent").on("keydown", function (event) {
-let activeCommentText = $(this).text();
+					axios.post("{{ path('comment_edit') }}", {
+						comment_id: commentId,
+						comment_content: activeCommentText
+					});
 
-if ((event.key == 'Enter') || (event.key == 'Escape')) {
-$(this).prop("contenteditable", false);
-}
+				}
+			});
 
-if (event.key == 'Escape') {
-$(this).text(lastContent);
-}
-
-if (event.key == 'Enter') {
-let commentId = $(this).parents(".comment").attr("data-id");
-
-
-axios.post("{{ path('comment_edit') }}", {
-comment_id: commentId,
-comment_content: activeCommentText
-});
+			$(".commentContent").on("keydown", function (event) {
+				let activeCommentText = $(this).text();
+				let editBtn = $(this).parents(".full-comment-content").find(".comment-edit");
+				let supprBtn = $(this).parents(".full-comment-content").find(".button-delete");
 
 
-}
+			if ((event.key == 'Enter') || (event.key == 'Escape')) {
+				$(this).prop("contenteditable", false);
+				edition = false;
+				editBtn.text("Editer");
+				supprBtn.text("Supprimer");
+			}
 
-});
-});
-		</script>
-	{% endblock %}
+			if (event.key == 'Escape') {
+				$(this).text(lastContent);
+			}
+
+			if (event.key == 'Enter') {
+				let commentId = $(this).parents(".comment").attr("data-id");
+
+
+				axios.post("{{ path('comment_edit') }}", {
+					comment_id: commentId,
+					comment_content: activeCommentText
+				});
+			}
+			});
+		// });
+	</script>
+{% endblock %}

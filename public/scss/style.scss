@@ -10,11 +10,16 @@ body {
 	font-weight: 500;
 }
 
+.container {
+	max-width: 1295px;
+}
+
 .navbar {
 	z-index: 9;
 	position: fixed;
 	top: 0;
     width: 100%;
+
 }
 
 .display-none {
@@ -125,3 +130,26 @@ body {
 	}
 }
 
+.commentContent:focus {
+	outline: 0;
+}
+
+@media screen and (max-width: 1080px) {
+	body {
+		padding-top: 80px;
+	}
+
+	.hunt-btn:not(.hunt-anonyme) {
+		width: 118px;
+	}
+
+	.pokeball-container {
+		width: 110px;
+	}
+}
+
+@media screen and (max-width: 990px) {
+	body {
+		padding-top: 60px;
+	}
+}

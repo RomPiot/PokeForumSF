@@ -71,6 +71,7 @@ You can follow the the project management
 - Automatic random pop of a pokemon with no action decided by the user (currently, a pokemon appears when clicking on the "chasser" button, to present the project)
 - A better method for calculating rank and adding points on the forum
 - Create a pagination on topic list
+- Addition of fixtures to automatically add all pokemons, badges, and other data essential to the smooth running of the site when creating the database, to avoid having a syncronized base on github, and conflict on sqlite database with git
 
 ## Produced by
 
