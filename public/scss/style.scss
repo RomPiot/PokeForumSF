@@ -130,6 +130,10 @@ body {
 	}
 }
 
+.commentContent:focus {
+	outline: 0;
+}
+
 @media screen and (max-width: 1080px) {
 	body {
 		padding-top: 80px;

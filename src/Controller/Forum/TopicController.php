@@ -7,7 +7,6 @@ use App\Entity\Comment;
 use App\Form\CommentFormType;
 use App\Form\NewTopicFormType;
 use App\Controller\PokeController;
-use App\Repository\UserRepository;
 use App\Repository\TopicRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
