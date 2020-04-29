@@ -126,6 +126,7 @@ easy_admin:
         fields:
           - { property: "idPokemon", label: "Numéro d'identification" }
           - { property: "name", label: "Nom du pokemon" }
+          - { property: "description", label: "Description du pokemon" }
           - { property: "difficulty", label: "Difficulté" }
 
       list:
