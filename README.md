@@ -75,8 +75,9 @@ You can follow the the project management
 ## Produced by
 
 - **[Rompiot](https://github.com/RomPiot/)** - *Back-end & Game Developer*
-- **[seb7474](https://github.com/seb7474)** - *Designer & Front-end Developer*
+- **[seb7474](https://github.com/seb7474)** - *Designer & Front-end Developer* 
 
 ## Thanks
 
-To our teacher **[Decima](https://github.com/decima)** for his pedagogy and his availability.
+- To our teacher **[Decima](https://github.com/decima)** for his pedagogy and his availability.
+- A big thanks to our ghost developer.
