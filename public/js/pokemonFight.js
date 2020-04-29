@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 								
 								setTimeout(() => {
 									addBadge(newBadge)
-								}, 4500);
+								}, 5200);
 							}
 							
 						});
