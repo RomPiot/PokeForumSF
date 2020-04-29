@@ -11,7 +11,11 @@
     padding-bottom: 15px;
     padding-top: 15px;
     border-bottom: 1px solid #cbd3da;
-    border-top: 1px solid #cbd3da;
+	border-top: 1px solid #cbd3da;
+	
+	.avatar-link {
+		width: 174px !important;
+	}
 }
 
 .username {
@@ -73,6 +77,10 @@
 	white-space: break-spaces;
 }
 
+.topicContent {
+	margin-bottom: 40px;
+}
+
 .dateTopic {
 	margin: 0 !important;
 }
@@ -80,7 +88,8 @@
 .topic-badge-container{
     display: flex;
     flex-wrap: wrap;
-    width: 130px;
+	width: 100%;
+	padding: 0 15px;
     margin: 5px;
     justify-content: center;
 }
@@ -103,11 +112,10 @@
     margin-top: 0;
     margin-bottom: 0;
     box-shadow: 3px 2px 8px #0000000f;
-    width: fit-content;
+    width: 148px;
     padding: 5px;
-
-
 }
+
 .avatar-link >p{
     color: black;
     text-align: center;

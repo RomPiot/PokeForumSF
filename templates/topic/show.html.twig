@@ -23,9 +23,8 @@
 			<div class="avatar-link">
 				<p class="font-weight-bold">{{ topic.author.username }}</p>
 				<img class="avatar" src="{{ topic.author.avatar }}" alt="">
+				<p>{{ topic.author.rank }}</p>
 				<div class="topic-badge-container">
-					<p>{{ topic.author.rank }}</p>
-
 					{% for badge in topic.author.badges %}
 						<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~ badge.image ) }}" alt="">
 					{% endfor %}
@@ -64,8 +63,8 @@
 				<p class="font-weight-bold">{{ comment.author.username | capitalize }}</p>
 				<p>
 					<img class="avatar" src="{{ comment.author.avatar }}" alt="">
+					<p>{{ comment.author.rank }}</p>
 					<div class="topic-badge-container">
-						<p>{{ comment.author.rank }}</p>
 
 						{% for authorBadge in comment.author.badges %}
 							<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~ authorBadge.image ) }}" alt="">

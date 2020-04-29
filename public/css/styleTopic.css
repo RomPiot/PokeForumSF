@@ -16,6 +16,10 @@
   border-top: 1px solid #cbd3da;
 }
 
+.comment .avatar-link {
+  width: 174px !important;
+}
+
 .username {
   height: 20px;
   color: black;
@@ -97,6 +101,10 @@
   white-space: break-spaces;
 }
 
+.topicContent {
+  margin-bottom: 40px;
+}
+
 .dateTopic {
   margin: 0 !important;
 }
@@ -107,7 +115,8 @@
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  width: 130px;
+  width: 100%;
+  padding: 0 15px;
   margin: 5px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -136,9 +145,7 @@
   margin-bottom: 0;
   -webkit-box-shadow: 3px 2px 8px #0000000f;
           box-shadow: 3px 2px 8px #0000000f;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 148px;
   padding: 5px;
 }
 
