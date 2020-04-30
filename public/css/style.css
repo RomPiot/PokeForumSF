@@ -394,6 +394,22 @@
   pointer-events: none;
 }
 
+.pokemon-wanted {
+  background-color: #d6d7d8;
+}
+
+.pokemon-wanted * {
+  color: grey !important;
+}
+
+.pokemon-list#profile .a-pokemon:hover {
+  background-color: #e2faff;
+}
+
+.pokemon-list#profile p {
+  margin: auto 0;
+}
+
 body {
   background-color: #dce4e7;
   font-size: 14px;

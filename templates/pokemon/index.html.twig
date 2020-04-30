@@ -14,7 +14,7 @@
 			</div>
 			<div class="col-3 text-center font-weight-bold">Image</div>
 			<div class="col-2 d-flex flex-column">
-				<div class="font-weight-bold">Nom</div>
+				<div class="font-weight-bold text-center">Nom</div>
 				<input type="text" class="filter-name form-control">
 			</div>
 			<div class="col-2 d-flex flex-column">
@@ -31,7 +31,7 @@
 					<div class="col-3 text-center">
 						<img src="{{ asset("images/pokemons/" ~ pokemon.idPokemon ~ ".png") }}" class="pokemon-img"/>
 					</div>
-					<div class="col-2 pokemon-name">{{ pokemon.name }}</div>
+					<div class="col-2 text-center pokemon-name">{{ pokemon.name }}</div>
 					<div class="col-2 text-center difficulty">{{ pokemon.difficulty }}</div>
 					<div class="col-4 text-center">{{ pokemon.description }}</div>
 				</div>

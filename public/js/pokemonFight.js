@@ -134,10 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		document.addEventListener("click", function (event) {
 			// On click in game
+			$('.pokemon').stop();
 			if (!event.target.classList.contains("hunt-btn")) {
 				if (hunting == true) {
 					hunting = false;
-					$('.pokemon').stop();
 				
 					successCatch = false;
 

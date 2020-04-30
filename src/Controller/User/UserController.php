@@ -5,6 +5,8 @@ namespace App\Controller\User;
 use App\Entity\User;
 use App\Controller\PokeController;
 use App\Form\ProfileFormType;
+use App\Repository\PokedexRepository;
+use App\Repository\PokemonRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,14 +79,21 @@ class UserController extends PokeController
 	 * Display user's details
 	 *
 	 * @param User $user
+	 * @param PokemonRepository $pokemonRepository
+	 * @param PokedexRepository $pokemonRpokedexRepositoryepository
 	 * @return Response
 	 * 
 	 * @Route("/dresseur/{id}", name="user_profile_show")
 	 */
-	public function show(User $user): Response
+	public function show(User $user, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository): Response
 	{
+		$pokemons = $pokemonRepository->findAll();
+		$pokedexUser = $pokedexRepository->findByUser($user);
+		
 		return $this->render('user/show.html.twig', [
 			'user' => $user,
+			'pokemons' => $pokemons,
+			'pokedex' => $pokedexUser,
 		]);
 	}
 

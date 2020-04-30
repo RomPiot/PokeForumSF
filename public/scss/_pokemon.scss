@@ -279,7 +279,7 @@
 
 		.row {
 			&:hover {
-		background-color: #e2faff;
+		background-color: #e2faff; 
 
 			}
 		}
@@ -288,4 +288,23 @@
 
 .disabled {
 	pointer-events: none;
+}
+
+.pokemon-wanted {
+	background-color: #d6d7d8;
+	* {
+		color: grey !important;
+	}
+}
+
+.pokemon-list#profile {
+	.a-pokemon {
+		&:hover {
+			background-color: #e2faff;
+		}
+	}
+	
+	p {
+		margin: auto 0;
+	}
 }
