@@ -83,7 +83,7 @@ class User implements UserInterface
 	private $badges;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="author")
+	 * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="author", orphanRemoval=true)
 	 */
 	private $topics;
 

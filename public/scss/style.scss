@@ -138,6 +138,10 @@ body {
   }
 }
 
+.a-user > div {
+	min-height: 50px;
+}
+
 .commentContent:focus {
   outline: 0;
 }

@@ -23,13 +23,23 @@ class CommentController extends PokeController
 	 */
 	public function remove(Comment $comment, EntityManagerInterface $entityManager): Response
 	{
+		$user = $this->getUser();
 
-		if ($comment->getAuthor() == $this->getUser()) {
-			$entityManager->remove($comment);
-			$entityManager->flush();
+		if ($comment) {
+			// Is not author or not admin
+			if (($user != $comment->getAuthor()) && (!$this->isGranted('ROLE_ADMIN'))) {
+				return $this->redirectToRoute("topic_show", ["id" => $comment->getTopic()->getId()]);
+			}
+		} else {
+			return $this->redirectToRoute('home');
 		}
+		
+		$topic = $comment->getTopic();
 
-		return $this->redirectToRoute("topic_show", ["id" => $comment->getTopic()->getId()]);
+		$entityManager->remove($comment);
+		$entityManager->flush();
+
+		return $this->redirectToRoute("topic_show", ["id" => $topic->getId()]);
 	}
 
 	/**
@@ -53,7 +63,12 @@ class CommentController extends PokeController
 
 		if ($user) {
 			$comment = $commentRepository->find($commentId);
-			if ($user != $comment->getAuthor()) {
+			if ($comment) {
+				// Is not author or not admin
+				if (($user != $comment->getAuthor()) && (!$this->isGranted('ROLE_ADMIN'))) {
+					return $this->redirectToRoute("topic_show", ["id" => $comment->getTopic()->getId()]);
+				}
+			} else {
 				return $this->redirectToRoute('home');
 			}
 		} else {

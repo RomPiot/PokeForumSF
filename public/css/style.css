@@ -395,6 +395,10 @@ body {
   height: 100%;
 }
 
+.a-user > div {
+  min-height: 50px;
+}
+
 .commentContent:focus {
   outline: 0;
 }
