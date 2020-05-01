@@ -535,7 +535,7 @@ class User implements UserInterface
 				return "Champion de Ligue";
 				break;
 			case $point >= 200:
-				return "Maître Pokémon";
+				return "Maître Pokemon";
 				break;
 			default:
 				return "Apprenti dresseur";

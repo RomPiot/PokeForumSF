@@ -142,14 +142,14 @@ easy_admin:
       form:
         fields:
           - { property: "user", label: "Utilisateur" }
-          - { property: "pokemon", label: "Pokémon" }
+          - { property: "pokemon", label: "Pokemon" }
           - { property: "quantity", label: "Quantité" }
 
       list:
         max_results: 20
         fields:
           - { property: "user", label: "Utilisateur" }
-          - { property: "pokemon", label: "Pokémon" }
+          - { property: "pokemon", label: "Pokemon" }
           - { property: "quantity", label: "Quantité" }
 
     # BADGE
