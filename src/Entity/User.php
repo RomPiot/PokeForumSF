@@ -137,6 +137,8 @@ class User implements UserInterface
 		} else {
 			$this->avatar = "https://randomuser.me/api/portraits/men/$random_img.jpg";
 		}
+
+		$this->setOldPassword($this->getPassword());
 	}
 
 	public function __toString()

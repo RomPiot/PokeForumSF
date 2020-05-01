@@ -37,6 +37,7 @@ class ProfileFormType extends AbstractType
 			->add('birthday', DateType::class, [
 				// renders it as a single text box
 				'widget' => 'single_text',
+				"required" => false,
 			])
 			->add('gender', ChoiceType::class, [
 				'choices'  => [

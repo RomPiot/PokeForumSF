@@ -57,6 +57,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult()
         ;
+	}
+	
+	/**
+	 * To check the old password with the new
+	 *
+	 * @param int $userId
+	 * @return [result]
+	 */
+	public function findPassword($userId)
+    {		
+		return $this->createQueryBuilder('u')
+			->select('u.password')
+			->andWhere('u.id = :id')
+			->setParameter('id', $userId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+        ;
     }
     
 

@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Controller\User\UserController;
+use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -14,12 +14,12 @@ class UserAdminController extends EasyAdminController
 	 * @var UserPasswordEncoderInterface
 	 */
 	private $encoder;
-	private $userController;
+	private $userRepository;
 
-	public function __construct(UserPasswordEncoderInterface $encoder, UserController $userController)
+	public function __construct(UserPasswordEncoderInterface $encoder, UserRepository $userRepository)
 	{
 		$this->encoder = $encoder;
-		$this->userController = $userController;
+		$this->userRepository = $userRepository;
 	}
 
 	public function persistUserEntity($user)
@@ -36,12 +36,12 @@ class UserAdminController extends EasyAdminController
 
 	public function updatePassword(User $user)
 	{
-
-		$Pwdlength = \strlen($user->getPassword());
 		$passwordEncoded = $this->encoder->encodePassword($user, $user->getPassword());
-		
-		if ($Pwdlength == 60) {
-			$user->setPassword($user->getPassword());
+
+		$oldPassword = $this->userRepository->findPassword($user->getId())["password"];
+
+		if ($user->getPassword() == "default") {
+			$user->setPassword($oldPassword);
 		} else {
 			$user->setPassword($passwordEncoded);
 		}
