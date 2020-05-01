@@ -216,5 +216,22 @@
 		margin: 15px;
 	}
 
+	.TopicContainer {
+		flex-wrap: wrap;
+	}
+
+	.col-6 {
+
+		max-width: 100%;
+		flex: auto;
+
+	}
+
+	.col-2 {
+
+		max-width: 100%;
+		flex: auto;
+
+	}
 
 }
