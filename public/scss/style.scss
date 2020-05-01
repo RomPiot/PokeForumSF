@@ -177,5 +177,16 @@ body {
     flex: auto;
    max-width: 100%;
   }
+  .pokemon-list > .row > .col-1, .col-2, .col-3, .col-4 {
+    flex: auto;
+    max-width: 100%;
+  }
+  .a-pokemon > .row > .col-1, .col-2, .col-3, .col-4 {
+    flex: auto;
+    max-width: 100%;
+
+  }
+
+
 
 }
