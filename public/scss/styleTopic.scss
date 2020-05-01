@@ -204,6 +204,30 @@
     max-width: 95px;
   }
 
+  h1{
+    font-size: 1.5rem;
+  }
+
+
+  #titreAndContent {
+
+    flex-wrap: wrap;
+  }
+
+  #titreAndContent > div {
+    margin-top: 10px;
+  }
+
+  .topicContent {
+    margin-bottom: 55px;
+  }
+
+
+  .topic-delete-and-edit-button {
+
+    bottom: 20px;
+
+  }
 
 }
 
