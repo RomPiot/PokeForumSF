@@ -58,12 +58,16 @@
 	{% for comment in comments %}
 		<div class="comment" data-id="{{ comment.id }}">
 
-			<a class="avatar-link" href="{{ path('user_profile_show', {id: comment.author.id}) }}">
-				<p class="font-weight-bold">{{ comment.author.username | capitalize }}</p>
-				<p>
-					<img class="avatar" src="{{ comment.author.avatar }}" alt="">
-					<p>{{ comment.author.rank }}</p>
-					<div class="topic-badge-container">
+            {% if comment.author.pokedex|length == 151 %}
+            <a class="avatar-link final-stage" href="{{ path('user_profile_show', {id: comment.author.id}) }}">
+                {% else %}
+                <a class="avatar-link " href="{{ path('user_profile_show', {id: comment.author.id}) }}">
+                    {% endif %}
+                    <p class="font-weight-bold">{{ comment.author.username | capitalize }}</p>
+                    <p>
+                        <img class="avatar" src="{{ comment.author.avatar }}" alt="">
+                    <p>{{ comment.author.rank }}</p>
+                    <div class="topic-badge-container">
 
 						{% for authorBadge in comment.author.badges %}
 							<img style="width: 20px;height:20px;object-fit: contain;" src="{{ asset('images/pokemon_items/'~ authorBadge.image ) }}" alt="">
@@ -95,7 +99,7 @@
 			</div>
 		</div>
 	{% endfor %}
-	
+
 	{% if topic.isActive == true and commentForm is defined %}
 		{{ form(commentForm) }}
 	{% endif %}

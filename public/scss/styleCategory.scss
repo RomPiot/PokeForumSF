@@ -204,4 +204,34 @@
 	background: linear-gradient(to left, #166c864d, #1a8fb5bf);
 }
 
+@media only screen and (max-width: 800px) {
 
+
+	#featuredAndNewTopicContainer {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		margin: 15px;
+	}
+
+	.TopicContainer {
+		flex-wrap: wrap;
+	}
+
+	.col-6 {
+
+		max-width: 100%;
+		flex: auto;
+
+	}
+
+	.col-2 {
+
+		max-width: 100%;
+		flex: auto;
+
+	}
+
+}
