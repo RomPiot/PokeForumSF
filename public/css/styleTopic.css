@@ -201,6 +201,7 @@
 
   #titreAndContent {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   #titreAndContent > div {
@@ -213,6 +214,16 @@
 
   .topic-delete-and-edit-button {
     bottom: 20px;
+  }
+
+  #titreAndContent > a > .avatar-link {
+    padding-left: calc((100vw - 60px - 150px) / 2);
+    padding-right: calc((100vw - 60px - 150px) / 2);
+    width: auto;
+  }
+
+  #titreAndContent > a > .avatar-link > .topic-badge-container {
+    padding: 0;
   }
 }
 

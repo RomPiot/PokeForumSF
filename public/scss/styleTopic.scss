@@ -204,7 +204,7 @@
     max-width: 95px;
   }
 
-  h1{
+  h1 {
     font-size: 1.5rem;
   }
 
@@ -212,6 +212,7 @@
   #titreAndContent {
 
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   #titreAndContent > div {
@@ -226,6 +227,18 @@
   .topic-delete-and-edit-button {
 
     bottom: 20px;
+
+  }
+
+  #titreAndContent > a > .avatar-link {
+    padding-left: calc((100vw - 60px - 150px) / 2);
+    padding-right: calc((100vw - 60px - 150px) / 2);
+    width: auto;
+  }
+
+  #titreAndContent > a > .avatar-link > .topic-badge-container {
+
+    padding: 0;
 
   }
 
