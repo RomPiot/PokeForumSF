@@ -422,12 +422,7 @@ body {
   }
 }
 @media only screen and (max-width: 800px) {
-  .a-user > .row > .col-1, .col-2, .col-3, .col-4 {
-    flex: auto;
-    max-width: 100%;
-  }
-
-  .a-user > .row {
+  .a-user .row {
     border-radius: 15px;
     padding: 15px;
     margin-left: 0;
@@ -437,8 +432,22 @@ body {
     background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
+  .a-user .row .col-1, .a-user .row .col-2, .a-user .row .col-3, .a-user .row .col-4 {
+    flex: auto;
+    max-width: 100%;
+  }
 
-  .a-pokemon > .row {
+  .user-list > .row .col-1, .user-list > .row .col-2, .user-list > .row .col-3, .user-list > .row .col-4 {
+    flex: auto;
+    max-width: 100%;
+  }
+
+  .pokemon-list .row .col-1, .pokemon-list .row .col-2, .pokemon-list .row .col-3, .pokemon-list .row .col-4 {
+    flex: auto;
+    max-width: 100%;
+  }
+
+  .a-pokemon .row {
     border-radius: 15px;
     padding: 15px;
     margin-left: 0;
@@ -448,23 +457,12 @@ body {
     background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
-
-  .user-list > .row > .col-1, .col-2, .col-3, .col-4 {
-    flex: auto;
-    max-width: 100%;
-  }
-
-  .pokemon-list > .row > .col-1, .col-2, .col-3, .col-4 {
-    flex: auto;
-    max-width: 100%;
-  }
-
-  .a-pokemon > .row > .col-1, .col-2, .col-3, .col-4 {
+  .a-pokemon .row .col-1, .a-pokemon .row .col-2, .a-pokemon .row .col-3, .a-pokemon .row .col-4 {
     flex: auto;
     max-width: 100%;
   }
 }
-.a-user > .row {
+.a-user .row {
   border-radius: 5px;
   padding: 15px;
   background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
@@ -473,13 +471,24 @@ body {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.a-pokemon > .row {
+.a-pokemon .row {
   border-radius: 5px;
   padding: 15px;
   background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.final-stage {
+  background-image: linear-gradient(to left, #f5af19, #fd4e3b) !important;
+  background: linear-gradient(to left, #f5af19, #fd4e3b) !important;
+}
+.final-stage p {
+  color: white !important;
+}
+.final-stage .col-1, .final-stage .col-2, .final-stage .col-3, .final-stage .col-4 {
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */
