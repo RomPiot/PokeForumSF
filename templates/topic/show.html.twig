@@ -37,7 +37,7 @@
 				<div class="d-flex justify-content-between align-items-center">
 					<h1>{{ topic.title }}</h1>
 
-					{% if topic.author == app.user %}
+					{% if topic.author == app.user or is_granted('ROLE_ADMIN')  %}
 						<div class="topic-delete-and-edit-button">
 							<a class="button-edit" href="{{ path('topic_edit', {'id' : topic.id}) }}">Editer</a>
 							<a class="button-delete" href="{{ path('topic_remove', {'id' : topic.id}) }}">Supprimer</a>
@@ -57,7 +57,6 @@
 
 	{% for comment in comments %}
 		<div class="comment" data-id="{{ comment.id }}">
-
 
 			<a class="avatar-link" href="{{ path('user_profile_show', {id: comment.author.id}) }}">
 				<p class="font-weight-bold">{{ comment.author.username | capitalize }}</p>
@@ -83,7 +82,7 @@
 				</div>
 				<div class="w-100 d-flex flex-row justify-content-between editAndDateComment">
 					<div class="container-delete-and-edit-button">
-						{% if comment.author == app.user %}
+						{% if comment.author == app.user or is_granted('ROLE_ADMIN')  %}
 							<a class="comment-edit button-edit" href="#">Editer</a>
 							<a class="button-delete" href="{{ path('comment_remove', {'id' : comment.id}) }}">Supprimer</a>
 						{% endif %}
@@ -96,8 +95,10 @@
 			</div>
 		</div>
 	{% endfor %}
+	
 	{% if topic.isActive == true and commentForm is defined %}
-		{{ form(commentForm) }}{% endif %}
+		{{ form(commentForm) }}
+	{% endif %}
 
 
 {% endblock %}

@@ -13,7 +13,7 @@ easy_admin:
       form:
         fields:
           - { property: "title", label: "Titre" }
-          - { property: "content", label: "Commentaire" }
+          - { property: "content", label: "Contenu" }
           - { property: "author", label: "Auteur" }
           - { property: "category", label: "Catégorie" }
           - { property: "subCategory", label: "Sous-catégorie" }
@@ -22,7 +22,7 @@ easy_admin:
         max_results: 20
         fields:
           - { property: "title", label: "Titre" }
-          - { property: "content", label: "Commentaire" }
+          - { property: "content", label: "Contenu" }
           - { property: "author", label: "Auteur" }
           - { property: "category", label: "Catégorie" }
           - { property: "subCategory", label: "Sous-catégorie" }

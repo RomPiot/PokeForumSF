@@ -7,7 +7,7 @@
 
 
 	<div class="container emp-profile user-list">
-		<div class="row">
+		<div class="row mb-4">
 			<div class="col-1 text-center font-weight-bold">
 				<div class="font-weight-bold">TOP</div>
 				<input type="text" class="filter-top form-control">
@@ -28,7 +28,7 @@
 		</div>
 		{% for user in users %}
 			<a href="{{ path('user_profile_show', {id: user.id}) }}" class="a-user">
-				<div class="row align-items-center mt-4">
+				<div class="row align-items-center">
 					<div class="col-1 text-center userTop">{{ loop.index }}</div>
 					<div class="col-2 text-center font-weight-bold username">{{ user.username }}</div>
 					<div class="col-2 text-center rank">{{ user.rank }}</div>

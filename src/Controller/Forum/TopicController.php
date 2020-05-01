@@ -34,13 +34,20 @@ class TopicController extends PokeController
 			// New Topic
 			if ($id == 0) {
 				$topic = new Topic();
-			
-			// Topic exist
+
+				// Topic exist
 			} else {
 				$topic = $topicRepository->find($id);
-				if ($user != $topic->getAuthor()) {
-					return $this->redirectToRoute('home');
+			}
+			if ($topic) {
+				if ($topic->getAuthor()) {
+					// Is not author or not admin
+					if (($user != $topic->getAuthor()) && (!$this->isGranted('ROLE_ADMIN'))) {
+						return $this->redirectToRoute("topic_show", ["id" => $topic->getId()]);
+					}
 				}
+			} else {
+				return $this->redirectToRoute('home');
 			}
 		} else {
 			return $this->redirectToRoute('home');
@@ -51,8 +58,9 @@ class TopicController extends PokeController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-
-			$topic->setAuthor($user);
+			if (!$topic->getAuthor()) {
+				$topic->setAuthor($user);
+			}
 			$entityManager->persist($topic);
 
 			$user->setPoints($user->getPoints() + 1);
@@ -130,6 +138,17 @@ class TopicController extends PokeController
 	 */
 	public function remove(Topic $topic, EntityManagerInterface $entityManager): Response
 	{
+		$user = $this->getUser();
+
+		if ($topic) {
+			// Is not author or not admin
+			if (($user != $topic->getAuthor()) && (!$this->isGranted('ROLE_ADMIN'))) {
+				return $this->redirectToRoute("topic_show", ["id" => $topic->getId()]);
+			}
+		} else {
+			return $this->redirectToRoute('home');
+		}
+		
 		$entityManager->remove($topic);
 		$entityManager->flush();
 
