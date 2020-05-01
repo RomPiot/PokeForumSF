@@ -39,7 +39,7 @@ class Category
 	private $parentCategory;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory")
+	 * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parentCategory", orphanRemoval=true)
 	 */
 	private $categories;
 
