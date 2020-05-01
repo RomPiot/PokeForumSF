@@ -8,9 +8,9 @@ It's also a real fun game, where every user is a trainer. As a trainer, you can 
 Go to the online website [PokeForum](https://pokeforum.h91.co/).  <br/>  
 You can follow the the project management [here on Trello](https://trello.com/b/mxdZndki/symfony-pokeforum). 
 <br/><br/> 
-<img src="https://pokeforum.h91.co/images/Pokemons/150.png" alt="PokeForum" width="200"/>
+<img src="https://pokeforum.h91.co/images/pokemons/150.png" alt="PokeForum" width="200"/>
 <img src="https://pokeforum.h91.co/images/pokemon_items/pokeball.png" alt="PokeForum" width="200"/>
-<img src="https://pokeforum.h91.co/images/Pokemons/149.png" alt="PokeForum" width="200"/>
+<img src="https://pokeforum.h91.co/images/pokemons/149.png" alt="PokeForum" width="200"/>
 
 
 ## Technologies used
