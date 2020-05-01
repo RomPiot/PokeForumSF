@@ -6,7 +6,6 @@
   /* margin-left: 20px; */
   margin-bottom: 0;
 }
-
 .comment {
   display: flex;
   padding-bottom: 15px;
@@ -35,12 +34,10 @@
   box-shadow: 3px 2px 8px #0000000f;
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
-
 .commentContent {
-  padding: 5px 15px;
-  margin-bottom: 0;
+	padding: 5px 15px;
+	margin-bottom: 0;
 }
-
 .usernameAndDate {
   display: flex;
 }
@@ -84,11 +81,11 @@
 }
 
 .topicContent {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 
 .dateTopic {
-  margin: 0 !important;
+	margin: 0 !important;
 }
 
 .topic-badge-container {
@@ -132,19 +129,17 @@
 }
 
 #comment_form {
-  margin-top: 10px;
+	margin-top: 10px;
 }
-
 #comment_form_content {
-  height: 100px;
+	height: 100px;
 }
-
 #comment_form label {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 #comment_form .form-group:last-of-type {
-  text-align: end;
+	text-align: end;
 }
 
 .button-delete {
