@@ -5,22 +5,13 @@
 }
 
 .categoryContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   border-radius: 40px;
   background-color: white;
   margin: 5px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   padding: 0 24px;
 }
@@ -30,23 +21,15 @@
 }
 
 #wrapperCategory {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   padding: 15px;
   background-color: #607d8b;
   margin: 15px;
   border-radius: 15px;
-  -webkit-box-shadow: 4px 4px 20px 0px #84848478;
-          box-shadow: 4px 4px 20px 0px #84848478;
+  box-shadow: 4px 4px 20px 0px #84848478;
   width: 500px;
 }
 
@@ -79,19 +62,13 @@
 }
 
 #wrapperSubCategory {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   background-color: #50b4e4;
   margin: 15px;
   border-radius: 15px;
-  -webkit-box-shadow: 4px 4px 20px 0px #84848478;
-          box-shadow: 4px 4px 20px 0px #84848478;
-  background: -webkit-gradient(linear, left top, right top, from(#feb47b), to(#ff7e5f));
+  box-shadow: 4px 4px 20px 0px #84848478;
   background: linear-gradient(to right, #feb47b, #ff7e5f);
   min-height: 100px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   width: 100%;
   max-width: 545px;
@@ -105,36 +82,22 @@
   padding: 15px;
   margin: 0;
   color: white;
-  background: -webkit-gradient(linear, left top, right top, from(#fe3c0052), to(#ff7e5f));
   background: linear-gradient(to right, #fe3c0052, #ff7e5f);
   border-radius: 15px 15px 0 0;
 }
 
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 #pokemonLogoContainer {
   width: 1235px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   background-color: #343a40;
   border-radius: 15px;
   margin-top: 15px;
@@ -153,4 +116,5 @@ a {
 #wrapperSubCategory .SubCategorieContainer:last-child {
   border-bottom: 0;
 }
+
 /*# sourceMappingURL=styleCategoryList.css.map */
