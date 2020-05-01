@@ -181,4 +181,19 @@
   bottom: -5px;
 }
 
+@media only screen and (max-width: 800px) {
+  .container-delete-and-edit-button {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .container-delete-and-edit-button > a {
+    width: 100%;
+    text-align: center;
+    max-width: 95px;
+  }
+}
+
 /*# sourceMappingURL=styleTopic.css.map */

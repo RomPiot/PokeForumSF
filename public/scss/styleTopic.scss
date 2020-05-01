@@ -1,181 +1,212 @@
 
 .avatar {
-    border-radius: 100%;
-    width: 95px;
-    margin: 10px;
-    /* margin-left: 20px; */
-    margin-bottom: 0;
+  border-radius: 100%;
+  width: 95px;
+  margin: 10px;
+  /* margin-left: 20px; */
+  margin-bottom: 0;
 }
+
 .comment {
-    display: flex;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    border-bottom: 1px solid #cbd3da;
-	border-top: 1px solid #cbd3da;
-	
-	.avatar-link {
-		width: 174px !important;
-	}
+  display: flex;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border-bottom: 1px solid #cbd3da;
+  border-top: 1px solid #cbd3da;
+
+  .avatar-link {
+    width: 174px !important;
+  }
 }
 
 .username {
-    height: 20px;
-    color: black;
+  height: 20px;
+  color: black;
 }
 
 .leftSideComment {
-	height: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
-    border-radius: 14px;
-    padding: 15px;
-    box-shadow: 3px 2px 8px #0000000f;
-    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 14px;
+  padding: 15px;
+  box-shadow: 3px 2px 8px #0000000f;
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
+
 .commentContent {
-	padding: 5px 15px;
-	margin-bottom: 0;
+  padding: 5px 15px;
+  margin-bottom: 0;
 }
+
 .usernameAndDate {
-    display: flex;
+  display: flex;
 }
 
 #pokemonLogoContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #343a40;
-    border-radius: 15px;
-    margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #343a40;
+  border-radius: 15px;
+  margin-top: 15px;
 }
 
 .editAndDateComment {
-    padding: 7px 15px 7px 0px;
+  padding: 7px 15px 7px 0px;
 }
 
 #pokemonLogoContainer > img {
-    width: 60%;
+  width: 60%;
 }
 
 #titreAndContent {
-    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
-    padding: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    color: white;
-    width: 100%;
-    display: flex;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
+  width: 100%;
+  display: flex;
 
 }
-#titreAndContent > div{
-	margin: 0 15px;
-    position: relative;
+
+#titreAndContent > div {
+  margin: 0 15px;
+  position: relative;
 }
 
 .topicContent, .commentContent {
-	white-space: break-spaces;
-    word-break: break-word;
+  white-space: break-spaces;
+  word-break: break-word;
 }
 
 .topicContent {
-	margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .dateTopic {
-	margin: 0 !important;
+  margin: 0 !important;
 }
 
-.topic-badge-container{
-    display: flex;
-    flex-wrap: wrap;
-	width: 100%;
-	padding: 0 15px;
-    margin: 5px;
-    justify-content: center;
+.topic-badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 15px;
+  margin: 5px;
+  justify-content: center;
 }
 
-.topic-badge-container >img{
-    margin: 2px;
-}
-.topic-badge-container >p{
-    width: 100%;
-    text-align: center;
-    margin:0;
-    margin-bottom: 5px;
-    color: black;
+.topic-badge-container > img {
+  margin: 2px;
 }
 
-.avatar-link{
-	text-align: center;
-    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);				border-radius: 15px;
-    margin: 10px;
-    margin-top: 0;
-    margin-bottom: 0;
-    box-shadow: 3px 2px 8px #0000000f;
-    width: 148px;
-    padding: 5px;
+.topic-badge-container > p {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 5px;
+  color: black;
 }
 
-.avatar-link >p{
-    color: black;
-    text-align: center;
-    margin-top:5px;
-    margin-bottom: 5px;
+.avatar-link {
+  text-align: center;
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  border-radius: 15px;
+  margin: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 3px 2px 8px #0000000f;
+  width: 148px;
+  padding: 5px;
+}
+
+.avatar-link > p {
+  color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #comment_form {
-	margin-top: 10px;
+  margin-top: 10px;
 }
+
 #comment_form_content {
-	height: 100px;
+  height: 100px;
 }
+
 #comment_form label {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 #comment_form .form-group:last-of-type {
-	text-align: end;
+  text-align: end;
 }
 
-.button-delete{
-    color: white;
-    background-color: #ed5e68;
-    padding: 9px;
-    border-radius: 5px;
-    margin: 7px;
-    font-weight: 500;
-    padding-left: 15px;
-    padding-right: 15px;
-
-}
-
-.button-edit{
-    color: white;
-    background-color: #03A9F4;
-    padding: 9px;
-    border-radius: 5px;
-    margin: 7px;
-    font-weight: 500;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-left: 0px;
-}
-
-
-.container-delete-and-edit-button{
-    margin: 10px;
-    margin-left: 0;
+.button-delete {
+  color: white;
+  background-color: #ed5e68;
+  padding: 9px;
+  border-radius: 5px;
+  margin: 7px;
+  font-weight: 500;
+  padding-left: 15px;
+  padding-right: 15px;
 
 }
 
-.topic-delete-and-edit-button{
-    height: fit-content;
-    width: fit-content;
+.button-edit {
+  color: white;
+  background-color: #03A9F4;
+  padding: 9px;
+  border-radius: 5px;
+  margin: 7px;
+  font-weight: 500;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 0px;
+}
+
+
+.container-delete-and-edit-button {
+  margin: 10px;
+  margin-left: 0;
+
+}
+
+.topic-delete-and-edit-button {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  position: absolute;
+  bottom: -5px;
+
+}
+
+@media only screen and (max-width: 800px) {
+
+  .container-delete-and-edit-button {
     display: flex;
-    position: absolute;
-    bottom: -5px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+
+  .container-delete-and-edit-button > a {
+    width: 100%;
+    text-align: center;
+    max-width: 95px;
+  }
+
 
 }
+
+
+
+
