@@ -23,6 +23,23 @@
 					</div>
 					<p class="">{{ user.pokedex|length}}
 						Pokémon attrapés sur 151</p>
+
+					{% set levelCatched = 0 %}
+
+					{% for pokemonLine in user.pokedex %}
+						{% if pokemonLine.pokemon.difficulty == user.badges|length + 1 %}
+					 		{% set levelCatched  = levelCatched + 1 %}
+							 
+						{% endif %}
+					{% endfor %}
+
+					{% if user.badges|length < 8 %}
+						<p class="text-center">Prochain badge : {{ allBadges[user.badges|length].name }}
+						badges <br>{{ levelCatched }} / 5</p>
+					{% else %}
+						<p>Grand dresseur ayant obtenu les 8 badges !</p>
+					{% endif %}
+					
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -152,26 +169,26 @@
 {% block javascripts %}
 	<script>
 		$(document).ready(function () {
-$(".filter-name").on("keyup", function () {
-var value = $(this).val().toLowerCase();
-$(".a-pokemon .pokemon-name").filter(function () {
-$(this).parents(".a-pokemon").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-});
-});
+			$(".filter-name").on("keyup", function () {
+				var value = $(this).val().toLowerCase();
+					$(".a-pokemon .pokemon-name").filter(function () {
+						$(this).parents(".a-pokemon").toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
 
-$(".filter-difficulty").on("keyup", function () {
-var value = $(this).val().toLowerCase();
-$(".a-pokemon .difficulty").filter(function () {
-$(this).parents(".a-pokemon").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-});
-});
+				$(".filter-difficulty").on("keyup", function () {
+					var value = $(this).val().toLowerCase();
+					$(".a-pokemon .difficulty").filter(function () {
+						$(this).parents(".a-pokemon").toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
 
-$(".filter-idPokemon").on("keyup", function () {
-var value = $(this).val().toLowerCase();
-$(".a-pokemon .idPokemon").filter(function () {
-$(this).parents(".a-pokemon").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-});
-});
-});
+				$(".filter-idPokemon").on("keyup", function () {
+					var value = $(this).val().toLowerCase();
+					$(".a-pokemon .idPokemon").filter(function () {
+						$(this).parents(".a-pokemon").toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+			});
 	</script>
 {% endblock %}

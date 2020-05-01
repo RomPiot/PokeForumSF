@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Entity\User;
 use App\Controller\PokeController;
 use App\Form\ProfileFormType;
+use App\Repository\BadgeRepository;
 use App\Repository\PokedexRepository;
 use App\Repository\PokemonRepository;
 use App\Repository\UserRepository;
@@ -80,20 +81,23 @@ class UserController extends PokeController
 	 *
 	 * @param User $user
 	 * @param PokemonRepository $pokemonRepository
-	 * @param PokedexRepository $pokemonRpokedexRepositoryepository
+	 * @param PokedexRepository $pokedexRepository
+	 * @param BadgeRepository $badgeRepository
 	 * @return Response
 	 * 
 	 * @Route("/dresseur/{id}", name="user_profile_show")
 	 */
-	public function show(User $user, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository): Response
+	public function show(User $user, PokemonRepository $pokemonRepository, PokedexRepository $pokedexRepository, BadgeRepository $badgeRepository): Response
 	{
 		$pokemons = $pokemonRepository->findAll();
 		$pokedexUser = $pokedexRepository->findByUser($user);
+		$allBadges = $badgeRepository->findAll();
 		
 		return $this->render('user/show.html.twig', [
 			'user' => $user,
 			'pokemons' => $pokemons,
 			'pokedex' => $pokedexUser,
+			'allBadges' => $allBadges,
 		]);
 	}
 
