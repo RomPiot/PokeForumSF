@@ -22,17 +22,16 @@
 
 
     <div class="categorieBox">
-        <a href="{{ path('category', {id: topic.SubCategory.id}) }}">
-            <div>
-                {{ topic.SubCategory.name }}
-            </div>
-        </a>
-
+    
         <a id="category-link" href="{{ path('category', {id: topic.category.id}) }} ">
             <img src="{{ topic.category.icon }}" alt="{{ topic.category.name }}">
             <h3 >
                 {{ topic.category.name }}
             </h3>
+        </a>
+
+		<a href="{{ path('category', {id: topic.SubCategory.id}) }}" id="subcategory-link">
+            {{ topic.SubCategory.name }}
         </a>
     </div>
 
